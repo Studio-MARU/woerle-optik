@@ -34,10 +34,10 @@
   mark(0);
 })();
 
-// Anmeldung mit sechsstelliger PIN (eigenes Ziffernfeld, keine Bildschirmtastatur)
+// Anmeldung mit vierstelliger PIN (eigenes Ziffernfeld, keine Bildschirmtastatur)
 // Vergleicht nur den SHA-256-Wert, die PIN steht nicht im Quelltext
 (() => {
-  const H = '81de4ee3f0c222423eb00aecf27584bd295fccb6acd50c947d1e23bc16ede546';
+  const H = '0a95adbf8581859ae0cc477127abeaf4ad89916405c41855af8fbc482e1634e8';
   const gate = document.getElementById('gate'); if (!gate) return;
   const root = document.documentElement;
   if (!root.classList.contains('locked')) { gate.remove(); return; }
@@ -54,9 +54,9 @@
   async function press(k){
     if (busy) return;
     if (k === 'del') { pin = pin.slice(0, -1); return paint(); }
-    if (pin.length >= 6) return;
+    if (pin.length >= 4) return;
     pin += k; paint();
-    if (pin.length < 6) return;
+    if (pin.length < 4) return;
     busy = true;
     await wait(180);
     (await sha(pin)) === H ? success() : fail();
