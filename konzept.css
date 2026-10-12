@@ -481,3 +481,8 @@ html.revealing main,html.revealing .bar{animation:pinFocus 1.5s cubic-bezier(.2,
   .cmp .a,.cmp .b{padding:10px 14px}
   .cmp .a::before,.cmp .b::before{margin-bottom:2px}
 }
+/* Kopf nur noch mit der Einleitung für Horsti */
+.hero{padding-block:56px 48px}
+.hello-wrap{margin-bottom:0}
+.hello{margin-inline:auto}
+@media (max-width:959px){.hero{padding-block:28px 24px}}
