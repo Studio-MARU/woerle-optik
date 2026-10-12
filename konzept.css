@@ -562,3 +562,16 @@ html.revealing main,html.revealing .bar{animation:pinFocus 1.5s cubic-bezier(.2,
 .ab-body .ab-flow i{background:rgba(255,255,255,.5)}
 @media (max-width:899px){.ab-body .ab-tiles{grid-template-columns:repeat(2,minmax(0,1fr))}.ab-scene{padding-bottom:180px}.ab-body{margin-top:-90px}}
 @media (max-width:620px){.ab-scene{padding:20px 12px 170px}.ab-hero{padding-top:44px}.ab-body{padding:0 12px 56px}.ab-body .ab-panels{grid-template-columns:minmax(0,1fr)}.glass-c{padding:14px 16px}}
+/* Über uns auf dem Handy: Text auf Himmel, Hügel erst ab dem Button, Himmel im Bildblau verlängert */
+@media (max-width:620px){
+  .ab-scene{padding:20px 20px 240px;background:url("maru-wiese.webp") center bottom/auto 520px no-repeat,linear-gradient(#5aaeed,#68b7f1 calc(100% - 520px))}
+  .ab-scene::before{-webkit-mask:linear-gradient(#000,rgba(0,0,0,.4) 60%,transparent 75%);mask:linear-gradient(#000,rgba(0,0,0,.4) 60%,transparent 75%)}
+  .ab-sub{font-size:16px;margin:22px 0 26px}
+  .ab-body{margin-top:-90px;padding:0 16px 56px}
+}
+@media (max-width:620px){
+  .ab-scene{background:linear-gradient(#68b7f1 calc(100% - 520px),rgba(104,183,241,0) calc(100% - 360px)),url("maru-wiese.webp") center bottom/auto 520px no-repeat,linear-gradient(#5aaeed,#68b7f1 calc(100% - 520px))}
+  .ab-body .ab-flow{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
+  .ab-body .ab-flow i{display:none}
+  .ab-body .ab-flow span{text-align:center}
+}
