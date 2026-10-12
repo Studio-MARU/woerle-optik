@@ -361,3 +361,10 @@ html.locked .bar,html.locked main,html.locked .foot{display:none}
 .gate-box input{height:50px;border-radius:14px;border:1px solid var(--line);background:var(--surface-2);padding:0 14px;font:inherit;font-size:16px;color:var(--ink)}
 .gate-box input:focus{outline:none;border-color:var(--petrol);box-shadow:0 0 0 3px var(--petrol-soft)}
 .gate-err{color:var(--havanna);font-size:14px}
+/* Farbschimmer wie im Kopf, über die Seite verteilt (ruhig, ohne Animation) */
+.sec{position:relative;isolation:isolate}
+.sec::before{content:"";position:absolute;inset:0;z-index:-1;pointer-events:none}
+#ausprobieren::before{background:radial-gradient(45% 40% at 0% 30%,var(--glow-a),transparent 70%),radial-gradient(35% 35% at 100% 85%,var(--glow-b),transparent 70%)}
+#vergleich::before{background:radial-gradient(40% 45% at 100% 20%,var(--glow-a),transparent 70%)}
+#marke::before{background:radial-gradient(45% 45% at 0% 80%,var(--glow-a),transparent 70%),radial-gradient(35% 40% at 100% 10%,var(--glow-b),transparent 70%)}
+.about::before{display:none}
