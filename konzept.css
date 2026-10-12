@@ -486,3 +486,56 @@ html.revealing main,html.revealing .bar{animation:pinFocus 1.5s cubic-bezier(.2,
 .hello-wrap{margin-bottom:0}
 .hello{margin-inline:auto}
 @media (max-width:959px){.hero{padding-block:28px 24px}}
+
+/* ===== Über uns im Stil „Wiese & Himmel“ ===== */
+.ab{--serif:"Instrument Serif",Georgia,"Times New Roman",serif;position:relative;isolation:isolate;overflow:hidden;padding:28px 20px 0;border-top:0;background:#8ec5f2 url("maru-wiese.webp") center bottom/cover no-repeat;color:#13202c}
+.ab::before{display:block;content:"";position:absolute;inset:0;z-index:-1;pointer-events:none;background-image:radial-gradient(rgba(255,255,255,.55) 1px,transparent 1.6px);background-size:22px 22px;-webkit-mask:linear-gradient(#000 0%,rgba(0,0,0,.5) 55%,transparent 75%);mask:linear-gradient(#000 0%,rgba(0,0,0,.5) 55%,transparent 75%)}
+.ab-pill{display:flex;align-items:center;gap:22px;width:max-content;max-width:100%;margin:0 auto;padding:10px 22px 10px 14px;border-radius:16px;background:rgba(255,255,255,.82);-webkit-backdrop-filter:blur(14px) saturate(1.4);backdrop-filter:blur(14px) saturate(1.4);box-shadow:0 10px 30px -18px rgba(19,32,44,.45);font-size:15px;color:#3b4a57}
+.ab-pill .mlogo{width:24px;height:24px;color:#13202c}
+.ab-pill .ab-pill-n{font-weight:700;color:#13202c;margin-left:-12px}
+.ab-hero{display:grid;justify-items:center;text-align:center;padding:72px 0 64px}
+.ab-h{display:grid;justify-items:center;gap:10px;font-size:clamp(40px,7.4vw,92px);font-weight:300;letter-spacing:-.035em;line-height:1.05;color:#24384a;margin:0}
+.ab-row{display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:.22em}
+.ab-chip{display:inline-flex;align-items:center;gap:.22em;padding:.08em .32em .12em .22em;border-radius:.28em;box-shadow:0 10px 30px -16px rgba(19,32,44,.35)}
+.ab-chip em{font-family:var(--serif);font-style:italic;font-weight:400;letter-spacing:-.01em}
+.ab-chip.vio{background:rgba(214,206,255,.8);color:#7a5af5}
+.ab-chip.ora{background:rgba(255,233,207,.92);color:#ea6a1f;transform:rotate(1.6deg)}
+.ab-ic{display:grid;place-items:center;width:.62em;height:.62em;border-radius:.16em}
+.ab-chip.vio .ab-ic{color:#7a5af5}
+.ab-chip.vio .ab-ic .i{width:.56em;height:.56em}
+.ab-chip.ora .ab-ic{background:#ee5a1d;color:#fff}
+.ab-chip.ora .ab-ic .i{width:.38em;height:.38em}
+.ab-sub{max-width:36em;margin:28px 0 30px;font-size:clamp(16px,1.6vw,19px);line-height:1.5;color:#2f4252}
+.ab-cta{display:inline-flex;align-items:center;gap:10px;padding:14px 26px;border-radius:14px;background:#22b455;color:#fff;font-weight:600;font-size:16px;text-decoration:none;box-shadow:inset 0 -3px 0 rgba(0,0,0,.18),0 12px 28px -12px rgba(20,120,60,.7);transition:transform .15s,background .15s}
+.ab-cta:hover{background:#1ea14c;transform:translateY(-1px)}
+/* App-Fenster, das in die Hügel ragt */
+.ab-win{display:grid;grid-template-columns:220px minmax(0,1fr);max-width:1080px;margin:0 auto;background:rgba(246,246,244,.97);border-radius:22px 22px 0 0;box-shadow:0 -10px 50px -20px rgba(19,32,44,.35);overflow:hidden;text-align:left}
+.ab-side{display:grid;align-content:start;gap:4px;padding:18px 14px;border-right:1px solid rgba(19,32,44,.06);background:#f9f9f7}
+.ab-brand{display:flex;align-items:center;gap:10px;padding:6px 8px 16px}
+.ab-brand .mlogo{width:22px;height:22px;color:#13202c}
+.ab-brand b{font-size:15px}
+.ab-side > span{display:flex;align-items:center;gap:10px;padding:9px 10px;border-radius:10px;font-size:14px;color:#3b4a57}
+.ab-side > span.on{background:#dcf5e3;color:#13202c;font-weight:600}
+.ab-main{padding:16px 24px 26px;min-width:0}
+.ab-top{display:flex;align-items:center;justify-content:space-between;gap:12px;padding-bottom:16px;font-size:13.5px;color:#7a8794}
+.ab-crumb i{font-style:normal;margin:0 8px;opacity:.5}
+.ab-crumb b{color:#13202c;font-weight:500}
+.ab-search{display:inline-flex;align-items:center;gap:8px;padding:7px 12px;border-radius:10px;background:#efefec;min-width:150px}
+.ab-head{display:flex;align-items:flex-end;justify-content:space-between;gap:16px;margin:8px 0 18px}
+.ab-head h3{font-family:var(--serif);font-weight:400;font-size:36px;letter-spacing:-.01em;margin:0 0 4px;color:#13202c}
+.ab-head p{margin:0;font-size:14px;color:#5b6874}
+.ab-head p b{color:#13202c}
+.ab-dark{flex:none;padding:10px 16px;border-radius:10px;background:#111a24;color:#fff;font-size:13.5px;font-weight:600;text-decoration:none}
+.ab-tiles{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px}
+.ab-tiles > div,.ab-panels > div{background:#fff;border:1px solid rgba(19,32,44,.06);border-radius:14px;padding:14px 16px;display:grid;gap:4px;min-width:0}
+.ab-tiles small,.ab-panels small{font-size:12.5px;color:#7a8794}
+.ab-tiles b{font-family:var(--serif);font-weight:400;font-size:30px;line-height:1.05;color:#13202c;letter-spacing:-.01em}
+.ab-tiles em{font-style:normal;font-size:12px;font-weight:600;color:#1f9d55}
+.ab-panels{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin-top:12px}
+.ab-panels b{font-family:var(--serif);font-weight:400;font-size:26px;line-height:1.1;color:#13202c}
+.ab-panels p{margin:2px 0 0;font-size:14px;color:#5b6874;line-height:1.45}
+.ab-flow{display:flex;flex-wrap:wrap;align-items:center;gap:8px;margin-top:14px;font-size:13.5px;font-weight:600;color:#3b4a57}
+.ab-flow span{padding:7px 12px;border-radius:999px;background:#fff;border:1px solid rgba(19,32,44,.08)}
+.ab-flow i{width:14px;height:1px;background:rgba(19,32,44,.25)}
+@media (max-width:899px){.ab-win{grid-template-columns:minmax(0,1fr)}.ab-side{display:none}.ab-tiles{grid-template-columns:repeat(2,minmax(0,1fr))}.ab-hero{padding:52px 0 44px}}
+@media (max-width:620px){.ab{padding:20px 12px 0}.ab-pill span:not(.ab-pill-n){display:none}.ab-pill{gap:18px;padding:9px 16px 9px 12px}.ab-panels{grid-template-columns:minmax(0,1fr)}.ab-search{display:none}.ab-main{padding:14px 16px 20px}.ab-head{flex-direction:column;align-items:flex-start}.ab-tiles b{font-size:24px}.ab-h{gap:6px}}
