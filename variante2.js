@@ -13,24 +13,24 @@ const SV = {
   'kl-neu-skleral':      {g:'b', topic:'meine', name:'Neue Sklerallinsen (Folgeversorgung)', min:45, wer:'Spezialist/in Sklerallinsen', prep:'Bitte bringen Sie Ihre aktuellen Sklerallinsen und den Behälter mit.', kw:'neue linsen folgeversorgung sklerallinsen skleral'},
   'ea-sport':    {g:'e', topic:'anpassen', icon:'dumbbell', name:'Erstanpassung · Linsen für ab und zu', desc:'z. B. für den Sport oder besondere Anlässe', min:45, min40:60, wer:'Kontaktlinsen-Team', prep:LENS, kw:'sport ab und zu gelegentlich wochenende ausprobieren erstanpassung'},
   'ea-tag':      {g:'e', topic:'anpassen', icon:'sun', name:'Erstanpassung · Tageslinsen', desc:'jeden Tag frisch, ohne Pflegemittel', min:45, min40:60, wer:'Kontaktlinsen-Team', prep:LENS, kw:'tageslinsen tageslinse taeglich eintageslinsen erstanpassung'},
-  'ea-hart':     {g:'e', topic:'anpassen', icon:'gem', name:'Erstanpassung · harte Linsen', desc:'formstabil, individuell angepasst', min:60, min40:75, wer:'Kontaktlinsen-Team', prep:LENS, kw:'harte linsen hart formstabil erstanpassung'},
+  'ea-hart':     {g:'e', topic:'anpassen', icon:'kl-lens', name:'Erstanpassung · harte Linsen', desc:'formstabil, individuell angepasst', min:60, min40:75, wer:'Kontaktlinsen-Team', prep:LENS, kw:'harte linsen hart formstabil erstanpassung'},
   'ea-gleit':    {g:'e', topic:'anpassen', icon:'book-open', name:'Erstanpassung · Gleitsichtlinsen', desc:'scharf in der Nähe und in der Ferne, meist ab 40', min:75, wer:'Kontaktlinsen-Team', prep:LENS + READ40, kw:'gleitsicht multifokal lesen naehe ferne alterssichtig erstanpassung'},
   'ea-beratung': {g:'e', topic:'anpassen', icon:'circle-help', name:'Erstberatung Kontaktlinsen', desc:'Wir finden gemeinsam heraus, welche Linsen passen', min:60, min40:75, wer:'Kontaktlinsen-Team', prep:LENS, kw:'beratung unsicher weiss nicht erstberatung ausprobieren kontaktlinsen', vor:true},
-  'med-keratokonus': {g:'m', topic:'med', icon:'scan-eye', name:'Erstberatung Keratokonus', min:90, wer:'Spezialist/in Keratokonus', prep:'Bitte bringen Sie Ihre ärztliche Verordnung und vorhandene Befunde (z. B. Topographie) mit.', kw:'keratokonus hornhaut kegel'},
-  'med-op':      {g:'m', topic:'med', icon:'shield-plus', name:'Erstberatung nach OP oder Verletzung', desc:'nach Hornhauttransplantation, Augenverletzung oder Laser-OP', min:90, wer:'Spezialist/in Kontaktlinseninstitut', prep:'Bitte bringen Sie Ihre ärztliche Verordnung und den OP- oder Klinikbericht mit.', kw:'transplantation transplantat keratoplastik hornhaut verletzung unfall laser lasik operation op'},
-  'med-skleral': {g:'m', topic:'med', icon:'layers', name:'Erstanpassung Sklerallinsen', min:90, wer:'Spezialist/in Sklerallinsen', prep:'Bitte bringen Sie Ihre ärztliche Verordnung und vorhandene Befunde mit.', kw:'sklerallinsen skleral erstanpassung'},
-  'med-iris':    {g:'m', topic:'med', icon:'aperture', name:'Beratung Irislinse', desc:'Farb- und Irislinsen, z. B. nach einer Verletzung', min:60, wer:'Spezialist/in Kontaktlinseninstitut', prep:'Bitte bringen Sie vorhandene Befunde und, falls möglich, ein Foto Ihres anderen Auges mit.', kw:'irislinse iris farblinse farbe verletzung prothetisch'},
+  'med-keratokonus': {g:'m', topic:'med', icon:'keratokonus', name:'Erstberatung Keratokonus', min:90, wer:'Spezialist/in Keratokonus', prep:'Bitte bringen Sie Ihre ärztliche Verordnung und vorhandene Befunde (z. B. Topographie) mit.', kw:'keratokonus hornhaut kegel'},
+  'med-op':      {g:'m', topic:'med', icon:'bandage', name:'Erstberatung nach OP oder Verletzung', desc:'nach Hornhauttransplantation, Augenverletzung oder Laser-OP', min:90, wer:'Spezialist/in Kontaktlinseninstitut', prep:'Bitte bringen Sie Ihre ärztliche Verordnung und den OP- oder Klinikbericht mit.', kw:'transplantation transplantat keratoplastik hornhaut verletzung unfall laser lasik operation op'},
+  'med-skleral': {g:'m', topic:'med', icon:'kl-lens', name:'Erstanpassung Sklerallinsen', min:90, wer:'Spezialist/in Sklerallinsen', prep:'Bitte bringen Sie Ihre ärztliche Verordnung und vorhandene Befunde mit.', kw:'sklerallinsen skleral erstanpassung'},
+  'med-iris':    {g:'m', topic:'med', icon:'iris', name:'Beratung Irislinse', desc:'Farb- und Irislinsen, z. B. nach einer Verletzung', min:60, wer:'Spezialist/in Kontaktlinseninstitut', prep:'Bitte bringen Sie vorhandene Befunde und, falls möglich, ein Foto Ihres anderen Auges mit.', kw:'irislinse iris farblinse farbe verletzung prothetisch'},
   'kind-erst':      {g:'k', topic:'kind', name:'Erstversorgung Kind (Baby bis 11 Jahre)', min:90, wer:'Kinder-Kontaktlinsen', prep:'Bitte bringen Sie alle Befunde der Augenklinik oder des Augenarztes mit. Wir nehmen uns viel Zeit für Ihr Kind.', kw:'kind kinder baby saeugling kleinkind erstversorgung', vor:true},
   'kind-kontrolle': {g:'k', topic:'kind', name:'Nachkontrolle Kind', min:30, wer:'Kinder-Kontaktlinsen', prep:'Bitte bringen Sie die Linsen Ihres Kindes und den Behälter mit.', kw:'kind kinder baby kleinkind kontrolle nachkontrolle'},
   'brille-neu':   {g:'r', topic:'brille', name:'Sehtest & Brillenberatung', min:45, wer:'Brillen-Team', prep:'Bringen Sie Ihre aktuelle Brille mit, falls Sie eine haben.', kw:'brille sehtest augen messen brillenberatung lesebrille gleitsichtbrille'},
   'brille-stamm': {g:'r', topic:'brille', name:'Sehtest & Brillenberatung (Stammkunde)', min:30, wer:'Brillen-Team', prep:'Bringen Sie Ihre aktuelle Brille mit.', kw:'brille sehtest brillenberatung wieder stammkunde'}
 };
 const GR = {b:'Kontaktlinsen · Betreuung', e:'Kontaktlinsen · Erstanpassung', m:'Medizinische Linsen', k:'Kinder', r:'Brille'};
-const GICON = {b:'refresh-cw', e:'eye', m:'stethoscope', k:'baby', r:'glasses'};
+const GICON = {b:'kl-check', e:'kl-new', m:'eye-med', k:'baby', r:'glasses'};
 const TOPICS = {
-  meine:   {label:'Meine Kontaktlinsen', icon:'refresh-cw', step:'betreuung', sub:'Kontrolle oder neue Linsen'},
-  anpassen:{label:'Kontaktlinsen anpassen', icon:'eye', step:'wunsch', sub:'Zum ersten Mal oder Wechsel zu uns'},
-  med:     {label:'Medizinische Linsen', icon:'stethoscope', step:'med', sub:'Keratokonus, nach OP, Skleral- und Irislinsen'},
+  meine:   {label:'Meine Kontaktlinsen', icon:'kl-check', step:'betreuung', sub:'Kontrolle oder neue Linsen'},
+  anpassen:{label:'Kontaktlinsen anpassen', icon:'kl-new', step:'wunsch', sub:'Zum ersten Mal oder Wechsel zu uns'},
+  med:     {label:'Medizinische Linsen', icon:'eye-med', step:'med', sub:'Keratokonus, nach OP, Skleral- und Irislinsen'},
   kind:    {label:'Für mein Kind', icon:'baby', step:'kind', sub:'Vom Baby bis 11 Jahre'},
   brille:  {label:'Brille & Sehtest', icon:'glasses', step:'brille', sub:'Beratung, Sehtest, neue Brille'}
 };

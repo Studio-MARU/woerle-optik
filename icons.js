@@ -1,5 +1,12 @@
-// Icons: Lucide v0.469.0 (ISC-Lizenz, lucide.dev)
+// Icons: Lucide v0.469.0 (ISC-Lizenz, lucide.dev); eigene Optik-Symbole (kl-*, eye-med, keratokonus, iris) von Studio MARU im selben Stil
 window.IC = {
+"kl-check": "<path d=\"M2.5 17c1.5-4.6 4.4-7.1 7.9-7.1s6.4 2.5 7.9 7.1\"/><path d=\"M2.5 17c2.4 1.2 5 1.8 7.9 1.8s5.5-.6 7.9-1.8\"/><path d=\"m16 5.5 2 2 4-4\"/>",
+"kl-new": "<path d=\"M2.5 17c1.5-4.6 4.4-7.1 7.9-7.1s6.4 2.5 7.9 7.1\"/><path d=\"M2.5 17c2.4 1.2 5 1.8 7.9 1.8s5.5-.6 7.9-1.8\"/><path d=\"M19 2c.3 2 1.3 3.1 3.3 3.4-2 .3-3 1.4-3.3 3.4-.3-2-1.3-3.1-3.3-3.4 2-.3 3-1.4 3.3-3.4Z\"/>",
+"keratokonus": "<path d=\"M14.6 7.2A7 7 0 1 0 14.6 16.8\"/><path d=\"M14.6 7.2c2.6 1 5.2 3.3 6.4 4.8-1.2 1.5-3.8 3.8-6.4 4.8\"/><path d=\"M12.4 9.3c.9 1.7.9 3.7 0 5.4\"/>",
+"iris": "<path d=\"M2 12s3.6-6 10-6 10 6 10 6-3.6 6-10 6S2 12 2 12Z\"/><circle cx=\"12\" cy=\"12\" r=\"3.6\" fill=\"currentColor\" fill-opacity=\".28\"/><circle cx=\"12\" cy=\"12\" r=\"1.3\" fill=\"currentColor\"/>",
+"kl-lens": "<path d=\"M3 15.5c1.7-5.3 5-8.2 9-8.2s7.3 2.9 9 8.2\"/><path d=\"M3 15.5c2.7 1.4 5.7 2.1 9 2.1s6.3-.7 9-2.1\"/><path d=\"M8.2 11.2c1-1.1 2.3-1.7 3.8-1.8\"/>",
+"eye-med": "<path d=\"M2 15s2.5-5 7.5-5 7.5 5 7.5 5-2.5 5-7.5 5S2 15 2 15Z\"/><circle cx=\"9.5\" cy=\"15\" r=\"2\"/><path d=\"M19 3v6\"/><path d=\"M16 6h6\"/>",
+"bandage": "<path d=\"M10 10.01h.01\"/><path d=\"M10 14.01h.01\"/><path d=\"M14 10.01h.01\"/><path d=\"M14 14.01h.01\"/><path d=\"M18 6v11.5\"/><path d=\"M6 6v12\"/><rect x=\"2\" y=\"6\" width=\"20\" height=\"12\" rx=\"2\"/>",
 "message-circle": "<path d=\"M7.9 20A9 9 0 1 0 4 16.1L2 22Z\"/>",
 "aperture": "<circle cx=\"12\" cy=\"12\" r=\"10\"/> <path d=\"m14.31 8 5.74 9.94\"/> <path d=\"M9.69 8h11.48\"/> <path d=\"m7.38 12 5.74-9.94\"/> <path d=\"M9.69 16 3.95 6.06\"/> <path d=\"M14.31 16H2.83\"/> <path d=\"m16.62 12-5.74 9.94\"/>",
 "arrow-right": "<path d=\"M5 12h14\"/> <path d=\"m12 5 7 7-7 7\"/>",

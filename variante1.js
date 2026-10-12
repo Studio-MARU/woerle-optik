@@ -13,9 +13,9 @@ const FLOW = {
     {key:'fv-skl', group:'Folgeversorgung (neue Linsen)', label:'Sklerallinsen', end:'st-fv-skl'},
     {key:'brille', group:'Brille', label:'Sehtest oder neue Brille', end:'st-brille', short:'Brille'} ]},
   neu:{ q:'Worum geht es?', sub:'Wählen Sie, was am besten passt.', tree:'Worum geht es?', opts:[
-    {key:'kl', label:'Ich möchte Kontaktlinsen', sub:'Tageslinsen, harte Linsen, Gleitsicht, Sport', icon:'eye', next:'alter', short:'Kontaktlinsen'},
+    {key:'kl', label:'Ich möchte Kontaktlinsen', sub:'Tageslinsen, harte Linsen, Gleitsicht, Sport', icon:'kl-new', next:'alter', short:'Kontaktlinsen'},
     {key:'br', label:'Ich brauche eine Brille', sub:'Beratung und Sehtest', icon:'glasses', end:'neu-brille', short:'Brille'},
-    {key:'med', label:'Medizinischer Grund', sub:'z. B. Keratokonus, nach OP oder Verletzung', icon:'stethoscope', next:'med', short:'Medizinisch'},
+    {key:'med', label:'Medizinischer Grund', sub:'z. B. Keratokonus, nach OP oder Verletzung', icon:'eye-med', next:'med', short:'Medizinisch'},
     {key:'baby', label:'Für mein Baby oder Kleinkind', sub:'Kontaktlinsen für die Kleinsten', icon:'baby', end:'neu-baby', short:'Baby/Kleinkind'} ]},
   alter:{ q:'Wie alt sind Sie?', sub:'Ab etwa 40 lässt das Sehen in der Nähe nach. Dann planen wir mehr Zeit ein.', tree:'Alter', opts:[
     {key:'u40', label:'12 bis 39 Jahre', age:'u40', next:'wunsch', short:'12–39'},
@@ -23,13 +23,13 @@ const FLOW = {
   wunsch:{ q:'Was wünschen Sie sich?', sub:'Wenn Sie unsicher sind, beraten wir Sie im Termin.', tree:'Wunsch', opts:[
     {key:'sport', label:'Linsen für ab und zu', sub:'z. B. für den Sport', icon:'dumbbell', end:'neu-kl-sport'},
     {key:'tag', label:'Tageslinsen', sub:'jeden Tag frisch, ohne Pflegemittel', icon:'sun', end:'neu-kl-tag'},
-    {key:'hart', label:'Harte Linsen', sub:'formstabil, individuell angepasst', icon:'gem', end:'neu-kl-hart'},
+    {key:'hart', label:'Harte Linsen', sub:'formstabil, individuell angepasst', icon:'kl-lens', end:'neu-kl-hart'},
     {key:'gleit', label:'Gleitsichtlinsen', sub:'scharf in der Nähe und in der Ferne', icon:'book-open', end:'neu-kl-gleit'} ]},
   med:{ q:'Worum geht es genau?', sub:'Haben Sie eine ärztliche Verordnung? Bringen Sie sie einfach mit.', tree:'Medizinischer Grund', opts:[
-    {key:'kk', label:'Keratokonus', icon:'scan-eye', end:'neu-kk'},
-    {key:'op', label:'Nach Transplantation, Verletzung oder Laser-OP', icon:'shield-plus', end:'neu-op', short:'Transplantat/Verletzung/Laser'},
-    {key:'skl', label:'Sklerallinsen', icon:'layers', end:'neu-skl'},
-    {key:'iris', label:'Irislinse', sub:'z. B. nach einer Verletzung', icon:'aperture', end:'neu-iris'} ]}
+    {key:'kk', label:'Keratokonus', icon:'keratokonus', end:'neu-kk'},
+    {key:'op', label:'Nach Transplantation, Verletzung oder Laser-OP', icon:'bandage', end:'neu-op', short:'Transplantat/Verletzung/Laser'},
+    {key:'skl', label:'Sklerallinsen', icon:'kl-lens', end:'neu-skl'},
+    {key:'iris', label:'Irislinse', sub:'z. B. nach einer Verletzung', icon:'iris', end:'neu-iris'} ]}
 };
 // Terminarten in Timify – Dauer, Team und Hinweis sind Beispiele; p40 = eigene Terminart ab 40
 const READ = ' Falls Sie eine Lesebrille haben, bringen Sie sie bitte auch mit.';
