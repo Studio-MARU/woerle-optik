@@ -368,3 +368,12 @@ html.locked .bar,html.locked main,html.locked .foot{display:none}
 #vergleich::before{background:radial-gradient(40% 45% at 100% 20%,var(--glow-a),transparent 70%)}
 #marke::before{background:radial-gradient(45% 45% at 0% 80%,var(--glow-a),transparent 70%),radial-gradient(35% 40% at 100% 10%,var(--glow-b),transparent 70%)}
 .about::before{display:none}
+/* Persönliche Einleitung und WhatsApp */
+.hello{display:grid;gap:10px;max-width:36em;margin-bottom:36px;padding:22px 24px;border-radius:22px;background:var(--surface);border:1px solid var(--line);box-shadow:var(--sh-1);font-size:16px;line-height:1.6;color:var(--ink-2)}
+.hello-h{font-size:20px;font-weight:700;color:var(--ink);letter-spacing:-.01em}
+.hello-f{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:12px;margin-top:6px;padding-top:14px;border-top:1px solid var(--line);color:var(--ink);font-weight:600;font-size:15px}
+.wa-btn,.wa-fab{display:inline-flex;align-items:center;gap:8px;text-decoration:none;font-weight:600;color:#fff;background:#1f8f5a;border-radius:999px}
+.wa-btn{padding:9px 16px;font-size:14.5px}
+.wa-btn:hover,.wa-fab:hover{background:#18784b}
+.wa-fab{position:fixed;right:20px;bottom:calc(20px + env(safe-area-inset-bottom,0px));z-index:40;padding:12px 18px 12px 14px;font-size:15px;box-shadow:0 12px 30px -10px rgba(16,32,39,.45)}
+@media (max-width:520px){.wa-fab{right:14px;bottom:calc(14px + env(safe-area-inset-bottom,0px));padding:12px}.wa-fab .t{display:none}.hello{padding:18px}}
