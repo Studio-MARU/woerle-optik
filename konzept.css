@@ -591,3 +591,8 @@ html.revealing main,html.revealing .bar{animation:pinFocus 1.5s cubic-bezier(.2,
   .ab-scene{padding-bottom:calc(30px + .3 * max(100vw, 1400px));background:url("maru-wiese.webp") center bottom/max(100%, 1400px) auto no-repeat,linear-gradient(90deg,#96cdf6,#66b5f1 50%,#4ba6eb)}
   .ab-sub{max-width:34em;text-wrap:balance}
 }
+/* Weicher Übergang vom Wiesengrün in den Fuß (sanft auslaufend, auch im dunklen Modus) */
+.ab{background:linear-gradient(#627a55 calc(100% - 200px),color-mix(in oklab,#627a55 94%,var(--paper)) calc(100% - 170px),color-mix(in oklab,#627a55 80%,var(--paper)) calc(100% - 135px),color-mix(in oklab,#627a55 58%,var(--paper)) calc(100% - 100px),color-mix(in oklab,#627a55 33%,var(--paper)) calc(100% - 65px),color-mix(in oklab,#627a55 12%,var(--paper)) calc(100% - 30px),var(--paper))}
+.ab-body{padding-bottom:180px}
+.foot{border-top:0}
+@media (max-width:620px){.ab-body{padding-bottom:160px}}
