@@ -203,7 +203,7 @@ document.querySelectorAll('[data-vb]').forEach(b => b.addEventListener('click', 
   V = fresh(); H = [];
   if (kind === 'topic') { V.topic = val; V.step = TOPICS[val].step; } else pickSvc(val);
   render();
-  if (window.CAR) CAR.show(1, false);
+  if (window.CAR) CAR.show(0, false);
   document.getElementById('ausprobieren').scrollIntoView({behavior:UI.reduced() ? 'auto' : 'smooth', block:'start'});
 }));
 

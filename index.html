@@ -78,18 +78,41 @@
       <div class="sec-head c">
         <p class="eyebrow">Zum Ausprobieren</p>
         <h2>Zwei Wege zum Termin</h2>
-        <p class="lead">Umschalten oder wischen. Beide führen zu denselben Leistungen.</p>
+        <p class="lead">Unser Vorschlag zuerst, Horstis Skizze daneben. Umschalten oder wischen.</p>
       </div>
       <div class="switch" role="tablist" aria-label="Variante wählen">
-        <button type="button" role="tab" aria-selected="true" aria-controls="skizze" data-slide="0"><span class="num">1</span>Horstis Skizze</button>
-        <button type="button" role="tab" aria-selected="false" aria-controls="vorschlag" data-slide="1"><span class="num">2</span>Unser Vorschlag<span class="tag">Empfehlung</span></button>
+        <button type="button" role="tab" class="rec" aria-selected="true" aria-controls="vorschlag" data-slide="0"><span data-ic="sparkles" data-s="16"></span>Unser Vorschlag</button>
+        <button type="button" role="tab" aria-selected="false" aria-controls="skizze" data-slide="1">Horstis Skizze</button>
       </div>
       <div class="car">
         <button class="car-btn prev" type="button" aria-label="Vorherige Variante" data-step="-1" disabled><span data-ic="chevron-left" data-s="20"></span></button>
         <div class="track" id="track">
+          <article class="slide rec" id="vorschlag" role="tabpanel" aria-label="Unser Vorschlag">
+            <div class="slide-txt">
+              <h3>Unser Vorschlag</h3>
+              <ul class="ticks">
+                <li><span data-ic="check" data-s="18"></span>Erst das Anliegen</li>
+                <li><span data-ic="check" data-s="18"></span>Suche mit einem Wort</li>
+                <li><span data-ic="check" data-s="18"></span>Höchstens drei Fragen</li>
+              </ul>
+            </div>
+            <div class="slide-ph">
+              <span class="ph-badge"><span data-ic="sparkles" data-s="14"></span>Empfehlung</span>
+              <div class="phone" id="fb">
+                <div class="ph-top">
+                  <button class="ph-back off" type="button" aria-label="Zurück"></button>
+                  <div class="ph-prog" aria-hidden="true"></div>
+                  <button class="ph-tech" type="button" aria-pressed="false" aria-controls="fbTech">Technik</button>
+                </div>
+                <div class="ph-sum"></div>
+                <div class="ph-body" aria-live="polite"></div>
+              </div>
+              <div class="tech" id="fbTech" hidden></div>
+            </div>
+          </article>
           <article class="slide" id="skizze" role="tabpanel" aria-label="Horstis Skizze">
             <div class="slide-txt">
-              <p class="eyebrow">Variante 1</p>
+              <p class="eyebrow">So wie skizziert</p>
               <h3>Horstis Skizze</h3>
             </div>
             <div class="slide-ph">
@@ -102,29 +125,6 @@
                 <div class="ph-body" aria-live="polite"></div>
               </div>
               <div class="tech" id="faTech" hidden></div>
-            </div>
-          </article>
-          <article class="slide" id="vorschlag" role="tabpanel" aria-label="Unser Vorschlag">
-            <div class="slide-txt">
-              <p class="eyebrow">Variante 2 · Empfehlung</p>
-              <h3>Unser Vorschlag</h3>
-              <ul class="ticks">
-                <li><span data-ic="check" data-s="18"></span>Erst das Anliegen</li>
-                <li><span data-ic="check" data-s="18"></span>Suche mit einem Wort</li>
-                <li><span data-ic="check" data-s="18"></span>Höchstens drei Fragen</li>
-              </ul>
-            </div>
-            <div class="slide-ph">
-              <div class="phone" id="fb">
-                <div class="ph-top">
-                  <button class="ph-back off" type="button" aria-label="Zurück"></button>
-                  <div class="ph-prog" aria-hidden="true"></div>
-                  <button class="ph-tech" type="button" aria-pressed="false" aria-controls="fbTech">Technik</button>
-                </div>
-                <div class="ph-sum"></div>
-                <div class="ph-body" aria-live="polite"></div>
-              </div>
-              <div class="tech" id="fbTech" hidden></div>
             </div>
           </article>
         </div>
@@ -142,8 +142,8 @@
       </div>
       <div class="cmp">
         <div class="h lbl"></div>
-        <div class="h a"><small>Variante 1</small><b>Horstis Skizze</b></div>
-        <div class="h b"><small>Variante 2 · Empfehlung</small><b>Unser Vorschlag</b></div>
+        <div class="h a"><small>So wie skizziert</small><b>Horstis Skizze</b></div>
+        <div class="h b"><small>Unsere Empfehlung</small><b>Unser Vorschlag</b></div>
 
         <div class="lbl">Erste Frage</div>
         <div class="a">„Waren Sie schon einmal bei uns?“</div>
@@ -183,7 +183,7 @@
 
         <div class="end lbl"></div>
         <div class="end a"></div>
-        <div class="end b"><button type="button" class="btn" data-show="1">Unseren Vorschlag ausprobieren</button></div>
+        <div class="end b"><button type="button" class="btn" data-show="0">Unseren Vorschlag ausprobieren</button></div>
       </div>
     </div>
   </section>
