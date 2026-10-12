@@ -459,3 +459,4 @@ html.revealing main,html.revealing .bar{animation:pinFocus 1.5s cubic-bezier(.2,
 .slide.rec .phone{border:2px solid var(--petrol);box-shadow:0 0 0 6px var(--petrol-soft),var(--sh-2)}
 .ph-badge{position:absolute;top:-13px;left:50%;transform:translateX(-50%);z-index:3;display:inline-flex;align-items:center;gap:6px;padding:5px 12px;border-radius:999px;background:var(--petrol);color:var(--on-petrol);font-size:12.5px;font-weight:700;white-space:nowrap;box-shadow:0 6px 16px -8px rgba(14,94,111,.6)}
 @media (max-width:899px){.slide.rec .slide-txt{gap:10px}.slide.rec .ticks{display:flex;flex-wrap:wrap;gap:6px 16px}.slide-ph{margin-top:10px}}
+.slide-txt > p.rec-pill{color:var(--on-petrol)}
