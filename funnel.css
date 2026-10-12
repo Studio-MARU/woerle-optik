@@ -152,3 +152,4 @@
 @media (max-width:480px){.ph-top{padding:14px 12px 4px}.ph-sum{margin-inline:12px}.ph-body{padding:16px 16px 20px}.row{padding-inline:14px 10px;gap:12px}}
 @media (max-width:380px){.st .q{font-size:22px}.times{grid-template-columns:repeat(3,minmax(0,1fr))}}
 @media (prefers-reduced-motion:reduce){.st{animation:none}.pass-in{transition:none}.chk svg{stroke-dashoffset:0}.ph-prog .seg i{transition:none}}
+@media (max-width:480px){.mx-row{display:grid;grid-template-columns:minmax(0,1fr);gap:10px;padding:12px}.mx-row > b{padding-left:4px}.seg2{width:100%}}
