@@ -1,0 +1,244 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Terminfinder Wörle.Optik</title>
+<meta name="robots" content="noindex, nofollow">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap">
+<link rel="stylesheet" href="konzept.css">
+<link rel="stylesheet" href="funnel.css">
+
+</head>
+<body>
+<script>try { if (sessionStorage.getItem('wo-ok') !== '1') document.documentElement.classList.add('locked'); } catch (e) { document.documentElement.classList.add('locked'); }</script>
+<div class="gate" id="gate">
+  <form class="gate-box" id="gateForm">
+    <p class="eyebrow">Studio MARU 丸 · Konzept für Wörle.Optik</p>
+    <h1>Bitte Passwort eingeben</h1>
+    <input id="gatePw" type="password" autocomplete="off" placeholder="Passwort" aria-label="Passwort">
+    <button class="btn block" type="submit">Öffnen</button>
+    <p class="gate-err" id="gateErr" hidden>Das Passwort stimmt nicht.</p>
+  </form>
+</div>
+<header class="bar">
+  <div class="wrap bar-in">
+    <a class="brand" href="#top"><b>Studio MARU 丸</b><span class="for">Konzept für Wörle.Optik</span></a>
+    <nav class="nav" aria-label="Abschnitte">
+      <a href="#ausprobieren">Ausprobieren</a><a href="#vergleich">Vergleich</a><a href="#marke">Marke</a><a href="#maru">Über uns</a>
+    </nav>
+  </div>
+</header>
+
+<main id="top">
+  <section class="hero">
+    <div class="wrap hero-in">
+      <div>
+        <p class="eyebrow">Konzept für Wörle.Optik · Oktober 2026</p>
+        <h1>Klarer Blick.<br>Klarer Termin.</h1>
+        <p class="lead">Ein Terminfinder für Wörle Optik aus München, verbunden mit Timify. Wenige Fragen, und jede Buchung landet bei der richtigen Terminart.</p>
+        <div class="cta-row"><a class="btn" href="#ausprobieren">Ausprobieren</a><a class="btn ghost" href="#vergleich">Vergleich ansehen</a></div>
+        <ul class="facts">
+          <li><b>2</b>Varianten zum Ausprobieren</li>
+          <li><b>2–3</b>Fragen bis zum Kalender</li>
+          <li><b>23</b>Timify-Leistungen</li>
+        </ul>
+      </div>
+      <div class="chart" aria-hidden="true">
+        <div class="ln l1" style="--d:0"><span>E</span><small>0,1</small></div>
+        <div class="ln l2" style="--d:1"><span>F P</span><small>0,2</small></div>
+        <div class="ln l3" style="--d:2"><span>T O Z</span><small>0,3</small></div>
+        <div class="ln l4" style="--d:3"><span>L P E D</span><small>0,5</small></div>
+        <div class="ln l5" style="--d:4"><span>P E C F D</span><small>0,8</small></div>
+        <div class="ln l6" style="--d:5"><span>E D F C Z P</span><small>1,0</small></div>
+        <div class="cap"><span>Sehtafel</span><span>Visus</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec" id="ausprobieren">
+    <div class="wrap">
+      <div class="sec-head c">
+        <p class="eyebrow">Zum Ausprobieren</p>
+        <h2>Zwei Wege zum Termin</h2>
+        <p class="lead">Umschalten oder wischen. Beide führen zu denselben Leistungen.</p>
+      </div>
+      <div class="switch" role="tablist" aria-label="Variante wählen">
+        <button type="button" role="tab" aria-selected="true" aria-controls="skizze" data-slide="0"><span class="num">1</span>Horstis Skizze</button>
+        <button type="button" role="tab" aria-selected="false" aria-controls="vorschlag" data-slide="1"><span class="num">2</span>Unser Vorschlag<span class="tag">Empfehlung</span></button>
+      </div>
+      <div class="car">
+        <button class="car-btn prev" type="button" aria-label="Vorherige Variante" data-step="-1" disabled><span data-ic="chevron-left" data-s="20"></span></button>
+        <div class="track" id="track">
+          <article class="slide" id="skizze" role="tabpanel" aria-label="Horstis Skizze">
+            <div class="slide-txt">
+              <p class="eyebrow">Variante 1</p>
+              <h3>Horstis Skizze</h3>
+            </div>
+            <div class="slide-ph">
+              <div class="phone" id="fa">
+                <div class="ph-top">
+                  <button class="ph-back off" type="button" aria-label="Zurück"></button>
+                  <div class="ph-prog" aria-hidden="true"></div>
+                  <button class="ph-tech" type="button" aria-pressed="false" aria-controls="faTech">Technik</button>
+                </div>
+                <div class="ph-body" aria-live="polite"></div>
+              </div>
+              <div class="tech" id="faTech" hidden></div>
+            </div>
+          </article>
+          <article class="slide" id="vorschlag" role="tabpanel" aria-label="Unser Vorschlag">
+            <div class="slide-txt">
+              <p class="eyebrow">Variante 2 · Empfehlung</p>
+              <h3>Unser Vorschlag</h3>
+              <ul class="ticks">
+                <li><span data-ic="check" data-s="18"></span>Erst das Anliegen</li>
+                <li><span data-ic="check" data-s="18"></span>Suche mit einem Wort</li>
+                <li><span data-ic="check" data-s="18"></span>Höchstens drei Fragen</li>
+              </ul>
+            </div>
+            <div class="slide-ph">
+              <div class="phone" id="fb">
+                <div class="ph-top">
+                  <button class="ph-back off" type="button" aria-label="Zurück"></button>
+                  <div class="ph-prog" aria-hidden="true"></div>
+                  <button class="ph-tech" type="button" aria-pressed="false" aria-controls="fbTech">Technik</button>
+                </div>
+                <div class="ph-sum"></div>
+                <div class="ph-body" aria-live="polite"></div>
+              </div>
+              <div class="tech" id="fbTech" hidden></div>
+            </div>
+          </article>
+        </div>
+        <button class="car-btn next" type="button" aria-label="Nächste Variante" data-step="1"><span data-ic="chevron-right" data-s="20"></span></button>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec" id="vergleich">
+    <div class="wrap">
+      <div class="sec-head c">
+        <p class="eyebrow">Vergleich</p>
+        <h2>Schwierige Themen, einfach gemacht</h2>
+        <p class="lead">Keratokonus, Folgeversorgung, Sklerallinsen: Ihre Leistungen sind anspruchsvoll. Der Terminfinder muss sie so einfach machen, dass niemand falsch abbiegt.</p>
+      </div>
+      <div class="cmp">
+        <div class="h lbl"></div>
+        <div class="h a"><small>Variante 1</small><b>Horstis Skizze</b></div>
+        <div class="h b"><small>Variante 2 · Empfehlung</small><b>Unser Vorschlag</b></div>
+
+        <div class="lbl">Erste Frage</div>
+        <div class="a">„Waren Sie schon einmal bei uns?“</div>
+        <div class="b">„Wobei dürfen wir helfen?“</div>
+
+        <div class="lbl">Brillenkunde möchte erstmals Linsen</div>
+        <div class="a no"><span data-ic="x" data-s="18"></span>Kein passender Weg</div>
+        <div class="b"><span data-ic="check" data-s="18"></span>Klarer Weg</div>
+
+        <div class="lbl">Sprache</div>
+        <div class="a">„Folgeversorgung“</div>
+        <div class="b">„Neue Linsen, gleiche Sorte“</div>
+
+        <div class="lbl">Suche</div>
+        <div class="a no"><span data-ic="x" data-s="18"></span>Nicht vorhanden</div>
+        <div class="b"><span data-ic="check" data-s="18"></span>„Keratokonus“ genügt</div>
+
+        <div class="lbl">Klicks bis zum Kalender, Gleitsicht</div>
+        <div class="a">4</div>
+        <div class="b">2</div>
+
+        <div class="lbl">Angabe korrigieren</div>
+        <div class="a">Schritt für Schritt zurück</div>
+        <div class="b"><span data-ic="check" data-s="18"></span>Ein Tipp im Termin-Pass</div>
+
+        <div class="lbl">Nachkontrolle Sklerallinsen</div>
+        <div class="a no"><span data-ic="x" data-s="18"></span>Fehlt</div>
+        <div class="b"><span data-ic="check" data-s="18"></span>Enthalten</div>
+
+        <div class="lbl">Kinder bis 11 Jahre</div>
+        <div class="a no"><span data-ic="x" data-s="18"></span>Fehlt</div>
+        <div class="b"><span data-ic="check" data-s="18"></span>Enthalten</div>
+
+        <div class="lbl">Noch unentschlossen</div>
+        <div class="a no"><span data-ic="x" data-s="18"></span>Kein Weg</div>
+        <div class="b"><span data-ic="check" data-s="18"></span>„Weiß ich noch nicht“</div>
+
+        <div class="end lbl"></div>
+        <div class="end a"></div>
+        <div class="end b"><button type="button" class="btn" data-show="1">Unseren Vorschlag ausprobieren</button></div>
+      </div>
+    </div>
+  </section>
+
+
+  <section class="sec" id="marke">
+    <div class="wrap">
+      <div class="sec-head c">
+        <p class="eyebrow">Ihre Marke</p>
+        <h2>Ihre Marke, neu in Szene gesetzt</h2>
+        <p class="lead">Ihre Haltung bleibt, das Farbkonzept wird ruhiger und moderner.</p>
+      </div>
+      <div class="bcard wide">
+        <div class="wm">WÖRLE.OPTIK <span>· SehkraftCentrum München</span></div>
+        <div class="motto">Sehen Sie!</div>
+        <p>Termin für Kontaktlinsen, Brille oder Sehtest, in einer Minute online gebucht.</p>
+        <div class="row2"><span class="fake-btn">Termin finden</span><span class="acc">seit 1972</span></div>
+      </div>
+      <ul class="voice3">
+        <li><b>„Sehen Sie!“</b><p>Ihr Motto wird zum Leitsatz im Terminfinder.</p></li>
+        <li><b>Seit 1972</b><p>Erfahrung, die bei schwierigen Themen Vertrauen schafft.</p></li>
+        <li><b>Per Sie, herzlich, fachkundig</b><p>So formulieren wir jede Frage.</p></li>
+      </ul>
+      <div class="sw-row">
+        <div><i style="background:#102027"></i><b>Tinte</b>Schrift</div>
+        <div><i style="background:#0e5e6f"></i><b>Petrol</b>Buttons</div>
+        <div><i style="background:#8fd6cf"></i><b>Glas</b>Licht</div>
+        <div><i style="background:#c8742b"></i><b>Havanna</b>Akzent</div>
+        <div><i style="background:#f5f5f1"></i><b>Papier</b>Fläche</div>
+      </div>
+    </div>
+  </section>
+
+
+  <section class="sec about" id="maru">
+    <div class="wrap">
+      <div class="sec-head">
+        <p class="eyebrow">Über uns</p>
+        <h2>Studio MARU 丸</h2>
+        <p class="lead">Wir sind Marco und Luis, beide Augenoptiker mit über 15 Jahren Erfahrung in der Branche. Wir kennen Ihr Geschäft von innen und bauen, was Ihre Kundschaft wirklich braucht.</p>
+      </div>
+      <div class="about-grid four">
+        <div><span data-ic="glasses" data-s="24"></span><b>Aus der Augenoptik</b><p>Keratokonus, Folgeversorgung, Brillenpass: Wir kennen das aus dem Alltag und sprechen Ihre Sprache.</p></div>
+        <div><span data-ic="compass" data-s="24"></span><b>Vom ersten Kontakt bis zur Nachbetreuung</b><p>Maßgeschneiderte Systeme, die Ihre Kundschaft durchgehend begleiten.</p></div>
+        <div><span data-ic="sparkles" data-s="24"></span><b>Eindruck, der bleibt</b><p>Marke, Website und E-Commerce aus einem Guss. Keine Schnellschüsse.</p></div>
+        <div><span data-ic="users" data-s="24"></span><b>Tiroler Handschlag-Qualität</b><p>Wir legen sofort los, liefern verlässlich und stehen zu unserem Wort.</p></div>
+      </div>
+      <div class="pillars">
+        <div><p class="eyebrow">Digital</p><b>MARU Dev</b><p>Websites, Apps und Programme, mit KI entwickelt und von uns verantwortet. Wie dieser Terminfinder.</p></div>
+        <div><p class="eyebrow">Auf Papier</p><b>MARU Ink</b><p>Briefe und Karten mit echter Tinte, geschrieben von unserem Schreibroboter. Zum Beispiel persönliche Dankesbriefe an Ihre Stammkunden.</p></div>
+      </div>
+      <div class="circle" aria-label="So arbeiten wir"><span>Verstehen</span><span class="arr">→</span><span>Gestalten</span><span class="arr">→</span><span>Bauen</span><span class="arr">→</span><span>Begleiten</span></div>
+      <div class="contact"><b>Erstgespräch vereinbaren</b><span>info@studiomaru.at</span><span>studiomaru.at</span></div>
+    </div>
+  </section>
+</main>
+
+<footer class="foot">
+  <div class="wrap">
+    <div><b>Studio MARU 丸</b> · MARU Dev · Innsbruck</div>
+    <div>Konzept für Wörle.Optik, nicht öffentlich. Kalender, Zeiten und Dauer sind Beispiele.</div>
+  </div>
+</footer>
+
+<script src="icons.js"></script>
+<script>document.querySelectorAll('[data-ic]').forEach(el => { el.outerHTML = ic(el.dataset.ic, +el.dataset.s || 18); });</script>
+<script src="ui.js"></script>
+<script src="variante1.js"></script>
+<script src="variante2.js"></script>
+<script src="seite.js"></script>
+
+</body>
+</html>
