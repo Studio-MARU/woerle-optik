@@ -377,3 +377,7 @@ html.locked .bar,html.locked main,html.locked .foot{display:none}
 .wa-btn:hover,.wa-fab:hover{background:#18784b}
 .wa-fab{position:fixed;right:20px;bottom:calc(20px + env(safe-area-inset-bottom,0px));z-index:40;padding:12px 18px 12px 14px;font-size:15px;box-shadow:0 12px 30px -10px rgba(16,32,39,.45)}
 @media (max-width:520px){.wa-fab{right:14px;bottom:calc(14px + env(safe-area-inset-bottom,0px));padding:12px}.wa-fab .t{display:none}.hello{padding:18px}}
+/* Einleitung über dem Kopf, damit Titel und Sehtafel auf einer Höhe stehen */
+.hello-wrap{margin-bottom:48px}
+.hello{max-width:760px;margin:0}
+@media (max-width:959px){.hello-wrap{margin-bottom:32px}}
