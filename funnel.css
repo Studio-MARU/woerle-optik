@@ -153,3 +153,13 @@
 @media (max-width:380px){.st .q{font-size:22px}.times{grid-template-columns:repeat(3,minmax(0,1fr))}}
 @media (prefers-reduced-motion:reduce){.st{animation:none}.pass-in{transition:none}.chk svg{stroke-dashoffset:0}.ph-prog .seg i{transition:none}}
 @media (max-width:480px){.mx-row{display:grid;grid-template-columns:minmax(0,1fr);gap:10px;padding:12px}.mx-row > b{padding-left:4px}.seg2{width:100%}}
+/* Stammkunden-Zeile im Vorschlag hervorgehoben */
+.list.feat{border:1.5px solid var(--petrol);background:var(--petrol-soft);box-shadow:0 10px 24px -18px rgba(14,94,111,.55)}
+.list.feat .row{min-height:70px}
+.list.feat .row:hover{background:rgba(14,94,111,.08)}
+.list.feat .ic{width:38px;height:38px;border-radius:12px;background:var(--petrol);color:var(--on-petrol);place-items:center}
+.list.feat .ic .i{width:22px;height:22px}
+.list.feat b{font-size:16px}
+.list.feat .tag{background:var(--petrol);color:var(--on-petrol)}
+.list.feat .end{color:var(--petrol)}
+.search + #vRes .lh:first-child{margin-top:4px}

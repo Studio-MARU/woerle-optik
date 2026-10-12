@@ -80,13 +80,18 @@ function pickSvc(id){
 }
 
 function resHTML(){
-  if (!V.q.trim()) return UI.list(Object.keys(TOPICS).map(k => ({label:TOPICS[k].label, sub:TOPICS[k].sub, icon:TOPICS[k].icon, attrs:`data-topic="${k}"`})));
+  if (!V.q.trim()) {
+    // Stammkunden zuerst und deutlich abgesetzt, darunter alle anderen Themen
+    const feat = UI.list([{label:TOPICS.meine.label, tag:'Stammkunde', sub:'Kontrolle oder neue Linsen', icon:TOPICS.meine.icon, attrs:'data-topic="meine"'}]).replace('<div class="list">', '<div class="list feat">');
+    const rest = UI.list(Object.keys(TOPICS).filter(k => k !== 'meine').map(k => ({label:TOPICS[k].label, sub:TOPICS[k].sub, icon:TOPICS[k].icon, attrs:`data-topic="${k}"`})));
+    return `<p class="lh">Schon Kunde bei Wörle?</p>${feat}<p class="lh">Alle anderen Themen</p>${rest}`;
+  }
   const r = find(V.q);
   if (!r.length) return '<p class="empty">Dazu haben wir nichts gefunden. Versuchen Sie ein anderes Wort oder wählen Sie ein Thema.</p>';
   return UI.list(r.map(id => { const s = SV[id]; return {label:mark(s.name, V.q), sub:GR[s.g], meta:'ca. ' + s.min + (s.min40 ? '–' + s.min40 : '') + ' Min.', icon:GICON[s.g], attrs:`data-svc="${id}"`}; }));
 }
 const STEPS = {
-  start: () => `<h2 class="q">Wobei dürfen wir helfen?</h2><p class="sub">Wählen Sie ein Thema oder suchen Sie direkt.</p>
+  start: () => `<h2 class="q">Wobei dürfen wir helfen?</h2>
     <div class="search">${ic('search', 18)}<input id="vSearch" type="search" enterkeyhint="go" autocomplete="off" placeholder="z. B. Kontrolle oder Sport" value="${esc(V.q)}" aria-label="Termin suchen"><button type="button" class="clr${V.q ? '' : ' off'}" data-act="clear" aria-label="Suche leeren">${ic('x', 18)}</button></div>
     <div id="vRes">${resHTML()}</div>`,
   betreuung: () => `<h2 class="q">Was steht an?</h2><p class="sub">„Neue Linsen“ heißt: dieselbe Sorte wie bisher, frisch angepasst.</p>
