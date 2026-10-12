@@ -352,15 +352,6 @@ button{font:inherit;color:inherit;cursor:pointer;-webkit-tap-highlight-color:tra
 @media (max-width:719px){.track{margin-inline:-20px}.slide{padding-inline:20px}}
 @media (max-width:899px){.slide{gap:20px}}
 .car-btn{display:none!important}
-/* Passwort-Sperre (leichter Schutz, kein echter Zugriffsschutz) */
-.gate{display:none}
-html.locked .gate{display:grid;place-items:center;min-height:100vh;padding:20px}
-html.locked .bar,html.locked main,html.locked .foot{display:none}
-.gate-box{width:100%;max-width:380px;display:grid;gap:14px;background:var(--surface);border:1px solid var(--line);border-radius:24px;padding:32px 28px;box-shadow:var(--sh-2)}
-.gate-box h1{font-size:24px;font-weight:700;letter-spacing:-.02em}
-.gate-box input{height:50px;border-radius:14px;border:1px solid var(--line);background:var(--surface-2);padding:0 14px;font:inherit;font-size:16px;color:var(--ink)}
-.gate-box input:focus{outline:none;border-color:var(--petrol);box-shadow:0 0 0 3px var(--petrol-soft)}
-.gate-err{color:var(--havanna);font-size:14px}
 /* Farbschimmer wie im Kopf, über die Seite verteilt (ruhig, ohne Animation) */
 .sec{position:relative;isolation:isolate}
 .sec::before{content:"";position:absolute;inset:0;z-index:-1;pointer-events:none}
@@ -382,60 +373,6 @@ html.locked .bar,html.locked main,html.locked .foot{display:none}
 .hello{max-width:760px;margin:0}
 @media (max-width:959px){.hello-wrap{margin-bottom:32px}}
 
-/* ===== Passwort-Seite im MARU-Stil ===== */
-@property --r{syntax:"<length>";inherits:false;initial-value:0px}
-html.locked .gate,html.revealing .gate{display:grid;place-items:center;position:fixed;inset:0;z-index:100;min-height:0;padding:24px;background:#0b1316;color:#f5f5f1;overflow:hidden}
-.g-aura{position:absolute;inset:0;pointer-events:none}
-.g-aura i{position:absolute;width:75vmax;height:75vmax;border-radius:50%}
-.g-aura i:nth-child(1){left:-30vmax;top:-35vmax;background:radial-gradient(circle,rgba(143,214,207,.42),transparent 62%);animation:gD1 16s ease-in-out infinite alternate}
-.g-aura i:nth-child(2){right:-32vmax;bottom:-38vmax;background:radial-gradient(circle,rgba(29,133,147,.55),transparent 62%);animation:gD2 19s ease-in-out infinite alternate}
-.g-aura i:nth-child(3){left:10vmax;bottom:-50vmax;background:radial-gradient(circle,rgba(200,116,43,.22),transparent 60%);animation:gD3 22s ease-in-out infinite alternate}
-@keyframes gD1{to{transform:translate(14vmax,12vmax) scale(1.12)}}
-@keyframes gD2{to{transform:translate(-12vmax,-10vmax) scale(1.08)}}
-@keyframes gD3{to{transform:translate(8vmax,-14vmax) scale(1.15)}}
-.g-box{position:relative;z-index:1;width:min(100%,400px);display:grid;justify-items:center;text-align:center;gap:12px;animation:gIn 1.1s cubic-bezier(.2,.8,.2,1) both}
-@keyframes gIn{from{opacity:0;transform:translateY(18px);filter:blur(10px)}to{opacity:1;transform:none;filter:none}}
-.g-ring{position:relative;width:184px;height:184px;margin-bottom:14px}
-.g-ring svg{width:100%;height:100%;transform:rotate(-90deg);overflow:visible}
-.g-track{fill:none;stroke:rgba(245,245,241,.08);stroke-width:1.5}
-.g-draw{fill:none;stroke:url(#gGrad);stroke-width:2.5;stroke-linecap:round;stroke-dasharray:541;stroke-dashoffset:541;animation:gDraw 1.9s .25s cubic-bezier(.65,0,.35,1) forwards}
-@keyframes gDraw{to{stroke-dashoffset:0}}
-.g-dots{position:absolute;inset:0}
-.g-dots i{position:absolute;left:50%;top:50%;width:7px;height:7px;margin:-3.5px;border-radius:50%;background:rgba(245,245,241,.16);transform:rotate(var(--a)) translateY(-104px);transition:background .25s,box-shadow .25s,transform .3s cubic-bezier(.2,.8,.2,1)}
-.g-dots i.on{background:#8fd6cf;box-shadow:0 0 14px 3px rgba(143,214,207,.65);transform:rotate(var(--a)) translateY(-104px) scale(1.4)}
-.g-box.bad .g-dots i.on{background:#e3a466;box-shadow:0 0 14px 3px rgba(227,164,102,.55)}
-.g-kanji{position:absolute;inset:0;display:grid;place-items:center;font-size:78px;font-weight:700;line-height:1;background:linear-gradient(140deg,#f5f5f1 15%,#8fd6cf 55%,#e3a466 95%);-webkit-background-clip:text;background-clip:text;color:transparent;animation:gKanji 1.5s .6s cubic-bezier(.2,.8,.2,1) both}
-@keyframes gKanji{from{opacity:0;transform:scale(.82);filter:blur(12px)}to{opacity:1;transform:none;filter:none}}
-.g-hi{font-size:clamp(34px,7vw,46px);font-weight:700;letter-spacing:-.035em;line-height:1.05;color:#f5f5f1}
-.g-sub{color:rgba(245,245,241,.66);font-size:16px;max-width:22em;margin-bottom:14px}
-.g-field{width:100%;display:flex;align-items:center;background:rgba(255,255,255,.06);border:1px solid rgba(245,245,241,.14);border-radius:18px;-webkit-backdrop-filter:blur(12px);backdrop-filter:blur(12px);transition:border-color .2s,box-shadow .2s}
-.g-field:focus-within{border-color:rgba(143,214,207,.6);box-shadow:0 0 0 4px rgba(143,214,207,.12)}
-.g-field input{flex:1;min-width:0;height:56px;background:transparent;border:0;outline:none;color:#f5f5f1;font:inherit;font-size:18px;padding:0 18px;letter-spacing:.3em}
-.g-field input::placeholder{letter-spacing:0;color:rgba(245,245,241,.42);font-size:16px}
-.g-field button{flex:none;width:44px;height:44px;margin-right:6px;border-radius:13px;border:0;background:#1d8593;color:#fff;display:grid;place-items:center;transition:transform .15s,background .2s}
-.g-field button:hover{background:#25a0ae;transform:translateX(2px)}
-.g-err{min-height:22px;color:#e3a466;font-size:14.5px;font-weight:600}
-.g-sign{font-size:12.5px;color:rgba(245,245,241,.42);letter-spacing:.04em;margin-top:6px}
-.g-box.shake .g-field{animation:gShake .45s cubic-bezier(.36,.07,.19,.97)}
-@keyframes gShake{20%,60%{transform:translateX(-9px)}40%,80%{transform:translateX(9px)}}
-.g-box.ok .g-ring svg{animation:gSpin .9s cubic-bezier(.2,.8,.2,1) forwards}
-@keyframes gSpin{from{transform:rotate(-90deg)}to{transform:rotate(270deg)}}
-.g-box.ok .g-kanji{animation:gPulse .8s ease-out both}
-@keyframes gPulse{0%{transform:none}45%{transform:scale(1.18);filter:drop-shadow(0 0 22px rgba(143,214,207,.85))}100%{transform:none}}
-.g-welcome{position:absolute;inset:0;z-index:2;display:grid;place-items:center;text-align:center;pointer-events:none;opacity:0}
-.g-welcome div{display:grid;gap:10px}
-.g-welcome b{font-size:clamp(34px,7vw,60px);font-weight:700;letter-spacing:-.04em;color:#f5f5f1}
-.g-welcome span{color:rgba(245,245,241,.6);font-size:17px}
-.gate.ok .g-box{animation:gOut .55s ease forwards}
-@keyframes gOut{to{opacity:0;transform:scale(.94);filter:blur(8px)}}
-.gate.ok .g-welcome{animation:gWel .7s .25s cubic-bezier(.2,.8,.2,1) forwards}
-@keyframes gWel{from{opacity:0;transform:translateY(12px);filter:blur(6px)}to{opacity:1;transform:none;filter:none}}
-/* Blende öffnet sich vom Mittelpunkt aus, dahinter wird die Seite scharfgestellt */
-.gate.open{-webkit-mask:radial-gradient(circle at 50% 50%,transparent var(--r),#000 calc(var(--r) + 1px));mask:radial-gradient(circle at 50% 50%,transparent var(--r),#000 calc(var(--r) + 1px));animation:gIris 1.2s cubic-bezier(.7,0,.2,1) forwards}
-@keyframes gIris{to{--r:120vmax}}
-html.revealing main,html.revealing .bar{animation:gFocus 1.4s cubic-bezier(.2,.8,.2,1) both}
-@keyframes gFocus{from{filter:blur(16px);transform:scale(1.04)}to{filter:none;transform:none}}
-@media (prefers-reduced-motion:reduce){.g-aura i,.g-box,.g-draw,.g-kanji{animation:none}.g-draw{stroke-dashoffset:0}}
 /* MARU-Logo (als Vektor nachgebaut, Farbe über currentColor) */
 .mlogo{display:block;fill:currentColor;flex:none}
 .brand{align-items:center}
@@ -444,10 +381,71 @@ html.revealing main,html.revealing .bar{animation:gFocus 1.4s cubic-bezier(.2,.8
 .a-logo{width:56px;height:57px;color:#f5f5f1}
 .f-brand{display:flex;align-items:center;gap:10px}
 .f-logo{width:18px;height:18px;color:var(--ink)}
-.g-logo{position:absolute;left:50%;top:50%;width:76px;height:77px;margin:-38px 0 0 -38px;fill:url(#gGrad);animation:gKanji 1.5s .6s cubic-bezier(.2,.8,.2,1) both}
-.g-box.ok .g-logo{animation:gPulse .8s ease-out both}
-.g-ring .g-logo{width:76px;height:77px;transform:none}
-.g-box.ok .g-ring .g-logo{animation:gPulse .8s ease-out both}
 .mlogo{fill-rule:evenodd}
 .b-logo{width:26px;height:26px}
 .brand .for{color:var(--ink-2);font-weight:600}
+
+/* ===== Anmeldung mit PIN – MARU, hell ===== */
+@property --r{syntax:"<length>";inherits:false;initial-value:0px}
+.gate{display:none}
+html.locked .bar,html.locked main,html.locked .foot{display:none}
+html.locked .gate,html.revealing .gate{--ink-g:#0c0c0d;--bg-g:#ecebee;--vio:#a716e8;--err:#e5484d;display:grid;place-items:center;position:fixed;inset:0;z-index:100;padding:24px;background:var(--bg-g);color:var(--ink-g);overflow:hidden;font-family:var(--font)}
+.pin-aura{position:absolute;inset:0;pointer-events:none;animation:pinFade 1.6s ease both}
+.pin-aura i{position:absolute;width:70vmax;height:70vmax;border-radius:50%}
+.pin-aura i:nth-child(1){left:-28vmax;top:-34vmax;background:radial-gradient(circle,rgba(198,67,254,.20),transparent 62%);animation:pinD1 18s ease-in-out infinite alternate}
+.pin-aura i:nth-child(2){right:-30vmax;bottom:-36vmax;background:radial-gradient(circle,rgba(123,140,255,.22),transparent 62%);animation:pinD2 21s ease-in-out infinite alternate}
+.pin-aura i:nth-child(3){left:20vmax;top:30vmax;background:radial-gradient(circle,rgba(255,255,255,.75),transparent 60%);animation:pinD3 24s ease-in-out infinite alternate}
+@keyframes pinD1{to{transform:translate(12vmax,10vmax) scale(1.1)}}
+@keyframes pinD2{to{transform:translate(-10vmax,-12vmax) scale(1.08)}}
+@keyframes pinD3{to{transform:translate(-14vmax,-8vmax) scale(1.12)}}
+@keyframes pinFade{from{opacity:0}}
+.pin-stage{position:relative;z-index:1;display:grid;justify-items:center}
+.pin-mark{position:relative;width:112px;height:112px;display:grid;place-items:center;margin-bottom:22px;transition:transform 1.15s cubic-bezier(.65,0,.35,1)}
+.pin-ring{position:absolute;inset:0;width:100%;height:100%;transform:rotate(-90deg);overflow:visible}
+.pin-ring circle{fill:none;stroke-linecap:round;stroke-dasharray:352;stroke-dashoffset:352}
+.pin-ring .r1{stroke:rgba(12,12,13,.16);stroke-width:1;animation:pinDraw 1.6s .1s cubic-bezier(.65,0,.35,1) forwards}
+.pin-ring .r2{stroke:url(#pinGrad);stroke-width:2}
+@keyframes pinDraw{to{stroke-dashoffset:0}}
+.pin-logo{width:44px;height:45px;color:var(--ink-g);animation:pinIn .9s .35s cubic-bezier(.2,.8,.2,1) backwards}
+.pin-hi{font-size:20px;font-weight:600;letter-spacing:-.015em;margin:0 0 22px;animation:pinIn .8s .5s cubic-bezier(.2,.8,.2,1) backwards;transition:opacity .45s,transform .45s}
+.pin-dots{display:flex;gap:16px;margin-bottom:40px;animation:pinIn .8s .6s cubic-bezier(.2,.8,.2,1) backwards;transition:opacity .5s}
+.pin-dots i{position:relative;width:13px;height:13px;border-radius:50%;box-shadow:inset 0 0 0 1.5px rgba(12,12,13,.3);transition:box-shadow .3s}
+.pin-dots i::after{content:"";position:absolute;inset:0;border-radius:50%;background:var(--ink-g);transform:scale(0);transition:transform .32s cubic-bezier(.34,1.56,.64,1),background .3s,box-shadow .3s}
+.pin-dots i.on::after{transform:scale(1)}
+.pin-pad{display:grid;grid-template-columns:repeat(3,auto);gap:14px 22px}
+.pin-key{--s:clamp(64px,19vw,76px);width:var(--s);height:var(--s);border-radius:50%;border:1px solid rgba(12,12,13,.07);background:rgba(255,255,255,.62);-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);box-shadow:0 1px 2px rgba(12,12,13,.04),0 10px 24px -16px rgba(12,12,13,.25);color:var(--ink-g);font:inherit;font-size:28px;font-weight:500;font-variant-numeric:tabular-nums;display:grid;place-items:center;cursor:pointer;-webkit-tap-highlight-color:transparent;transition:background .12s,color .12s,transform .12s,opacity .5s,filter .5s;animation:pinKey .7s cubic-bezier(.2,.8,.2,1) backwards;animation-delay:calc(.7s + var(--i) * 35ms)}
+.pin-key:hover{background:rgba(255,255,255,.9)}
+.pin-key:active{transform:scale(.92);background:var(--ink-g);color:#fff}
+.pin-key:focus-visible{outline:2px solid var(--vio);outline-offset:3px}
+.pin-key.ghost{visibility:hidden}
+.pin-key.del{background:transparent;border-color:transparent;box-shadow:none;-webkit-backdrop-filter:none;backdrop-filter:none;color:rgba(12,12,13,.55)}
+.pin-key.del:active{background:rgba(12,12,13,.06);color:var(--ink-g)}
+@keyframes pinIn{from{opacity:0;transform:translateY(10px);filter:blur(6px)}to{opacity:1;transform:none;filter:none}}
+@keyframes pinKey{from{opacity:0;transform:translateY(14px) scale(.94)}to{opacity:1;transform:none}}
+.pin-sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}
+/* falsche PIN */
+.gate.bad .pin-dots{animation:pinShake .5s cubic-bezier(.36,.07,.19,.97)}
+.gate.bad .pin-dots i::after{background:var(--err)}
+@keyframes pinShake{20%,60%{transform:translateX(-10px)}40%,80%{transform:translateX(10px)}}
+/* richtige PIN: Sequenz ok → s1 → s2 → s3 → s4 → open */
+.gate.ok .pin-dots i::after{background:var(--vio);box-shadow:0 0 14px 2px rgba(167,22,232,.45);transition-delay:calc(var(--i) * 60ms)}
+.gate.s1 .pin-key{opacity:0;transform:translateY(18px) scale(.9);filter:blur(5px);transition-delay:calc(var(--i) * 28ms);pointer-events:none}
+.gate.s1 .pin-hi{opacity:0;transform:translateY(-8px)}
+.gate.s2 .pin-dots{opacity:0}
+.gate.s2 .pin-mark{transform:translateY(var(--my,0px)) scale(1.4)}
+.gate.s3 .pin-ring .r2{animation:pinDraw2 1.3s cubic-bezier(.65,0,.35,1) forwards}
+@keyframes pinDraw2{from{stroke-dashoffset:352;transform:rotate(0)}to{stroke-dashoffset:0;transform:rotate(360deg)}}
+.pin-ring .r2{transform-origin:60px 60px}
+.gate.s3 .pin-logo{animation:pinBreath 1.3s cubic-bezier(.45,0,.25,1) both}
+@keyframes pinBreath{0%{transform:none}45%{transform:scale(1.12)}100%{transform:none}}
+.pin-welcome{position:absolute;left:0;right:0;top:calc(50% + 96px);margin:0;text-align:center;font-size:clamp(22px,4vw,30px);font-weight:600;letter-spacing:-.02em;color:var(--ink-g);opacity:0;z-index:2;pointer-events:none}
+.gate.s4 .pin-welcome{animation:pinIn .9s cubic-bezier(.2,.8,.2,1) forwards}
+.pin-flash{position:absolute;left:50%;top:50%;width:0;height:0;border-radius:50%;transform:translate(-50%,-50%);box-shadow:0 0 0 1.5px rgba(167,22,232,.55),0 0 40px 6px rgba(198,67,254,.25);opacity:0;pointer-events:none;z-index:3}
+.gate.open{-webkit-mask:radial-gradient(circle at 50% 50%,transparent var(--r),#000 calc(var(--r) + 1px));mask:radial-gradient(circle at 50% 50%,transparent var(--r),#000 calc(var(--r) + 1px));animation:pinIris 1.3s cubic-bezier(.7,0,.2,1) forwards}
+.gate.open .pin-flash{animation:pinFlash 1.3s cubic-bezier(.7,0,.2,1) forwards}
+@keyframes pinIris{to{--r:110vmax}}
+@keyframes pinFlash{0%{opacity:1;width:0;height:0}80%{opacity:.8}100%{opacity:0;width:220vmax;height:220vmax}}
+html.revealing main,html.revealing .bar{animation:pinFocus 1.5s cubic-bezier(.2,.8,.2,1) both}
+@keyframes pinFocus{from{filter:blur(18px);transform:scale(1.04)}to{filter:none;transform:none}}
+@media (max-height:700px){.pin-mark{width:92px;height:92px;margin-bottom:14px}.pin-hi{margin-bottom:16px}.pin-dots{margin-bottom:28px}.pin-pad{gap:10px 20px}}
+@media (prefers-reduced-motion:reduce){.pin-aura i,.pin-logo,.pin-hi,.pin-dots,.pin-key,.pin-ring .r1{animation:none}.pin-ring .r1{stroke-dashoffset:0}}
