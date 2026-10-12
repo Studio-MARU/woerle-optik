@@ -13,7 +13,7 @@ const FLOW = {
     {key:'fv-skl', group:'Folgeversorgung (neue Linsen)', label:'Sklerallinsen', end:'st-fv-skl'},
     {key:'brille', group:'Brille', label:'Sehtest oder neue Brille', end:'st-brille', short:'Brille'} ]},
   neu:{ q:'Worum geht es?', sub:'Wählen Sie, was am besten passt.', tree:'Worum geht es?', opts:[
-    {key:'kl', label:'Ich möchte Kontaktlinsen', sub:'Tageslinsen, harte Linsen, Gleitsicht, Sport', icon:'kl-new', next:'alter', short:'Kontaktlinsen'},
+    {key:'kl', label:'Ich möchte Kontaktlinsen', sub:'Tageslinsen, harte Linsen, Gleitsicht, Sport', icon:'kl-lens', next:'alter', short:'Kontaktlinsen'},
     {key:'br', label:'Ich brauche eine Brille', sub:'Beratung und Sehtest', icon:'glasses', end:'neu-brille', short:'Brille'},
     {key:'med', label:'Medizinischer Grund', sub:'z. B. Keratokonus, nach OP oder Verletzung', icon:'eye-med', next:'med', short:'Medizinisch'},
     {key:'baby', label:'Für mein Baby oder Kleinkind', sub:'Kontaktlinsen für die Kleinsten', icon:'baby', end:'neu-baby', short:'Baby/Kleinkind'} ]},
@@ -23,7 +23,7 @@ const FLOW = {
   wunsch:{ q:'Was wünschen Sie sich?', sub:'Wenn Sie unsicher sind, beraten wir Sie im Termin.', tree:'Wunsch', opts:[
     {key:'sport', label:'Linsen für ab und zu', sub:'z. B. für den Sport', icon:'dumbbell', end:'neu-kl-sport'},
     {key:'tag', label:'Tageslinsen', sub:'jeden Tag frisch, ohne Pflegemittel', icon:'sun', end:'neu-kl-tag'},
-    {key:'hart', label:'Harte Linsen', sub:'formstabil, individuell angepasst', icon:'kl-lens', end:'neu-kl-hart'},
+    {key:'hart', label:'Harte Linsen', sub:'formstabil, individuell angepasst', icon:'kl-new', end:'neu-kl-hart'},
     {key:'gleit', label:'Gleitsichtlinsen', sub:'scharf in der Nähe und in der Ferne', icon:'book-open', end:'neu-kl-gleit'} ]},
   med:{ q:'Worum geht es genau?', sub:'Haben Sie eine ärztliche Verordnung? Bringen Sie sie einfach mit.', tree:'Medizinischer Grund', opts:[
     {key:'kk', label:'Keratokonus', icon:'keratokonus', end:'neu-kk'},

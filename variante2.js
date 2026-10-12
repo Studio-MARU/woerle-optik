@@ -13,7 +13,7 @@ const SV = {
   'kl-neu-skleral':      {g:'b', topic:'meine', name:'Neue Sklerallinsen (Folgeversorgung)', min:45, wer:'Spezialist/in Sklerallinsen', prep:'Bitte bringen Sie Ihre aktuellen Sklerallinsen und den Behälter mit.', kw:'neue linsen folgeversorgung sklerallinsen skleral'},
   'ea-sport':    {g:'e', topic:'anpassen', icon:'dumbbell', name:'Erstanpassung · Linsen für ab und zu', desc:'z. B. für den Sport oder besondere Anlässe', min:45, min40:60, wer:'Kontaktlinsen-Team', prep:LENS, kw:'sport ab und zu gelegentlich wochenende ausprobieren erstanpassung'},
   'ea-tag':      {g:'e', topic:'anpassen', icon:'sun', name:'Erstanpassung · Tageslinsen', desc:'jeden Tag frisch, ohne Pflegemittel', min:45, min40:60, wer:'Kontaktlinsen-Team', prep:LENS, kw:'tageslinsen tageslinse taeglich eintageslinsen erstanpassung'},
-  'ea-hart':     {g:'e', topic:'anpassen', icon:'kl-lens', name:'Erstanpassung · harte Linsen', desc:'formstabil, individuell angepasst', min:60, min40:75, wer:'Kontaktlinsen-Team', prep:LENS, kw:'harte linsen hart formstabil erstanpassung'},
+  'ea-hart':     {g:'e', topic:'anpassen', icon:'kl-new', name:'Erstanpassung · harte Linsen', desc:'formstabil, individuell angepasst', min:60, min40:75, wer:'Kontaktlinsen-Team', prep:LENS, kw:'harte linsen hart formstabil erstanpassung'},
   'ea-gleit':    {g:'e', topic:'anpassen', icon:'book-open', name:'Erstanpassung · Gleitsichtlinsen', desc:'scharf in der Nähe und in der Ferne, meist ab 40', min:75, wer:'Kontaktlinsen-Team', prep:LENS + READ40, kw:'gleitsicht multifokal lesen naehe ferne alterssichtig erstanpassung'},
   'ea-beratung': {g:'e', topic:'anpassen', icon:'circle-help', name:'Erstberatung Kontaktlinsen', desc:'Wir finden gemeinsam heraus, welche Linsen passen', min:60, min40:75, wer:'Kontaktlinsen-Team', prep:LENS, kw:'beratung unsicher weiss nicht erstberatung ausprobieren kontaktlinsen', vor:true},
   'med-keratokonus': {g:'m', topic:'med', icon:'keratokonus', name:'Erstberatung Keratokonus', min:90, wer:'Spezialist/in Keratokonus', prep:'Bitte bringen Sie Ihre ärztliche Verordnung und vorhandene Befunde (z. B. Topographie) mit.', kw:'keratokonus hornhaut kegel'},
@@ -26,10 +26,10 @@ const SV = {
   'brille-stamm': {g:'r', topic:'brille', name:'Sehtest & Brillenberatung (Stammkunde)', min:30, wer:'Brillen-Team', prep:'Bringen Sie Ihre aktuelle Brille mit.', kw:'brille sehtest brillenberatung wieder stammkunde'}
 };
 const GR = {b:'Kontaktlinsen · Betreuung', e:'Kontaktlinsen · Erstanpassung', m:'Medizinische Linsen', k:'Kinder', r:'Brille'};
-const GICON = {b:'kl-check', e:'kl-new', m:'eye-med', k:'baby', r:'glasses'};
+const GICON = {b:'kl-check', e:'kl-lens', m:'eye-med', k:'baby', r:'glasses'};
 const TOPICS = {
   meine:   {label:'Meine Kontaktlinsen', icon:'kl-check', step:'betreuung', sub:'Kontrolle oder neue Linsen'},
-  anpassen:{label:'Kontaktlinsen anpassen', icon:'kl-new', step:'wunsch', sub:'Zum ersten Mal oder Wechsel zu uns'},
+  anpassen:{label:'Kontaktlinsen anpassen', icon:'kl-lens', step:'wunsch', sub:'Zum ersten Mal oder Wechsel zu uns'},
   med:     {label:'Medizinische Linsen', icon:'eye-med', step:'med', sub:'Keratokonus, nach OP, Skleral- und Irislinsen'},
   kind:    {label:'Für mein Kind', icon:'baby', step:'kind', sub:'Vom Baby bis 11 Jahre'},
   brille:  {label:'Brille & Sehtest', icon:'glasses', step:'brille', sub:'Beratung, Sehtest, neue Brille'}
