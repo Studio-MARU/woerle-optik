@@ -14,25 +14,26 @@
 </head>
 <body>
 <script>try { if (sessionStorage.getItem('wo-ok') !== '1') document.documentElement.classList.add('locked'); } catch (e) { document.documentElement.classList.add('locked'); }</script>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true"><symbol id="maru" viewBox="284 278 1383 1407"><path d="M284 892V418A140 140 0 0 1 424 278H853A140 140 0 0 1 993 418V892H860V421A18 18 0 0 0 842 403H721A18 18 0 0 0 703 421V892H571V421A18 18 0 0 0 553 403H432A18 18 0 0 0 414 421V892Z"/><path d="M1093 892V418A140 140 0 0 1 1233 278H1522A140 140 0 0 1 1662 418V892H1529V689H1225V892ZM1243 403H1511A18 18 0 0 1 1529 421V564H1225V421A18 18 0 0 1 1243 403Z"/><path d="M284 1685V1015H768A150 150 0 0 1 918 1165V1330A130 130 0 0 1 788 1460L918 1630V1685H775L597 1460H427V1685ZM427 1150H757A18 18 0 0 1 775 1168V1305A18 18 0 0 1 757 1323H427Z"/><path d="M1055 1015H1197V1534A18 18 0 0 0 1215 1552H1505A18 18 0 0 0 1523 1534V1015H1667V1535A150 150 0 0 1 1517 1685H1205A150 150 0 0 1 1055 1535Z"/></symbol></svg>
 <div class="gate" id="gate">
   <div class="g-aura" aria-hidden="true"><i></i><i></i><i></i></div>
   <form class="g-box" id="gateForm" autocomplete="off">
     <div class="g-ring" aria-hidden="true">
       <svg viewBox="0 0 200 200"><defs><linearGradient id="gGrad" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#8fd6cf"/><stop offset=".55" stop-color="#1d8593"/><stop offset="1" stop-color="#e3a466"/></linearGradient></defs><circle class="g-track" cx="100" cy="100" r="86"/><circle class="g-draw" cx="100" cy="100" r="86"/></svg>
       <div class="g-dots" id="gDots"></div>
-      <span class="g-kanji">丸</span>
+      <svg class="mlogo g-logo" aria-hidden="true"><use href="#maru"/></svg>
     </div>
     <h1 class="g-hi" id="gHi">Hallo Horsti.</h1>
     <p class="g-sub">Schön, dass du da bist. Wir haben etwas für dich vorbereitet.</p>
     <label class="g-field"><input id="gatePw" type="password" autocomplete="off" placeholder="Dein Passwort" aria-label="Passwort"><button type="submit" aria-label="Öffnen"><span data-ic="arrow-right" data-s="20"></span></button></label>
     <p class="g-err" id="gateErr" aria-live="polite"></p>
-    <p class="g-sign">Gestaltet von Marco &amp; Luis · Studio MARU 丸</p>
+    <p class="g-sign">Gestaltet von Marco &amp; Luis · Studio MARU</p>
   </form>
   <div class="g-welcome" aria-hidden="true"><div><b>Willkommen, Horsti.</b><span>Viel Freude beim Ausprobieren.</span></div></div>
 </div>
 <header class="bar">
   <div class="wrap bar-in">
-    <a class="brand" href="#top"><b>Studio MARU 丸</b><span class="for">Konzept für Wörle.Optik</span></a>
+    <a class="brand" href="#top"><svg class="mlogo b-logo" role="img" aria-label="Studio MARU"><use href="#maru"/></svg><b>Studio MARU</b><span class="for">Konzept für Wörle.Optik</span></a>
     <nav class="nav" aria-label="Abschnitte">
       <a href="#ausprobieren">Ausprobieren</a><a href="#vergleich">Vergleich</a><a href="#maru">Über uns</a>
     </nav>
@@ -195,7 +196,7 @@
     <div class="wrap">
       <div class="sec-head">
         <p class="eyebrow">Über uns</p>
-        <h2>Studio MARU 丸</h2>
+        <h2 class="about-h"><svg class="mlogo a-logo" role="img" aria-label="Studio MARU"><use href="#maru"/></svg><span>Studio MARU</span></h2>
         <p class="lead">Wir sind Marco und Luis, beide Augenoptiker mit über 15 Jahren Erfahrung in der Branche. Wir kennen Ihr Geschäft von innen und bauen, was Ihre Kundschaft wirklich braucht.</p>
       </div>
       <div class="about-grid four">
@@ -217,7 +218,7 @@
 
 <footer class="foot">
   <div class="wrap">
-    <div><b>Studio MARU 丸</b> · MARU Dev · Innsbruck</div>
+    <div class="f-brand"><svg class="mlogo f-logo" role="img" aria-label="Studio MARU"><use href="#maru"/></svg><span><b>Studio MARU</b> · MARU Dev · Innsbruck</span></div>
     <div>Konzept für Wörle.Optik, nicht öffentlich. Kalender, Zeiten und Dauer sind Beispiele.</div>
   </div>
 </footer>
