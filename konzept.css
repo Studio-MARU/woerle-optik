@@ -575,3 +575,8 @@ html.revealing main,html.revealing .bar{animation:pinFocus 1.5s cubic-bezier(.2,
   .ab-body .ab-flow i{display:none}
   .ab-body .ab-flow span{text-align:center}
 }
+/* Über uns ab Tablet: Bild unten verankert, Horizont liegt unter dem Button, darüber Himmel in den Farben der oberen Bildkante */
+@media (min-width:621px){
+  .ab-scene{padding-bottom:calc(30px + .3 * max(100vw, 1400px));background:url("maru-wiese.webp") center bottom/max(100%, 1400px) auto no-repeat,linear-gradient(90deg,#96cdf6,#66b5f1 50%,#4ba6eb)}
+  .ab-sub{max-width:34em;text-wrap:balance}
+}
