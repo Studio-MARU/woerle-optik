@@ -96,3 +96,13 @@
     else if (e.key === 'Backspace') press('del');
   });
 })();
+
+// Sprunglinks (Navigation, Logo) selbst ausführen – zuverlässig auch in eingebetteten Vorschauen
+document.addEventListener('click', e => {
+  const a = e.target.closest('a[href^="#"]'); if (!a) return;
+  const id = a.getAttribute('href').slice(1);
+  const t = id ? document.getElementById(id) : null;
+  if (!t) return;
+  e.preventDefault();
+  t.scrollIntoView({behavior:matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth', block:'start'});
+});
