@@ -449,3 +449,5 @@ html.revealing main,html.revealing .bar{animation:gFocus 1.4s cubic-bezier(.2,.8
 .g-ring .g-logo{width:76px;height:77px;transform:none}
 .g-box.ok .g-ring .g-logo{animation:gPulse .8s ease-out both}
 .mlogo{fill-rule:evenodd}
+.b-logo{width:26px;height:26px}
+.brand .for{color:var(--ink-2);font-weight:600}
