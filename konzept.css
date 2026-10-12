@@ -389,50 +389,61 @@ button{font:inherit;color:inherit;cursor:pointer;-webkit-tap-highlight-color:tra
 @property --r{syntax:"<length>";inherits:false;initial-value:0px}
 .gate{display:none}
 html.locked .bar,html.locked main,html.locked .foot{display:none}
-html.locked .gate,html.revealing .gate{--ink-g:#0c0c0d;--bg-g:#ecebee;--vio:#a716e8;--err:#e5484d;display:grid;place-items:center;position:fixed;inset:0;z-index:100;padding:24px;background:var(--bg-g);color:var(--ink-g);overflow:hidden;font-family:var(--font)}
-.pin-aura{position:absolute;inset:0;pointer-events:none;animation:pinFade 1.6s ease both}
-.pin-aura i{position:absolute;width:70vmax;height:70vmax;border-radius:50%}
-.pin-aura i:nth-child(1){left:-28vmax;top:-34vmax;background:radial-gradient(circle,rgba(198,67,254,.20),transparent 62%);animation:pinD1 18s ease-in-out infinite alternate}
-.pin-aura i:nth-child(2){right:-30vmax;bottom:-36vmax;background:radial-gradient(circle,rgba(123,140,255,.22),transparent 62%);animation:pinD2 21s ease-in-out infinite alternate}
-.pin-aura i:nth-child(3){left:20vmax;top:30vmax;background:radial-gradient(circle,rgba(255,255,255,.75),transparent 60%);animation:pinD3 24s ease-in-out infinite alternate}
-@keyframes pinD1{to{transform:translate(12vmax,10vmax) scale(1.1)}}
-@keyframes pinD2{to{transform:translate(-10vmax,-12vmax) scale(1.08)}}
-@keyframes pinD3{to{transform:translate(-14vmax,-8vmax) scale(1.12)}}
-@keyframes pinFade{from{opacity:0}}
+html.locked .gate,html.revealing .gate{--ink-g:#102027;--sky-g:#bdb9b1;--glow:#e39a5e;--cu:#c8742b;--err:#d64545;display:grid;place-items:center;position:fixed;inset:0;z-index:100;padding:24px;background:linear-gradient(#bab7b0,#cdc4b5);color:var(--ink-g);overflow:hidden;font-family:var(--font)}
+/* Berg im Alpenglühen; oben angeschlagen, damit Gruß und Punkte im Himmel stehen. Blendet scharf ein, sobald geladen */
+.pin-bg{position:absolute;inset:-3%;background:url("maru-berg.webp") 55% 0/cover no-repeat;transform-origin:55% 44%;opacity:0;transform:scale(1.1);filter:blur(16px) saturate(.8) brightness(1.08);transition:opacity 1.2s ease,transform 3.2s cubic-bezier(.2,.7,.2,1),filter 2s cubic-bezier(.2,.7,.2,1)}
+.gate.bg-ready .pin-bg{opacity:1;transform:none;filter:none}
+.pin-air{position:absolute;inset:0;pointer-events:none;opacity:0;transition:opacity 2.4s .8s ease}
+.gate.bg-ready .pin-air{opacity:1}
+.pin-air i{position:absolute;display:block}
+/* warmes Licht am Gipfel, atmet langsam */
+.pin-glow{inset:0;background:radial-gradient(46vmax 30vmax at var(--gx,55%) var(--gy,44%),rgba(255,186,120,.34),transparent 72%);opacity:.45;animation:pinGlow 8s ease-in-out infinite alternate}
+@keyframes pinGlow{to{opacity:1}}
+/* Nebelschwaden ziehen langsam vor den Felsen vorbei */
+.pin-mist{left:-30%;width:160%;will-change:transform}
+.pin-mist.m1{bottom:-8%;height:46%;background:radial-gradient(28% 46% at 22% 58%,rgba(255,247,238,.42),transparent 70%),radial-gradient(30% 40% at 68% 64%,rgba(255,244,232,.36),transparent 70%);animation:pinMist 38s ease-in-out infinite alternate}
+.pin-mist.m2{bottom:18%;height:28%;background:radial-gradient(24% 40% at 40% 50%,rgba(255,250,244,.3),transparent 70%),radial-gradient(22% 36% at 82% 46%,rgba(255,246,236,.26),transparent 70%);animation:pinMist 52s ease-in-out infinite alternate-reverse}
+@keyframes pinMist{from{transform:translateX(-12%)}to{transform:translateX(12%)}}
+/* Licht, das sich nach der richtigen PIN hinter Logo und Begrüßung öffnet */
+.pin-bloom{left:50%;top:50%;width:150vmax;height:150vmax;margin:-75vmax 0 0 -75vmax;border-radius:50%;background:radial-gradient(closest-side,rgba(250,245,237,.94),rgba(250,236,214,.6) 34%,rgba(255,214,166,0) 70%);opacity:0;transform:scale(.35);transition:opacity 1.3s ease,transform 2.4s cubic-bezier(.2,.7,.2,1)}
 .pin-stage{position:relative;z-index:1;display:grid;justify-items:center}
-.pin-mark{position:relative;width:112px;height:112px;display:grid;place-items:center;margin-bottom:22px;transition:transform 1.15s cubic-bezier(.65,0,.35,1)}
+.pin-mark{position:relative;width:112px;height:112px;display:grid;place-items:center;margin-bottom:20px;transition:transform 1.15s cubic-bezier(.65,0,.35,1)}
 .pin-ring{position:absolute;inset:0;width:100%;height:100%;transform:rotate(-90deg);overflow:visible}
 .pin-ring circle{fill:none;stroke-linecap:round;stroke-dasharray:352;stroke-dashoffset:352}
-.pin-ring .r1{stroke:rgba(12,12,13,.16);stroke-width:1;animation:pinDraw 1.6s .1s cubic-bezier(.65,0,.35,1) forwards}
-.pin-ring .r2{stroke:url(#pinGrad);stroke-width:2}
+.pin-ring .r1{stroke:rgba(16,32,39,.2);stroke-width:1;animation:pinDraw 1.8s .5s cubic-bezier(.65,0,.35,1) forwards}
+.pin-ring .r2{stroke:url(#pinGrad);stroke-width:2.5}
 @keyframes pinDraw{to{stroke-dashoffset:0}}
-.pin-logo{width:44px;height:45px;color:var(--ink-g);animation:pinIn .9s .35s cubic-bezier(.2,.8,.2,1) backwards}
-.pin-hi{font-size:20px;font-weight:600;letter-spacing:-.015em;margin:0 0 22px;animation:pinIn .8s .5s cubic-bezier(.2,.8,.2,1) backwards;transition:opacity .45s,transform .45s}
-.pin-dots{display:flex;gap:16px;margin-bottom:40px;animation:pinIn .8s .6s cubic-bezier(.2,.8,.2,1) backwards;transition:opacity .5s}
-.pin-dots i{position:relative;width:13px;height:13px;border-radius:50%;box-shadow:inset 0 0 0 1.5px rgba(12,12,13,.3);transition:box-shadow .3s}
+.pin-logo{width:44px;height:45px;color:var(--ink-g);animation:pinIn 1s .6s cubic-bezier(.2,.8,.2,1) backwards}
+.pin-hi{font-size:22px;font-weight:600;letter-spacing:-.02em;margin:0 0 4px;animation:pinIn .9s .75s cubic-bezier(.2,.8,.2,1) backwards;transition:opacity .45s,transform .45s}
+.pin-hint{margin:0 0 22px;font-size:14px;font-weight:500;color:rgba(16,32,39,.62);animation:pinIn .9s .85s cubic-bezier(.2,.8,.2,1) backwards;transition:opacity .45s,transform .45s}
+.pin-dots{display:flex;gap:16px;margin-bottom:38px;animation:pinIn .9s .9s cubic-bezier(.2,.8,.2,1) backwards;transition:opacity .5s}
+.pin-dots i{position:relative;width:13px;height:13px;border-radius:50%;box-shadow:inset 0 0 0 1.5px rgba(16,32,39,.42);transition:box-shadow .3s}
 .pin-dots i::after{content:"";position:absolute;inset:0;border-radius:50%;background:var(--ink-g);transform:scale(0);transition:transform .32s cubic-bezier(.34,1.56,.64,1),background .3s,box-shadow .3s}
 .pin-dots i.on::after{transform:scale(1)}
 .pin-pad{display:grid;grid-template-columns:repeat(3,auto);gap:14px 22px}
-.pin-key{--s:clamp(64px,19vw,76px);width:var(--s);height:var(--s);border-radius:50%;border:1px solid rgba(12,12,13,.07);background:rgba(255,255,255,.62);-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);box-shadow:0 1px 2px rgba(12,12,13,.04),0 10px 24px -16px rgba(12,12,13,.25);color:var(--ink-g);font:inherit;font-size:28px;font-weight:500;font-variant-numeric:tabular-nums;display:grid;place-items:center;cursor:pointer;-webkit-tap-highlight-color:transparent;transition:background .12s,color .12s,transform .12s,opacity .5s,filter .5s;animation:pinKey .7s cubic-bezier(.2,.8,.2,1) backwards;animation-delay:calc(.7s + var(--i) * 35ms)}
-.pin-key:hover{background:rgba(255,255,255,.9)}
-.pin-key:active{transform:scale(.92);background:var(--ink-g);color:#fff}
-.pin-key:focus-visible{outline:2px solid var(--vio);outline-offset:3px}
+/* Tasten aus warmem Milchglas – lesbar über Schnee, Fels und Schatten */
+.pin-key{--s:clamp(64px,19vw,76px);width:var(--s);height:var(--s);border-radius:50%;border:1px solid rgba(255,255,255,.5);background:rgba(250,246,240,.6);-webkit-backdrop-filter:blur(14px) saturate(1.3);backdrop-filter:blur(14px) saturate(1.3);box-shadow:inset 0 1px 0 rgba(255,255,255,.55),0 14px 30px -18px rgba(52,30,14,.55);color:var(--ink-g);font:inherit;font-size:28px;font-weight:500;font-variant-numeric:tabular-nums;display:grid;place-items:center;cursor:pointer;-webkit-tap-highlight-color:transparent;transition:background .12s,color .12s,transform .12s,opacity .5s,filter .5s;animation:pinKey .8s cubic-bezier(.2,.8,.2,1) backwards;animation-delay:calc(1s + var(--i) * 35ms)}
+.pin-key:hover{background:rgba(255,251,246,.86)}
+.pin-key:active{transform:scale(.92);background:var(--ink-g);border-color:var(--ink-g);color:#fbf3e8}
+.pin-key:focus-visible{outline:2px solid var(--cu);outline-offset:3px}
 .pin-key.ghost{visibility:hidden}
-.pin-key.del{background:transparent;border-color:transparent;box-shadow:none;-webkit-backdrop-filter:none;backdrop-filter:none;color:rgba(12,12,13,.55)}
-.pin-key.del:active{background:rgba(12,12,13,.06);color:var(--ink-g)}
+.pin-key.del{background:rgba(250,246,240,.46);color:var(--ink-g)}
+.pin-key.del:active{background:var(--ink-g);color:#fbf3e8}
 @keyframes pinIn{from{opacity:0;transform:translateY(10px);filter:blur(6px)}to{opacity:1;transform:none;filter:none}}
-@keyframes pinKey{from{opacity:0;transform:translateY(14px) scale(.94)}to{opacity:1;transform:none}}
+@keyframes pinKey{from{opacity:0;transform:translateY(16px) scale(.94)}to{opacity:1;transform:none}}
 .pin-sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}
 /* falsche PIN */
 .gate.bad .pin-dots{animation:pinShake .5s cubic-bezier(.36,.07,.19,.97)}
 .gate.bad .pin-dots i::after{background:var(--err)}
 @keyframes pinShake{20%,60%{transform:translateX(-10px)}40%,80%{transform:translateX(10px)}}
 /* richtige PIN: Sequenz ok → s1 → s2 → s3 → s4 → open */
-.gate.ok .pin-dots i::after{background:var(--vio);box-shadow:0 0 14px 2px rgba(167,22,232,.45);transition-delay:calc(var(--i) * 60ms)}
+.gate.ok .pin-dots i::after{background:var(--glow);box-shadow:0 0 14px 3px rgba(227,154,94,.65);transition-delay:calc(var(--i) * 60ms)}
 .gate.s1 .pin-key{opacity:0;transform:translateY(18px) scale(.9);filter:blur(5px);transition-delay:calc(var(--i) * 28ms);pointer-events:none}
-.gate.s1 .pin-hi{opacity:0;transform:translateY(-8px)}
+.gate.s1 .pin-hi,.gate.s1 .pin-hint{opacity:0;transform:translateY(-8px)}
 .gate.s2 .pin-dots{opacity:0}
 .gate.s2 .pin-mark{transform:translateY(var(--my,0px)) scale(1.4)}
+.gate.s2 .pin-bg{transform:scale(1.09);transition:transform 4.2s cubic-bezier(.3,0,.2,1)}
+.gate.s2 .pin-bloom{opacity:1;transform:none}
 .gate.s3 .pin-ring .r2{animation:pinDraw2 1.3s cubic-bezier(.65,0,.35,1) forwards}
 @keyframes pinDraw2{from{stroke-dashoffset:352;transform:rotate(0)}to{stroke-dashoffset:0;transform:rotate(360deg)}}
 .pin-ring .r2{transform-origin:60px 60px}
@@ -440,15 +451,15 @@ html.locked .gate,html.revealing .gate{--ink-g:#0c0c0d;--bg-g:#ecebee;--vio:#a71
 @keyframes pinBreath{0%{transform:none}45%{transform:scale(1.12)}100%{transform:none}}
 .pin-welcome{position:absolute;left:0;right:0;top:calc(50% + 96px);margin:0;text-align:center;font-size:clamp(22px,4vw,30px);font-weight:600;letter-spacing:-.02em;color:var(--ink-g);opacity:0;z-index:2;pointer-events:none}
 .gate.s4 .pin-welcome{animation:pinIn .9s cubic-bezier(.2,.8,.2,1) forwards}
-.pin-flash{position:absolute;left:50%;top:50%;width:0;height:0;border-radius:50%;transform:translate(-50%,-50%);box-shadow:0 0 0 1.5px rgba(167,22,232,.55),0 0 40px 6px rgba(198,67,254,.25);opacity:0;pointer-events:none;z-index:3}
+.pin-flash{position:absolute;left:50%;top:50%;width:0;height:0;border-radius:50%;transform:translate(-50%,-50%);box-shadow:0 0 0 1.5px rgba(227,154,94,.75),0 0 46px 8px rgba(255,200,140,.4);opacity:0;pointer-events:none;z-index:3}
 .gate.open{-webkit-mask:radial-gradient(circle at 50% 50%,transparent var(--r),#000 calc(var(--r) + 1px));mask:radial-gradient(circle at 50% 50%,transparent var(--r),#000 calc(var(--r) + 1px));animation:pinIris 1.3s cubic-bezier(.7,0,.2,1) forwards}
 .gate.open .pin-flash{animation:pinFlash 1.3s cubic-bezier(.7,0,.2,1) forwards}
 @keyframes pinIris{to{--r:110vmax}}
 @keyframes pinFlash{0%{opacity:1;width:0;height:0}80%{opacity:.8}100%{opacity:0;width:220vmax;height:220vmax}}
 html.revealing main,html.revealing .bar{animation:pinFocus 1.5s cubic-bezier(.2,.8,.2,1) both}
 @keyframes pinFocus{from{filter:blur(18px);transform:scale(1.04)}to{filter:none;transform:none}}
-@media (max-height:700px){.pin-mark{width:92px;height:92px;margin-bottom:14px}.pin-hi{margin-bottom:16px}.pin-dots{margin-bottom:28px}.pin-pad{gap:10px 20px}}
-@media (prefers-reduced-motion:reduce){.pin-aura i,.pin-logo,.pin-hi,.pin-dots,.pin-key,.pin-ring .r1{animation:none}.pin-ring .r1{stroke-dashoffset:0}}
+@media (max-height:700px){.pin-mark{width:92px;height:92px;margin-bottom:12px}.pin-hint{margin-bottom:16px}.pin-dots{margin-bottom:26px}.pin-pad{gap:10px 20px}}
+@media (prefers-reduced-motion:reduce){.pin-bg{transition:none;opacity:1;transform:none;filter:none}.pin-air{transition:none}.pin-glow,.pin-mist,.pin-logo,.pin-hi,.pin-hint,.pin-dots,.pin-key,.pin-ring .r1{animation:none}.pin-ring .r1{stroke-dashoffset:0}}
 /* Unser Vorschlag hervorgehoben */
 .switch button.rec{color:var(--petrol-ink)}
 .switch button.rec .i{color:var(--petrol)}

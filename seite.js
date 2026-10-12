@@ -46,7 +46,29 @@
   const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
   const wait = ms => new Promise(r => setTimeout(r, ms));
   const hr = new Date().getHours();
-  document.getElementById('gHi').textContent = (hr < 11 ? 'Guten Morgen' : hr < 18 ? 'Hallo' : 'Guten Abend') + ', Horsti.';
+  // Gruß ohne Namen – der Name erscheint erst nach der richtigen PIN
+  document.getElementById('gHi').textContent = (hr < 11 ? 'Guten Morgen' : hr < 18 ? 'Guten Tag' : 'Guten Abend') + '.';
+  // Bergbild erst einblenden, wenn es geladen ist (Nebel lichtet sich)
+  const bg = new Image(); bg.src = 'maru-berg.webp';
+  const ready = () => gate.classList.add('bg-ready');
+  (bg.decode ? bg.decode() : Promise.reject()).then(ready, () => bg.complete ? ready() : bg.addEventListener('load', ready));
+  setTimeout(ready, 2500);
+  // Berg so legen, dass der Gipfel (bei 55,5 % / 38,5 % im Bild) knapp unter den PIN-Punkten steht – auf jedem Bildschirm
+  const bgEl = gate.querySelector('.pin-bg'), stage = gate.querySelector('.pin-stage');
+  function place(){
+    if (!gate.isConnected) return;
+    const w = bgEl.offsetWidth, h = bgEl.offsetHeight;
+    const P = stage.offsetTop + dots[0].parentNode.offsetTop + 13 + 20 - bgEl.offsetTop;
+    const ih = Math.max(w / 2000 * 1422, h, (h - P) / .615, P / .385), iw = ih / 1422 * 2000;
+    const x = Math.min(0, Math.max(w - iw, w / 2 - .555 * iw)), y = Math.min(0, Math.max(h - ih, P - .385 * ih));
+    bgEl.style.backgroundSize = iw + 'px ' + ih + 'px';
+    bgEl.style.backgroundPosition = x + 'px ' + y + 'px';
+    bgEl.style.transformOrigin = (x + .555 * iw) + 'px ' + (y + .385 * ih) + 'px';
+    gate.style.setProperty('--gx', (bgEl.offsetLeft + x + .555 * iw) + 'px');
+    gate.style.setProperty('--gy', (bgEl.offsetTop + y + .385 * ih) + 'px');
+  }
+  place(); addEventListener('resize', place);
+  if (document.fonts) document.fonts.ready.then(place);
   let pin = '', busy = false;
   const paint = () => dots.forEach((d, i) => d.classList.toggle('on', i < pin.length));
   const sha = async s => [...new Uint8Array(await crypto.subtle.digest('SHA-256', new TextEncoder().encode(s)))].map(b => b.toString(16).padStart(2, '0')).join('');
@@ -71,6 +93,7 @@
   async function success(){
     try { sessionStorage.setItem('wo-ok', '1'); } catch (e) {}
     msg.textContent = 'Willkommen, Horsti.';
+    document.getElementById('pinWelcome').textContent = 'Willkommen, Horsti.';
     if (reduced) { root.classList.remove('locked'); gate.remove(); return; }
     gate.classList.add('ok');                     // Punkte leuchten nacheinander auf
     await wait(500);
@@ -78,9 +101,9 @@
     await wait(450);
     const r = mark.getBoundingClientRect();
     gate.style.setProperty('--my', (innerHeight / 2 - (r.top + r.height / 2)) + 'px');
-    gate.classList.add('s2');                     // Logo wandert in die Mitte
+    gate.classList.add('s2');                     // Logo wandert in die Mitte, Kamera fährt an den Gipfel, Licht geht auf
     await wait(650);
-    gate.classList.add('s3');                     // Kreis schließt sich, Logo atmet
+    gate.classList.add('s3');                     // Kreis schließt sich in Alpenglühen, Logo atmet
     await wait(1000);
     gate.classList.add('s4');                     // „Willkommen, Horsti.“
     await wait(1100);
