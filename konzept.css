@@ -608,3 +608,49 @@ html.revealing main,html.revealing .bar{animation:pinFocus 1.5s cubic-bezier(.2,
   .ab-scene{padding-top:110px;background:linear-gradient(var(--paper),color-mix(in srgb,var(--paper) 84%,transparent) 35px,color-mix(in srgb,var(--paper) 58%,transparent) 75px,color-mix(in srgb,var(--paper) 30%,transparent) 115px,color-mix(in srgb,var(--paper) 10%,transparent) 155px,transparent 200px),linear-gradient(#68b7f1 calc(100% - 520px),rgba(104,183,241,0) calc(100% - 360px)),url("maru-wiese.webp") center bottom/auto 520px no-repeat,linear-gradient(#5aaeed,#68b7f1 calc(100% - 520px))}
   .ab-scene::before{-webkit-mask:linear-gradient(transparent 0,transparent 110px,#000 210px,rgba(0,0,0,.4) 60%,transparent 75%);mask:linear-gradient(transparent 0,transparent 110px,#000 210px,rgba(0,0,0,.4) 60%,transparent 75%)}
 }
+/* „Zum Angebot“: Titel und Text fliegen zur Seite, der Button gleitet nach unten, das Angebot blendet ein */
+.ab-cta{border:0;cursor:pointer;font:inherit;font-weight:600;font-size:16px}
+.ab-cta-i{display:inline-flex}
+.ab-cta-i.up,.ab-scene.offer .ab-cta-i.dn{display:none}
+.ab-scene.offer .ab-cta-i.up{display:inline-flex}
+.ab-scene.offer .ab-cta-t,.ab-scene.offer .ab-cta-i.up{animation:abFade .5s .4s backwards}
+.ab-h .ab-row,.ab-sub{transition:transform .85s cubic-bezier(.65,0,.25,1),opacity .6s ease,filter .6s ease}
+.ab-scene.go .ab-row:first-child{transform:translateX(-75vw);opacity:0;filter:blur(8px)}
+.ab-scene.go .ab-row:last-child{transform:translateX(75vw);opacity:0;filter:blur(8px);transition-delay:.07s}
+.ab-scene.go .ab-sub{transform:translateX(-60vw);opacity:0;filter:blur(8px);transition-delay:.14s}
+.ab-scene.go:not(.offer) .ab-cta{pointer-events:none}
+.ab-scene.offer .ab-h,.ab-scene.offer .ab-sub{display:none}
+.ab-scene.offer .ab-cta{margin-top:30px}
+.ab-offer{width:100%;max-width:640px;display:grid;justify-items:center}
+.ab-offer[hidden]{display:none}
+.ab-oh{margin:0 0 32px;font-size:clamp(36px,5vw,60px);font-weight:300;letter-spacing:-.035em;line-height:1.05;color:#24384a;text-wrap:balance}
+.ab-opt{position:relative;z-index:1;width:100%;text-align:left;display:grid;gap:6px;align-content:start;min-width:0;padding:26px 26px 24px;border-radius:22px;background:rgba(255,255,255,.92);-webkit-backdrop-filter:blur(16px) saturate(1.3);backdrop-filter:blur(16px) saturate(1.3);border:1px solid rgba(255,255,255,.7);box-shadow:0 24px 50px -28px rgba(20,50,90,.45)}
+.ab-opt h4{margin:0;font-size:22px;font-weight:700;letter-spacing:-.02em;line-height:1.2;color:#13202c}
+.ab-o1{margin:0;font-size:15px;line-height:1.5;color:#3d4a55}
+.ab-price{display:flex;align-items:baseline;flex-wrap:wrap;gap:4px 10px;margin:14px 0 6px;font-size:40px;font-weight:800;letter-spacing:-.03em;line-height:1.1;color:#13202c;font-variant-numeric:tabular-nums}
+.ab-price span{font-size:14px;font-weight:500;letter-spacing:0;color:#5b6874}
+.ab-opt ul{list-style:none;margin:8px 0 0;padding:16px 0 0;border-top:1px solid rgba(19,32,44,.08);display:grid;gap:10px}
+.ab-opt li{display:flex;gap:10px;align-items:flex-start;font-size:15px;line-height:1.45;color:#22313d}
+.ab-opt li .i{flex:none;margin-top:1px;color:#1f8f4c}
+.ab-note{margin:18px 0 0;font-size:13.5px;color:#2f4252}
+@keyframes abIn{from{opacity:0;transform:translateY(28px)}}
+@keyframes abFade{from{opacity:0}}
+/* Ausblick statt zweiter Option: Empfehlung für den ganzen Markenauftritt, ohne Preis */
+.ab-out{position:relative;z-index:1;width:100%;margin-top:16px;display:grid;grid-template-columns:auto minmax(0,1fr);gap:16px;align-items:start;padding:22px 24px;border-radius:22px;background:rgba(255,255,255,.55);-webkit-backdrop-filter:blur(16px) saturate(1.3);backdrop-filter:blur(16px) saturate(1.3);border:1px solid rgba(255,255,255,.7);text-align:left}
+.ab-out-i{display:grid;place-items:center;width:40px;height:40px;border-radius:12px;background:#13202c;color:#fff}
+.ab-out small{font-size:12.5px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:#4d6070}
+.ab-out h4{margin:2px 0 6px;font-size:19px;font-weight:700;letter-spacing:-.015em;line-height:1.25;color:#13202c}
+.ab-out p{margin:0;font-size:15px;line-height:1.55;color:#2c3c48}
+.ab-offer .ab-oh,.ab-opt,.ab-out,.ab-note{animation:abIn .8s cubic-bezier(.2,.8,.2,1) backwards}
+.ab-opt{animation-delay:.12s}
+.ab-out{animation-delay:.26s}
+.ab-note{animation-delay:.38s}
+@media (max-width:760px){.ab-opt{padding:24px 20px 20px}.ab-price{font-size:34px}.ab-out{padding:20px 18px;gap:14px}}
+@media (prefers-reduced-motion:reduce){.ab-h .ab-row,.ab-sub{transition:none}.ab-offer .ab-oh,.ab-opt,.ab-out,.ab-note,.ab-scene.offer .ab-cta-t,.ab-scene.offer .ab-cta-i.up{animation:none}}
+/* Optionale Leistungen im Angebot, zurückhaltender als die enthaltenen */
+.ab-plus{margin-top:16px;padding-top:14px;border-top:1px dashed rgba(19,32,44,.14)}
+.ab-plus small{font-size:12.5px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:#5b6b78}
+.ab-opt .ab-plus ul{margin:8px 0 0;padding:0;border-top:0}
+.ab-opt .ab-plus li{color:#3d4a55}
+.ab-opt .ab-plus li .i{color:#5b6b78}
+

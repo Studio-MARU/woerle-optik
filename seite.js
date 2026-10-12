@@ -120,6 +120,34 @@
   });
 })();
 
+// „Zum Angebot“: Titel und Text fliegen zur Seite, der Button gleitet nach unten, das Angebot blendet ein.
+// Danach ist der Button der WhatsApp-Link für das Erstgespräch.
+(() => {
+  const btn = document.getElementById('toOffer'); if (!btn) return;
+  const scene = btn.closest('.ab-scene'), offer = document.getElementById('angebot');
+  const reduced = () => matchMedia('(prefers-reduced-motion: reduce)').matches;
+  let state = 0;
+  function swap(){
+    const before = btn.getBoundingClientRect().top;
+    scene.classList.add('offer'); offer.hidden = false;
+    btn.querySelector('.ab-cta-t').textContent = 'Erstgespräch vereinbaren';
+    btn.href = btn.dataset.wa; btn.target = '_blank'; btn.rel = 'noopener';
+    const after = btn.getBoundingClientRect().top;
+    if (!reduced()) btn.animate([{transform:`translateY(${before - after}px)`}, {transform:'none'}], {duration:950, easing:'cubic-bezier(.65,0,.25,1)'});
+    scrollTo({top:offer.getBoundingClientRect().top + scrollY - 96, behavior:reduced() ? 'auto' : 'smooth'});
+    state = 2;
+  }
+  btn.addEventListener('click', e => {
+    if (state === 2) return;
+    e.preventDefault(); e.stopPropagation();
+    if (state === 1) return;
+    state = 1;
+    if (reduced()) return swap();
+    scene.classList.add('go');
+    setTimeout(swap, 720);
+  });
+})();
+
 // Sprunglinks (Navigation, Logo) selbst ausführen – zuverlässig auch in eingebetteten Vorschauen
 document.addEventListener('click', e => {
   const a = e.target.closest('a[href^="#"]'); if (!a) return;
