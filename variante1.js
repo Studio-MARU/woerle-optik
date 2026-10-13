@@ -42,12 +42,12 @@ const FLOW = {
 const READ = ' Falls Sie eine Lesebrille haben, bringen Sie sie bitte auch mit.';
 const LENS = 'Bringen Sie Ihre Brille und, falls vorhanden, Ihren Brillenpass mit.';
 const T = {
-  'st-nk-baby': {name:'Nachkontrolle Baby/Kleinkind', min:30, wer:'Kinder-Kontaktlinsen', prep:'Bitte bringen Sie die Linsen Ihres Kindes und den Behälter mit.'},
-  'st-nk-hart': {name:'Nachkontrolle harte Linsen', min:20, wer:'Kontaktlinsen-Team', prep:'Bitte tragen Sie Ihre Linsen zum Termin und bringen Sie den Behälter mit.'},
-  'st-nk-weich':{name:'Nachkontrolle weiche Linsen', min:20, wer:'Kontaktlinsen-Team', prep:'Bitte tragen Sie Ihre Linsen zum Termin und bringen Sie den Behälter mit.'},
-  'st-fv-hart': {name:'Folgeversorgung harte Linsen', min:30, wer:'Kontaktlinsen-Team', prep:'Bitte bringen Sie Ihre aktuellen Linsen und Ihren Linsenpass mit.'},
-  'st-fv-weich':{name:'Folgeversorgung weiche Linsen', min:30, wer:'Kontaktlinsen-Team', prep:'Bitte bringen Sie Ihre aktuellen Linsen und Ihren Linsenpass mit.'},
-  'st-fv-skl':  {name:'Folgeversorgung Sklerallinsen', min:45, wer:'Spezialist/in Sklerallinsen', prep:'Bitte bringen Sie Ihre aktuellen Sklerallinsen und den Behälter mit.'},
+  'st-nk-baby': {name:'Nachkontrolle Baby/Kleinkind', min:30, wer:'Kinder-Kontaktlinsen', prep:'Bitte bringen Sie den Linsenbehälter mit.'},
+  'st-nk-hart': {name:'Nachkontrolle harte Linsen', min:20, wer:'Kontaktlinsen-Team', prep:'Bitte bringen Sie den Linsenbehälter mit.'},
+  'st-nk-weich':{name:'Nachkontrolle weiche Linsen', min:20, wer:'Kontaktlinsen-Team', prep:'Bitte bringen Sie den Linsenbehälter mit.'},
+  'st-fv-hart': {name:'Folgeversorgung harte Linsen', min:30, wer:'Kontaktlinsen-Team', prep:'Bitte bringen Sie Ihren Linsenpass mit.'},
+  'st-fv-weich':{name:'Folgeversorgung weiche Linsen', min:30, wer:'Kontaktlinsen-Team', prep:'Bitte bringen Sie Ihren Linsenpass mit.'},
+  'st-fv-skl':  {name:'Folgeversorgung Sklerallinsen', min:45, wer:'Spezialist/in Sklerallinsen', prep:'Bitte bringen Sie den Behälter Ihrer Sklerallinsen mit.'},
   'neu-brille': {name:'Brillenberatung mit Sehtest', min:45, wer:'Brillen-Team', prep:'Bringen Sie Ihre aktuelle Brille mit, falls Sie eine haben.'},
   'neu-baby':   {name:'Erstversorgung Baby/Kleinkind', min:90, wer:'Kinder-Kontaktlinsen', prep:'Bitte bringen Sie alle Befunde der Augenklinik oder des Augenarztes mit.'},
   'neu-kl-sport':{name:'Kontaktlinsen-Erstanpassung · für ab und zu', min:45, p40:60, wer:'Kontaktlinsen-Team', prep:LENS},
@@ -69,6 +69,9 @@ const fresh = () => ({node:'start', stage:'q', ans:[], age:null, termin:null, da
 let S = fresh(), hist = [], lock = false;
 const snap = () => JSON.parse(JSON.stringify(S));
 
+// Stammkunden-Termine mit eigenen Linsen (Nachkontrolle, Folgeversorgung): Linsen beim Termin tragen
+const wears = () => /^st-(nk|fv)-/.test(S.termin), kid = () => S.termin === 'st-nk-baby';
+const hint = t => (wears() ? UI.wear(kid()) + ' ' : '') + t.prep;
 function term(){
   const t = T[S.termin];
   if (S.age === 'ue40' && t.p40) return Object.assign({}, t, {min:t.p40, name:t.name + ' (ab 40)', prep:t.prep + READ, is40:true});
@@ -114,7 +117,7 @@ function doneHTML(){
   const t = term(), d = UI.days()[S.day];
   return `<div class="done-ic">${ic('check', 28)}</div><h2 class="q">So sieht die Bestätigung aus</h2><p class="sub">Timify schickt sie per E-Mail und erinnert vor dem Termin.</p>
     <ul class="sum"><li>${ic('calendar', 18)}<span><b>${t.name}</b></span></li><li>${ic('clock', 18)}<span>${UI.dLong(d)}, ${UI.hhmm(S.time)} Uhr · ca. ${t.min} Minuten</span></li><li>${ic('mail', 18)}<span>Bestätigung und Erinnerung per E-Mail oder SMS</span></li></ul>
-    <div class="prep"><b>Bitte mitbringen:</b> ${t.prep}</div>
+    <div class="prep">${hint(t)}</div>
     <div class="push"><button type="button" class="btn ghost block" data-act="restart">Anderen Weg ausprobieren</button><p class="fine">Vorschau. Es wurde kein Termin gebucht.</p></div>`;
 }
 
@@ -125,13 +128,17 @@ function render(mode){
   UI.progress(prog, S.ans.length + (S.stage === 'q' ? REST[S.node] + 1 : 0) + 2, S.ans.length + fwd);
   renderTech();
   if (treeEl) treeEl.innerHTML = tree('start');
+  // nach dem Buchen: Bestätigung als Nachricht auf dem iPhone
+  const ios = root.querySelector('.ios');
+  if (S.stage !== 'done') { if (ios) ios.remove(); }
+  else if (!ios) { const t = term(), d = UI.days()[S.day]; UI.sms(root, {name:t.name, date:UI.dLong(d), time:UI.hhmm(S.time), min:t.min, prep:t.prep, wear:wears(), kid:kid()}, () => { S = fresh(); hist = []; render('back'); }); }
 }
 function renderTech(){
   if (techEl.hidden) return;
   let h = `<h4>Was im Hintergrund passiert</h4><dl class="kv"><dt>Antworten</dt><dd>${S.ans.map(a => a.label).join(' › ') || '–'}</dd>`;
   if (S.termin) {
     const t = term(), base = T[S.termin];
-    h += `<dt>Terminart</dt><dd>${t.name}</dd><dt>Dauer</dt><dd>${t.min} Min.${t.is40 && base.p40 !== base.min ? ` statt ${base.min}` : ''} · Beispiel</dd><dt>Team</dt><dd>${t.wer} · Beispiel</dd><dt>Hinweis</dt><dd style="font-weight:500">${t.prep}</dd>`;
+    h += `<dt>Terminart</dt><dd>${t.name}</dd><dt>Dauer</dt><dd>${t.min} Min.${t.is40 && base.p40 !== base.min ? ` statt ${base.min}` : ''} · Beispiel</dd><dt>Team</dt><dd>${t.wer} · Beispiel</dd><dt>Hinweis</dt><dd style="font-weight:500">${hint(t)}</dd>`;
   } else h += '<dt>Terminart</dt><dd style="font-weight:500">Noch offen. Mit jeder Antwort wird der Weg enger.</dd>';
   h += '</dl>';
   if (S.node === 'alter' || S.age) h += '<p class="why-t"><b>Warum das Alter?</b> Ab etwa 40 beginnt die Alterssichtigkeit. Mit der Altersangabe bucht Timify automatisch die längere Anpassung.</p>';

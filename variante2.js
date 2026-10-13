@@ -5,12 +5,12 @@
 const LENS = 'Bringen Sie Ihre Brille und, falls vorhanden, Ihren Brillenpass mit.';
 const READ40 = ' Falls Sie eine Lesebrille haben, bringen Sie sie bitte auch mit.';
 const SV = {
-  'kl-kontrolle-weich':  {g:'b', topic:'meine', name:'Nachkontrolle weiche Linsen', min:20, wer:'Kontaktlinsen-Team', prep:'Bitte tragen Sie Ihre Linsen zum Termin und bringen Sie den Behälter mit.', kw:'kontrolle nachkontrolle check weiche weich monatslinsen'},
-  'kl-kontrolle-hart':   {g:'b', topic:'meine', name:'Nachkontrolle harte Linsen', min:20, wer:'Kontaktlinsen-Team', prep:'Bitte tragen Sie Ihre Linsen zum Termin und bringen Sie den Behälter mit.', kw:'kontrolle nachkontrolle check harte hart formstabil'},
-  'kl-kontrolle-skleral':{g:'b', topic:'meine', name:'Nachkontrolle Sklerallinsen', min:30, wer:'Spezialist/in Sklerallinsen', prep:'Bitte tragen Sie Ihre Sklerallinsen zum Termin und bringen Sie den Behälter mit.', kw:'kontrolle nachkontrolle sklerallinsen skleral', vor:true},
-  'kl-neu-weich':        {g:'b', topic:'meine', name:'Neue weiche Linsen (Folgeversorgung)', min:30, wer:'Kontaktlinsen-Team', prep:'Bitte bringen Sie Ihre aktuellen Linsen und Ihren Linsenpass mit.', kw:'neue linsen nachkauf ersatz folgeversorgung weiche weich nachbestellen'},
-  'kl-neu-hart':         {g:'b', topic:'meine', name:'Neue harte Linsen (Folgeversorgung)', min:30, wer:'Kontaktlinsen-Team', prep:'Bitte bringen Sie Ihre aktuellen Linsen und Ihren Linsenpass mit.', kw:'neue linsen ersatz folgeversorgung harte hart formstabil'},
-  'kl-neu-skleral':      {g:'b', topic:'meine', name:'Neue Sklerallinsen (Folgeversorgung)', min:45, wer:'Spezialist/in Sklerallinsen', prep:'Bitte bringen Sie Ihre aktuellen Sklerallinsen und den Behälter mit.', kw:'neue linsen folgeversorgung sklerallinsen skleral'},
+  'kl-kontrolle-weich':  {g:'b', topic:'meine', name:'Nachkontrolle weiche Linsen', min:20, wer:'Kontaktlinsen-Team', prep:'Bitte bringen Sie den Linsenbehälter mit.', kw:'kontrolle nachkontrolle check weiche weich monatslinsen'},
+  'kl-kontrolle-hart':   {g:'b', topic:'meine', name:'Nachkontrolle harte Linsen', min:20, wer:'Kontaktlinsen-Team', prep:'Bitte bringen Sie den Linsenbehälter mit.', kw:'kontrolle nachkontrolle check harte hart formstabil'},
+  'kl-kontrolle-skleral':{g:'b', topic:'meine', name:'Nachkontrolle Sklerallinsen', min:30, wer:'Spezialist/in Sklerallinsen', prep:'Bitte bringen Sie den Behälter Ihrer Sklerallinsen mit.', kw:'kontrolle nachkontrolle sklerallinsen skleral', vor:true},
+  'kl-neu-weich':        {g:'b', topic:'meine', name:'Neue weiche Linsen (Folgeversorgung)', min:30, wer:'Kontaktlinsen-Team', prep:'Bitte bringen Sie Ihren Linsenpass mit.', kw:'neue linsen nachkauf ersatz folgeversorgung weiche weich nachbestellen'},
+  'kl-neu-hart':         {g:'b', topic:'meine', name:'Neue harte Linsen (Folgeversorgung)', min:30, wer:'Kontaktlinsen-Team', prep:'Bitte bringen Sie Ihren Linsenpass mit.', kw:'neue linsen ersatz folgeversorgung harte hart formstabil'},
+  'kl-neu-skleral':      {g:'b', topic:'meine', name:'Neue Sklerallinsen (Folgeversorgung)', min:45, wer:'Spezialist/in Sklerallinsen', prep:'Bitte bringen Sie den Behälter Ihrer Sklerallinsen mit.', kw:'neue linsen folgeversorgung sklerallinsen skleral'},
   'ea-sport':    {g:'e', topic:'anpassen', icon:'dumbbell', name:'Erstanpassung · Linsen für ab und zu', desc:'z. B. für den Sport oder besondere Anlässe', min:45, min40:60, wer:'Kontaktlinsen-Team', prep:LENS, kw:'sport ab und zu gelegentlich wochenende ausprobieren erstanpassung'},
   'ea-tag':      {g:'e', topic:'anpassen', icon:'sun', name:'Erstanpassung · Tageslinsen', desc:'jeden Tag frisch, ohne Pflegemittel', min:45, min40:60, wer:'Kontaktlinsen-Team', prep:LENS, kw:'tageslinsen tageslinse taeglich eintageslinsen erstanpassung'},
   'ea-hart':     {g:'e', topic:'anpassen', icon:'kl-new', name:'Erstanpassung · harte Linsen', desc:'formstabil, individuell angepasst', min:60, min40:75, wer:'Kontaktlinsen-Team', prep:LENS, kw:'harte linsen hart formstabil erstanpassung'},
@@ -21,7 +21,7 @@ const SV = {
   'med-skleral': {g:'m', topic:'med', icon:'kl-lens', name:'Erstanpassung Sklerallinsen', min:90, wer:'Spezialist/in Sklerallinsen', prep:'Bitte bringen Sie Ihre ärztliche Verordnung und vorhandene Befunde mit.', kw:'sklerallinsen skleral erstanpassung'},
   'med-iris':    {g:'m', topic:'med', icon:'iris', name:'Beratung Irislinse', desc:'Farb- und Irislinsen, z. B. nach einer Verletzung', min:60, wer:'Spezialist/in Kontaktlinseninstitut', prep:'Bitte bringen Sie vorhandene Befunde und, falls möglich, ein Foto Ihres anderen Auges mit.', kw:'irislinse iris farblinse farbe verletzung prothetisch'},
   'kind-erst':      {g:'k', topic:'kind', name:'Erstversorgung Kind (Baby bis 11 Jahre)', min:90, wer:'Kinder-Kontaktlinsen', prep:'Bitte bringen Sie alle Befunde der Augenklinik oder des Augenarztes mit. Wir nehmen uns viel Zeit für Ihr Kind.', kw:'kind kinder baby saeugling kleinkind erstversorgung', vor:true},
-  'kind-kontrolle': {g:'k', topic:'kind', name:'Nachkontrolle Kind', min:30, wer:'Kinder-Kontaktlinsen', prep:'Bitte bringen Sie die Linsen Ihres Kindes und den Behälter mit.', kw:'kind kinder baby kleinkind kontrolle nachkontrolle'},
+  'kind-kontrolle': {g:'k', topic:'kind', name:'Nachkontrolle Kind', min:30, wer:'Kinder-Kontaktlinsen', prep:'Bitte bringen Sie den Linsenbehälter mit.', kw:'kind kinder baby kleinkind kontrolle nachkontrolle'},
   'brille-neu':   {g:'r', topic:'brille', name:'Sehtest & Brillenberatung', min:45, wer:'Brillen-Team', prep:'Bringen Sie Ihre aktuelle Brille mit, falls Sie eine haben.', kw:'brille sehtest augen messen brillenberatung lesebrille gleitsichtbrille'},
   'brille-stamm': {g:'r', topic:'brille', name:'Sehtest & Brillenberatung (Stammkunde)', min:30, wer:'Brillen-Team', prep:'Bringen Sie Ihre aktuelle Brille mit.', kw:'brille sehtest brillenberatung wieder stammkunde'}
 };
@@ -142,7 +142,10 @@ function render(mode){
   const p = path(), idx = V.step === 'fertig' ? p.length : Math.max(0, p.indexOf(V.step));
   UI.progress(prog, p.length, idx);
   renderSum(); renderTech();
-  if (V.step === 'fertig' && !UI.reduced()) flipTimer = setTimeout(() => { const c = body.querySelector('.pass-in'); if (c) c.classList.add('flip'); }, 900);
+  // nach dem Buchen: Bestätigung als Nachricht auf dem iPhone; Linsen-Termine (Betreuung, Kind-Kontrolle) mit Hinweis „Linsen tragen“
+  const ios = root.querySelector('.ios');
+  if (V.step !== 'fertig') { if (ios) ios.remove(); }
+  else if (!ios) { const s = svc(), d = UI.days()[V.day]; UI.sms(root, {name:s.name, date:UI.dLong(d), time:UI.hhmm(V.time), min:s.min, prep:s.prep, wear:s.g === 'b' || V.svc === 'kind-kontrolle', kid:V.svc === 'kind-kontrolle'}, () => { V = fresh(); H = []; render('back'); }); }
 }
 function renderSum(){
   const s = svc();
