@@ -74,65 +74,64 @@ window.UI = (() => {
   // Hinweis für Termine mit eigenen Linsen: ohne getragene Linsen keine Kontrolle
   const wear = kid => (kid ? 'Bitte lassen Sie Ihr Kind die Kontaktlinsen beim Termin tragen.' : 'Bitte tragen Sie Ihre Kontaktlinsen beim Termin.') + ' Sonst können wir sie nicht kontrollieren.';
 
-  // Nach dem Buchen: iPhone-Startbildschirm, „Nachrichten“ bekommt eine rote 1, Antippen öffnet den Chat von Wörle.Optik.
+  // Nach dem Buchen: erst die Bestätigung, dann taucht das Nachrichten-Symbol mit roter 1 auf.
+  // Antippen (oder nach ein paar Sekunden von selbst) öffnet den Chat von Wörle.Optik – passt sich jeder Breite an.
   // m = {name, date, time, min, prep, wear, kid}; onRestart startet den Terminfinder neu
-  const SIG = '<svg width="18" height="12" viewBox="0 0 18 12" aria-hidden="true"><rect x="0" y="8" width="3" height="4" rx="1"/><rect x="5" y="5.5" width="3" height="6.5" rx="1"/><rect x="10" y="3" width="3" height="9" rx="1"/><rect x="15" y="0" width="3" height="12" rx="1"/></svg>';
-  const BAT = '<svg width="27" height="13" viewBox="0 0 27 13" aria-hidden="true"><rect x=".5" y=".5" width="23" height="12" rx="3.5" fill="none" stroke="currentColor" opacity=".4"/><rect x="2" y="2" width="18" height="9" rx="2"/><path d="M25 4.5v4c.8-.3 1.5-1.1 1.5-2s-.7-1.7-1.5-2z" opacity=".45"/></svg>';
   const MSG = '<svg viewBox="0 0 60 60" aria-hidden="true"><path fill="#fff" d="M30 12.5c-11.9 0-21.5 7.8-21.5 17.4 0 5.5 3.2 10.4 8.2 13.6-.4 2.6-1.7 5-3.7 6.9 4-.3 7.6-1.8 10.2-3.9 2.2.5 4.4.8 6.8.8 11.9 0 21.5-7.8 21.5-17.4S41.9 12.5 30 12.5z"/></svg>';
   function sms(phone, m, onRestart){
-    const old = phone.querySelector('.ios'); if (old) old.remove();
+    phone.querySelectorAll('.msg-pop,.ios-chat').forEach(e => e.remove());
     const red = reduced(), now = new Date(), t = hhmm(now.getHours() * 60 + now.getMinutes());
-    const el = document.createElement('div'); el.className = 'ios';
-    el.innerHTML = `<div class="ios-bar"><b>${t}</b><span class="ios-st">${SIG}${BAT}</span></div>
-      <div class="ios-home">
-        <div class="ios-grid" aria-hidden="true">${'<i></i>'.repeat(16)}</div>
-        <p class="ios-hint"><b>Termin gebucht.</b> Tippen Sie auf „Nachrichten“.</p>
-        <div class="ios-dock"><i aria-hidden="true"></i><i aria-hidden="true"></i><button type="button" class="ios-app" aria-label="Nachrichten öffnen, 1 neue Nachricht"><span class="ios-ic">${MSG}<span class="ios-badge" aria-hidden="true">1</span></span></button><i aria-hidden="true"></i></div>
-      </div>
-      <div class="ios-chat" hidden>
-        <div class="ios-ch"><button type="button" class="ios-bk" aria-label="Zurück zum Startbildschirm">${ic('chevron-left', 26)}</button><div class="ios-who"><span class="ios-av">WO</span><b>Wörle.Optik</b></div></div>
-        <div class="ios-log" aria-live="polite"><p class="ios-meta">Textnachricht · SMS<br>Heute ${t}</p></div>
-        <div class="ios-in"><span class="ios-field" data-ph="Textnachricht"></span><span class="ios-send">${ic('arrow-up-right', 16)}</span></div>
-      </div>`;
-    phone.appendChild(el);
-    const app = el.querySelector('.ios-app'), chat = el.querySelector('.ios-chat'), log = el.querySelector('.ios-log'), field = el.querySelector('.ios-field'), send = el.querySelector('.ios-send');
+    const pop = document.createElement('button');
+    pop.type = 'button'; pop.className = 'msg-pop'; pop.setAttribute('aria-label', 'Neue Nachricht von Wörle.Optik öffnen');
+    pop.innerHTML = `<span class="msg-ic">${MSG}<span class="msg-badge" aria-hidden="true">1</span></span><span class="msg-tx"><b>Neue Nachricht</b><small>Tippen zum Öffnen</small></span>`;
+    const chat = document.createElement('div');
+    chat.className = 'ios-chat'; chat.hidden = true;
+    chat.innerHTML = `<div class="ios-ch"><button type="button" class="ios-bk" aria-label="Zurück zur Bestätigung">${ic('chevron-left', 26)}</button><div class="ios-who"><span class="ios-av">WO</span><b>Wörle.Optik</b></div></div>
+      <div class="ios-log" aria-live="polite"><div class="ios-col"><p class="ios-meta">Textnachricht · SMS<br>Heute ${t}</p></div></div>
+      <div class="ios-in"><div class="ios-inw"><span class="ios-field" data-ph="Textnachricht"></span><span class="ios-send">${ic('arrow-up-right', 16)}</span></div></div>`;
+    phone.append(pop, chat);
+    const log = chat.querySelector('.ios-log'), col = chat.querySelector('.ios-col'), field = chat.querySelector('.ios-field'), send = chat.querySelector('.ios-send');
     const wait = ms => new Promise(r => setTimeout(r, red ? 0 : ms));
-    const add = (cls, html, tag) => { const b = document.createElement(tag || 'div'); b.className = cls; b.innerHTML = html; log.appendChild(b); log.scrollTop = log.scrollHeight; return b; };
+    const alive = () => chat.isConnected;
+    const add = (cls, html, tag) => { const b = document.createElement(tag || 'div'); b.className = cls; b.innerHTML = html; col.appendChild(b); log.scrollTop = log.scrollHeight; return b; };
     async function incoming(html, ms){
       const ty = add('bub in typing', '<i></i><i></i><i></i>');
-      await wait(ms); ty.remove(); if (!el.isConnected) return false;
-      add('bub in', html); await wait(550); return el.isConnected;
+      await wait(ms); ty.remove(); if (!alive()) return false;
+      add('bub in', html); await wait(550); return alive();
     }
     let started = false;
     async function play(){
       if (started) return; started = true;
-      await wait(500);
+      await wait(450);
       if (!await incoming(`Guten Tag, Ihr Termin ist bestätigt:<br><b>${m.name}</b><br>${m.date}, ${m.time}&nbsp;Uhr · ca.&nbsp;${m.min}&nbsp;Min.<br>Augustenstraße&nbsp;6, München`, 1200)) return;
       if (m.wear && !await incoming(`<b>Wichtig:</b> ${wear(m.kid)}`, 950)) return;
       if (!await incoming(`${m.prep} Wir freuen uns auf Sie!`, 850)) return;
-      // Antwort wird getippt und abgeschickt
       const msg = 'Danke, ich freue mich schon auf den Termin!';
       await wait(500);
-      for (let i = 1; i <= msg.length; i++) { field.textContent = msg.slice(0, i); if (!red) await wait(34); if (!el.isConnected) return; }
-      send.classList.add('on'); await wait(380); if (!el.isConnected) return;
+      for (let i = 1; i <= msg.length; i++) { field.textContent = msg.slice(0, i); if (!red) await wait(34); if (!alive()) return; }
+      send.classList.add('on'); await wait(380); if (!alive()) return;
       field.textContent = ''; send.classList.remove('on');
-      add('bub out', msg); await wait(800); if (!el.isConnected) return;
+      add('bub out', msg); await wait(800); if (!alive()) return;
       const r = add('ios-restart', ic('refresh-cw', 16) + 'Terminfinder neu starten', 'button'); r.type = 'button';
       add('ios-fine', 'Vorschau. Bestätigung per SMS über Timify, als Option.', 'p');
-      r.addEventListener('click', () => { el.remove(); onRestart(); });
+      r.addEventListener('click', () => { pop.remove(); chat.remove(); onRestart(); });
     }
-    app.addEventListener('click', () => {
-      const a = app.getBoundingClientRect(), p = el.getBoundingClientRect();
+    // öffnet sich von selbst, wenn niemand tippt
+    const auto = setTimeout(() => open(), red ? 1500 : 6000);
+    function open(){
+      if (!alive()) return;
+      clearTimeout(auto);
+      const a = pop.querySelector('.msg-ic').getBoundingClientRect(), p = phone.getBoundingClientRect();
       chat.style.setProperty('--ox', (a.left + a.width / 2 - p.left) + 'px');
       chat.style.setProperty('--oy', (a.top + a.height / 2 - p.top) + 'px');
-      chat.classList.remove('closing'); chat.hidden = false; el.classList.add('read');
+      chat.classList.remove('closing'); chat.hidden = false; pop.classList.add('read');
       play();
-    });
-    el.querySelector('.ios-bk').addEventListener('click', () => {
+    }
+    pop.addEventListener('click', open);
+    chat.querySelector('.ios-bk').addEventListener('click', () => {
       chat.classList.add('closing');
       setTimeout(() => { chat.hidden = true; chat.classList.remove('closing'); }, red ? 0 : 260);
     });
-    return el;
   }
 
   return {reduced, hhmm, dLong, iso, days, slots, first, list, progress, swap, pick, cal, calClick, wear, sms};

@@ -128,7 +128,7 @@ const STEPS = {
         <div class="pf front"><div class="pass-h"><span>Bestätigung</span><span>Vorschau</span></div>${rows.map(([k, v]) => `<div class="pass-r"><small>${k}</small><div>${v}</div></div>`).join('')}</div>
         <div class="pf backside"><div class="chk">${ic('check', 30)}</div><b>Termin bestätigt</b><p>${s.name}</p><p>${UI.dLong(d)}, ${UI.hhmm(V.time)} Uhr</p><p>Bestätigung und Erinnerung kommen per E-Mail.</p></div>
       </div></div>
-      <div class="push"><button type="button" class="btn ghost block" data-act="restart">Noch einen Weg ausprobieren</button><p class="fine">Vorschau. Es wurde kein Termin gebucht.</p></div>`;
+      <p class="fine done-fine">Vorschau. Es wurde kein Termin gebucht.</p>`;
   }
 };
 function two(q, sub, opts){
@@ -143,9 +143,9 @@ function render(mode){
   UI.progress(prog, p.length, idx);
   renderSum(); renderTech();
   // nach dem Buchen: Bestätigung als Nachricht auf dem iPhone; Linsen-Termine (Betreuung, Kind-Kontrolle) mit Hinweis „Linsen tragen“
-  const ios = root.querySelector('.ios');
-  if (V.step !== 'fertig') { if (ios) ios.remove(); }
-  else if (!ios) { const s = svc(), d = UI.days()[V.day]; UI.sms(root, {name:s.name, date:UI.dLong(d), time:UI.hhmm(V.time), min:s.min, prep:s.prep, wear:s.g === 'b' || V.svc === 'kind-kontrolle', kid:V.svc === 'kind-kontrolle'}, () => { V = fresh(); H = []; render('back'); }); }
+  const pop = root.querySelector('.msg-pop');
+  if (V.step !== 'fertig') root.querySelectorAll('.msg-pop,.ios-chat').forEach(e => e.remove());
+  else if (!pop) { const s = svc(), d = UI.days()[V.day]; UI.sms(root, {name:s.name, date:UI.dLong(d), time:UI.hhmm(V.time), min:s.min, prep:s.prep, wear:s.g === 'b' || V.svc === 'kind-kontrolle', kid:V.svc === 'kind-kontrolle'}, () => { V = fresh(); H = []; render('back'); }); }
 }
 function renderSum(){
   const s = svc();

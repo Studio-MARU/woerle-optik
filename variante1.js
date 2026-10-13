@@ -118,7 +118,7 @@ function doneHTML(){
   return `<div class="done-ic">${ic('check', 28)}</div><h2 class="q">So sieht die Bestätigung aus</h2><p class="sub">Timify schickt sie per E-Mail und erinnert vor dem Termin.</p>
     <ul class="sum"><li>${ic('calendar', 18)}<span><b>${t.name}</b></span></li><li>${ic('clock', 18)}<span>${UI.dLong(d)}, ${UI.hhmm(S.time)} Uhr · ca. ${t.min} Minuten</span></li><li>${ic('mail', 18)}<span>Bestätigung und Erinnerung per E-Mail oder SMS</span></li></ul>
     <div class="prep">${hint(t)}</div>
-    <div class="push"><button type="button" class="btn ghost block" data-act="restart">Anderen Weg ausprobieren</button><p class="fine">Vorschau. Es wurde kein Termin gebucht.</p></div>`;
+    <p class="fine done-fine">Vorschau. Es wurde kein Termin gebucht.</p>`;
 }
 
 function render(mode){
@@ -129,9 +129,9 @@ function render(mode){
   renderTech();
   if (treeEl) treeEl.innerHTML = tree('start');
   // nach dem Buchen: Bestätigung als Nachricht auf dem iPhone
-  const ios = root.querySelector('.ios');
-  if (S.stage !== 'done') { if (ios) ios.remove(); }
-  else if (!ios) { const t = term(), d = UI.days()[S.day]; UI.sms(root, {name:t.name, date:UI.dLong(d), time:UI.hhmm(S.time), min:t.min, prep:t.prep, wear:wears(), kid:kid()}, () => { S = fresh(); hist = []; render('back'); }); }
+  const pop = root.querySelector('.msg-pop');
+  if (S.stage !== 'done') root.querySelectorAll('.msg-pop,.ios-chat').forEach(e => e.remove());
+  else if (!pop) { const t = term(), d = UI.days()[S.day]; UI.sms(root, {name:t.name, date:UI.dLong(d), time:UI.hhmm(S.time), min:t.min, prep:t.prep, wear:wears(), kid:kid()}, () => { S = fresh(); hist = []; render('back'); }); }
 }
 function renderTech(){
   if (techEl.hidden) return;
