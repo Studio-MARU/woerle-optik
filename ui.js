@@ -76,7 +76,21 @@ window.UI = (() => {
 
   // Nach dem Buchen: erst die Bestätigung, dann taucht das Nachrichten-Symbol mit roter 1 auf.
   // Antippen (oder nach ein paar Sekunden von selbst) öffnet den Chat von Wörle.Optik – passt sich jeder Breite an.
-  // m = {name, date, time, min, prep, wear, kid}; onRestart startet den Terminfinder neu
+  // m = {name, day, time, hint}; onRestart startet den Terminfinder neu
+  // Genau eine SMS mit höchstens 140 Zeichen (Vorgabe Marco). Für alle Terminarten nachgerechnet: längste = 140.
+  const SMS_HINT = {
+    wear:  'Bitte Linsen tragen, sonst ist keine Kontrolle möglich.',
+    kid:   'Linsen bitte eingesetzt lassen, sonst keine Kontrolle möglich.',
+    fit:   'Bitte Brille und Brillenpass mitbringen.',
+    med:   'Bitte Verordnung und Befunde mitbringen.',
+    brille:'Bitte aktuelle Brille mitbringen.',
+    befund:'Bitte vorhandene Befunde mitbringen.'
+  };
+  function smsText(m){
+    const wd = m.day.toLocaleDateString('de-DE', {weekday:'short'}), dm = m.day.toLocaleDateString('de-DE', {day:'2-digit', month:'2-digit'});
+    const t = `Termin bestätigt: ${m.name}, ${wd}, ${dm}, ${m.time} Uhr. ${SMS_HINT[m.hint]}`;
+    return t.length + 24 <= 140 ? t + ' Wir freuen uns auf Sie!' : t;
+  }
   const MSG = '<svg viewBox="0 0 60 60" aria-hidden="true"><path fill="#fff" d="M30 12.5c-11.9 0-21.5 7.8-21.5 17.4 0 5.5 3.2 10.4 8.2 13.6-.4 2.6-1.7 5-3.7 6.9 4-.3 7.6-1.8 10.2-3.9 2.2.5 4.4.8 6.8.8 11.9 0 21.5-7.8 21.5-17.4S41.9 12.5 30 12.5z"/></svg>';
   function sms(phone, m, onRestart){
     phone.querySelectorAll('.msg-pop,.ios-chat').forEach(e => e.remove());
@@ -99,13 +113,12 @@ window.UI = (() => {
       await wait(ms); ty.remove(); if (!alive()) return false;
       add('bub in', html); await wait(550); return alive();
     }
+    const text = smsText(m);
     let started = false;
     async function play(){
       if (started) return; started = true;
       await wait(450);
-      if (!await incoming(`Guten Tag, Ihr Termin ist bestätigt:<br><b>${m.name}</b><br>${m.date}, ${m.time}&nbsp;Uhr · ca.&nbsp;${m.min}&nbsp;Min.<br>Augustenstraße&nbsp;6, München`, 1200)) return;
-      if (m.wear && !await incoming(`<b>Wichtig:</b> ${wear(m.kid)}`, 950)) return;
-      if (!await incoming(`${m.prep} Wir freuen uns auf Sie!`, 850)) return;
+      if (!await incoming(text, 1600)) return;
       const msg = 'Danke, ich freue mich schon auf den Termin!';
       await wait(500);
       for (let i = 1; i <= msg.length; i++) { field.textContent = msg.slice(0, i); if (!red) await wait(34); if (!alive()) return; }
@@ -113,7 +126,7 @@ window.UI = (() => {
       field.textContent = ''; send.classList.remove('on');
       add('bub out', msg); await wait(800); if (!alive()) return;
       const r = add('ios-restart', ic('refresh-cw', 16) + 'Terminfinder neu starten', 'button'); r.type = 'button';
-      add('ios-fine', 'Vorschau. Bestätigung per SMS über Timify, als Option.', 'p');
+      add('ios-fine', `Vorschau. 1 SMS über Timify (${text.length} von 140 Zeichen), als Option.`, 'p');
       r.addEventListener('click', () => { pop.remove(); chat.remove(); onRestart(); });
     }
     // öffnet sich von selbst, wenn niemand tippt
@@ -134,5 +147,5 @@ window.UI = (() => {
     });
   }
 
-  return {reduced, hhmm, dLong, iso, days, slots, first, list, progress, swap, pick, cal, calClick, wear, sms};
+  return {reduced, hhmm, dLong, iso, days, slots, first, list, progress, swap, pick, cal, calClick, wear, sms, smsText};
 })();

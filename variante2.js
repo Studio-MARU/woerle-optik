@@ -145,7 +145,8 @@ function render(mode){
   // nach dem Buchen: Bestätigung als Nachricht auf dem iPhone; Linsen-Termine (Betreuung, Kind-Kontrolle) mit Hinweis „Linsen tragen“
   const pop = root.querySelector('.msg-pop');
   if (V.step !== 'fertig') root.querySelectorAll('.msg-pop,.ios-chat').forEach(e => e.remove());
-  else if (!pop) { const s = svc(), d = UI.days()[V.day]; UI.sms(root, {name:s.name, date:UI.dLong(d), time:UI.hhmm(V.time), min:s.min, prep:s.prep, wear:s.g === 'b' || V.svc === 'kind-kontrolle', kid:V.svc === 'kind-kontrolle'}, () => { V = fresh(); H = []; render('back'); }); }
+  else if (!pop) { const s = svc(), d = UI.days()[V.day]; const hint = V.svc === 'kind-kontrolle' ? 'kid' : s.g === 'b' ? 'wear' : ['kind-erst', 'med-iris'].includes(V.svc) ? 'befund' : s.g === 'e' ? 'fit' : s.g === 'm' ? 'med' : 'brille';
+    UI.sms(root, {name:s.name, day:d, time:UI.hhmm(V.time), hint}, () => { V = fresh(); H = []; render('back'); }); }
 }
 function renderSum(){
   const s = svc();

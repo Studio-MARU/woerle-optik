@@ -72,6 +72,8 @@ const snap = () => JSON.parse(JSON.stringify(S));
 // Stammkunden-Termine mit eigenen Linsen (Nachkontrolle, Folgeversorgung): Linsen beim Termin tragen
 const wears = () => /^st-(nk|fv)-/.test(S.termin), kid = () => S.termin === 'st-nk-baby';
 const hint = t => (wears() ? UI.wear(kid()) + ' ' : '') + t.prep;
+// Kurz-Hinweis für die SMS (eine SMS, max. 140 Zeichen)
+const smsHint = () => kid() ? 'kid' : wears() ? 'wear' : S.termin === 'neu-brille' ? 'brille' : /^neu-kl-/.test(S.termin) ? 'fit' : ['neu-baby', 'neu-iris'].includes(S.termin) ? 'befund' : 'med';
 function term(){
   const t = T[S.termin];
   if (S.age === 'ue40' && t.p40) return Object.assign({}, t, {min:t.p40, name:t.name + ' (ab 40)', prep:t.prep + READ, is40:true});
@@ -131,7 +133,7 @@ function render(mode){
   // nach dem Buchen: Bestätigung als Nachricht auf dem iPhone
   const pop = root.querySelector('.msg-pop');
   if (S.stage !== 'done') root.querySelectorAll('.msg-pop,.ios-chat').forEach(e => e.remove());
-  else if (!pop) { const t = term(), d = UI.days()[S.day]; UI.sms(root, {name:t.name, date:UI.dLong(d), time:UI.hhmm(S.time), min:t.min, prep:t.prep, wear:wears(), kid:kid()}, () => { S = fresh(); hist = []; render('back'); }); }
+  else if (!pop) { const t = term(), d = UI.days()[S.day]; UI.sms(root, {name:t.name, day:d, time:UI.hhmm(S.time), hint:smsHint()}, () => { S = fresh(); hist = []; render('back'); }); }
 }
 function renderTech(){
   if (techEl.hidden) return;
