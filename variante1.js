@@ -99,12 +99,12 @@ function qHTML(){
 }
 function calHTML(){
   const t = term();
-  return `<p class="kicker">Kalender</p><h2 class="q">Wann passt es Ihnen?</h2><p class="sub">${t.name} · ca. ${t.min} Minuten</p>${UI.cal(S, t.min)}
-    <div class="push"><button type="button" class="btn block" data-act="next" ${S.time === null ? 'disabled' : ''}>Weiter</button></div>`;
+  return `<p class="kicker">Kalender von Timify</p><h2 class="q">Wann passt es Ihnen?</h2><p class="sub">${t.name} · ca. ${t.min} Minuten</p>${UI.cal(S, t.min)}
+    <div class="push"><button type="button" class="btn block" data-act="next" ${S.time === null ? 'disabled' : ''}>Weiter</button><p class="fine">Vereinfachte Vorschau. Ab hier zeigt Timify seinen Kalender in Ihren Farben.</p></div>`;
 }
 function formHTML(){
   const d = UI.days()[S.day];
-  return `<p class="kicker">Ihre Angaben</p><h2 class="q">Fast geschafft</h2><p class="sub">${UI.dLong(d)}, ${UI.hhmm(S.time)} Uhr</p>
+  return `<p class="kicker">Formular von Timify</p><h2 class="q">Fast geschafft</h2><p class="sub">${UI.dLong(d)}, ${UI.hhmm(S.time)} Uhr</p>
     <div class="ff"><span>Vor- und Nachname</span><i>Feld in Timify</i></div>
     <div class="ff"><span>E-Mail</span><i>Feld in Timify</i></div>
     <div class="ff"><span>Telefon (optional)</span><i>Feld in Timify</i></div>

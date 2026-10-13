@@ -110,7 +110,7 @@ const STEPS = {
   kind: () => two('Ist Ihr Kind schon bei uns in Betreuung?', 'Für Kinder vom Babyalter bis 11 Jahre. Wir nehmen uns viel Zeit.', [['kind-kontrolle', 'Ja, zur Nachkontrolle'], ['kind-erst', 'Nein, es ist der erste Termin']]),
   brille: () => two('Waren Sie schon einmal zum Sehtest bei uns?', 'Damit wir die passende Zeit einplanen.', [['brille-stamm', 'Ja'], ['brille-neu', 'Nein, zum ersten Mal']]),
   termin: () => { const s = svc(); return `<p class="kicker">Kalender von Timify</p><h2 class="q">Wann passt es Ihnen?</h2><p class="sub">${s.name} · ca. ${s.min} Minuten</p>${UI.cal(V, s.min)}
-    <div class="push"><button type="button" class="btn block" data-act="next" ${V.time === null ? 'disabled' : ''}>Weiter</button></div>`; },
+    <div class="push"><button type="button" class="btn block" data-act="next" ${V.time === null ? 'disabled' : ''}>Weiter</button><p class="fine">Vereinfachte Vorschau. Ab hier zeigt Timify seinen Kalender in Ihren Farben.</p></div>`; },
   daten: () => {
     const d = UI.days()[V.day];
     const vo = V.topic === 'med' ? `<p class="flabel">Haben Sie eine ärztliche Verordnung?</p><div class="chips" role="group" aria-label="Ärztliche Verordnung">${[['ja','Ja'],['nein','Nein'],['unklar','Weiß ich nicht']].map(([k, l]) => `<button type="button" data-vo="${k}" class="${V.vo === k ? 'on' : ''}" aria-pressed="${V.vo === k}">${l}</button>`).join('')}</div>` : '';
@@ -123,9 +123,9 @@ const STEPS = {
   fertig: () => {
     const s = svc(), d = UI.days()[V.day];
     const rows = [['Thema', TOPICS[V.topic].label], ['Terminart', s.name], ['Dauer', 'ca. ' + s.min + ' Minuten'], ['Termin', UI.dLong(d) + ', ' + UI.hhmm(V.time) + ' Uhr'], ['Bitte mitbringen', s.prep]];
-    return `<h2 class="q">Ihr Termin-Pass</h2><p class="sub">So sieht der Abschluss aus. Tippen Sie auf den Pass, um ihn umzudrehen.</p>
-      <div class="pass" data-act="flip" role="button" tabindex="0" aria-label="Termin-Pass umdrehen"><div class="pass-in">
-        <div class="pf front"><div class="pass-h"><span>Termin-Pass</span><span>Vorschau</span></div>${rows.map(([k, v]) => `<div class="pass-r"><small>${k}</small><div>${v}</div></div>`).join('')}</div>
+    return `<h2 class="q">So sieht die Bestätigung aus</h2><p class="sub">Timify bestätigt den Termin per E-Mail und erinnert vorher. Tippen Sie auf die Karte, um sie umzudrehen.</p>
+      <div class="pass" data-act="flip" role="button" tabindex="0" aria-label="Bestätigung umdrehen"><div class="pass-in">
+        <div class="pf front"><div class="pass-h"><span>Bestätigung</span><span>Vorschau</span></div>${rows.map(([k, v]) => `<div class="pass-r"><small>${k}</small><div>${v}</div></div>`).join('')}</div>
         <div class="pf backside"><div class="chk">${ic('check', 30)}</div><b>Termin bestätigt</b><p>${s.name}</p><p>${UI.dLong(d)}, ${UI.hhmm(V.time)} Uhr</p><p>Bestätigung und Erinnerung kommen per E-Mail.</p></div>
       </div></div>
       <div class="push"><button type="button" class="btn ghost block" data-act="restart">Noch einen Weg ausprobieren</button><p class="fine">Vorschau. Es wurde kein Termin gebucht.</p></div>`;
@@ -152,12 +152,11 @@ function renderSum(){
 }
 function renderTech(){
   if (techEl.hidden) return;
-  const s = svc(), d = V.time !== null && V.day !== null ? UI.days()[V.day] : null;
+  const s = svc();
   if (!s) { techEl.innerHTML = '<h4>Übergabe an Timify</h4><p>Noch keine Leistung gewählt. Mit jeder Antwort wird der Weg enger.</p>'; return; }
   const lines = [`data-service-external-ids="${s.id}"`];
   if (V.age) lines.push(`data-ext-customer-field-1="altersgruppe-${V.age === '40' ? '40+' : '12-39'}"`);
   if (V.vo) lines.push(`data-ext-customer-field-2="verordnung-${V.vo}"`);
-  if (d) lines.push(`data-date="${UI.iso(d)}"`);
   lines.push('data-meta-utmsource="terminfinder"');
   techEl.innerHTML = `<h4>Übergabe an Timify</h4><dl class="kv"><dt>Leistung</dt><dd>${s.name}</dd><dt>Dauer</dt><dd>${s.min} Min.${s.is40 ? ` statt ${SV[V.svc].min}` : ''} · Beispiel</dd><dt>Team</dt><dd>${s.wer} · Beispiel</dd></dl><pre class="code">${lines.join('\n')}</pre>`;
 }
