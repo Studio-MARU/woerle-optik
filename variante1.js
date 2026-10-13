@@ -1,22 +1,27 @@
 // Variante 1 – genau nach der Skizze von Wörle.Optik
 (() => {
 const FLOW = {
-  start:{ q:'Waren Sie schon einmal bei uns?', sub:'Damit wir Ihnen die passende Terminart vorschlagen.', tree:'Schon einmal hier?', opts:[
-    {key:'ja', label:'Ja, ich war schon bei Ihnen', sub:'Kontaktlinsen oder Brille', icon:'refresh-cw', next:'stamm', short:'Stammkunde'},
-    {key:'nein', label:'Nein, ich bin zum ersten Mal hier', sub:'Wir freuen uns, Sie kennenzulernen', icon:'user-plus', next:'neu', short:'Neukunde'} ]},
-  stamm:{ q:'Was steht bei Ihnen an?', tree:'Was steht an?', other:true, opts:[
+  start:{ q:'Waren Sie schon mal in dieser Einrichtung?', sub:'Damit wir Ihnen die passende Terminart vorschlagen.', tree:'Schon mal hier?', opts:[
+    {key:'ja', label:'Ja, ich war schon bei Ihnen', icon:'refresh-cw', next:'ja', short:'Ja'},
+    {key:'nein', label:'Nein, ich bin zum ersten Mal hier', sub:'Wir freuen uns, Sie kennenzulernen', icon:'user-plus', next:'nein', short:'Nein'} ]},
+  // Skizze, Kasten nach „ja“: Stammkunden-Termin · Neukundin für Kontaktlinse · Neukundin für Brille
+  ja:{ q:'Worum geht es?', tree:'Ja', opts:[
+    {key:'stamm', label:'Stammkunden-Termin', sub:'Nachkontrolle oder Folgeversorgung Ihrer Kontaktlinsen', icon:'kl-check', next:'stamm', short:'Stammkunden-Termin'},
+    {key:'neu-kl', label:'Zum ersten Mal Kontaktlinsen', sub:'Sie kennen uns, z. B. von der Brille', icon:'kl-lens', next:'alter', short:'Neukundin Kontaktlinse'},
+    {key:'neu-br', label:'Zum ersten Mal eine Brille', sub:'Sie kennen uns, z. B. von den Kontaktlinsen', icon:'glasses', end:'neu-brille', short:'Neukundin Brille'} ]},
+  stamm:{ q:'Was steht bei Ihnen an?', tree:'Stammkunden-Termin', opts:[
     {key:'nk-baby', group:'Nachkontrolle', label:'Baby oder Kleinkind', end:'st-nk-baby'},
     {key:'nk-hart', group:'Nachkontrolle', label:'Harte Linsen', end:'st-nk-hart'},
     {key:'nk-weich', group:'Nachkontrolle', label:'Weiche Linsen', end:'st-nk-weich'},
-    {key:'fv-hart', group:'Folgeversorgung (neue Linsen)', label:'Harte Linsen', end:'st-fv-hart'},
-    {key:'fv-weich', group:'Folgeversorgung (neue Linsen)', label:'Weiche Linsen', end:'st-fv-weich'},
-    {key:'fv-skl', group:'Folgeversorgung (neue Linsen)', label:'Sklerallinsen', end:'st-fv-skl'},
-    {key:'brille', group:'Brille', label:'Sehtest oder neue Brille', end:'st-brille', short:'Brille'} ]},
-  neu:{ q:'Worum geht es?', sub:'Wählen Sie, was am besten passt.', tree:'Worum geht es?', opts:[
-    {key:'kl', label:'Ich möchte Kontaktlinsen', sub:'Tageslinsen, harte Linsen, Gleitsicht, Sport', icon:'kl-lens', next:'alter', short:'Kontaktlinsen'},
-    {key:'br', label:'Ich brauche eine Brille', sub:'Beratung und Sehtest', icon:'glasses', end:'neu-brille', short:'Brille'},
-    {key:'med', label:'Medizinischer Grund', sub:'z. B. Keratokonus, nach OP oder Verletzung', icon:'eye-med', next:'med', short:'Medizinisch'},
+    {key:'fv-hart', group:'Folgeversorgung', label:'Harte Linsen', end:'st-fv-hart'},
+    {key:'fv-weich', group:'Folgeversorgung', label:'Weiche Linsen', end:'st-fv-weich'},
+    {key:'fv-skl', group:'Folgeversorgung', label:'Sklerallinsen', end:'st-fv-skl'} ]},
+  // Skizze, Kasten nach „nein“: medizinische Indikation · Neukundin · Neukunde Baby/Kleinkind
+  nein:{ q:'Worum geht es?', sub:'Wählen Sie, was am besten passt.', tree:'Nein', opts:[
+    {key:'med', label:'Medizinischer Grund', sub:'mit ärztlicher Verordnung, z. B. Keratokonus', icon:'eye-med', next:'med', short:'Medizinische Indikation'},
+    {key:'kl', label:'Ich möchte Kontaktlinsen', sub:'Tageslinsen, harte Linsen, Gleitsicht, Sport', icon:'kl-lens', next:'alter', short:'Neukundin'},
     {key:'baby', label:'Für mein Baby oder Kleinkind', sub:'Kontaktlinsen für die Kleinsten', icon:'baby', end:'neu-baby', short:'Baby/Kleinkind'} ]},
+  // Skizze: Neukundin 12–40 · Neukundin 40 und älter, beide weiter zu denselben Linsenwünschen
   alter:{ q:'Wie alt sind Sie?', sub:'Ab etwa 40 lässt das Sehen in der Nähe nach. Dann planen wir mehr Zeit ein.', tree:'Alter', opts:[
     {key:'u40', label:'12 bis 39 Jahre', age:'u40', next:'wunsch', short:'12–39'},
     {key:'ue40', label:'40 Jahre oder älter', sub:'mit Prüfung fürs Sehen in der Nähe', age:'ue40', next:'wunsch', short:'40+'} ]},
@@ -25,7 +30,9 @@ const FLOW = {
     {key:'tag', label:'Tageslinsen', sub:'jeden Tag frisch, ohne Pflegemittel', icon:'sun', end:'neu-kl-tag'},
     {key:'hart', label:'Harte Linsen', sub:'formstabil, individuell angepasst', icon:'kl-new', end:'neu-kl-hart'},
     {key:'gleit', label:'Gleitsichtlinsen', sub:'scharf in der Nähe und in der Ferne', icon:'book-open', end:'neu-kl-gleit'} ]},
-  med:{ q:'Worum geht es genau?', sub:'Haben Sie eine ärztliche Verordnung? Bringen Sie sie einfach mit.', tree:'Medizinischer Grund', opts:[
+  // Skizze, Kasten der medizinischen Indikation
+  med:{ q:'Worum geht es genau?', sub:'Haben Sie eine ärztliche Verordnung? Bringen Sie sie einfach mit.', tree:'Medizinische Indikation', opts:[
+    {key:'mbaby', label:'Baby oder Kleinkind', icon:'baby', end:'neu-baby', short:'Baby/Kleinkind'},
     {key:'kk', label:'Keratokonus', icon:'keratokonus', end:'neu-kk'},
     {key:'op', label:'Nach Transplantation, Verletzung oder Laser-OP', icon:'bandage', end:'neu-op', short:'Transplantat/Verletzung/Laser'},
     {key:'skl', label:'Sklerallinsen', icon:'kl-lens', end:'neu-skl'},
@@ -41,7 +48,6 @@ const T = {
   'st-fv-hart': {name:'Folgeversorgung harte Linsen', min:30, wer:'Kontaktlinsen-Team', prep:'Bitte bringen Sie Ihre aktuellen Linsen und Ihren Linsenpass mit.'},
   'st-fv-weich':{name:'Folgeversorgung weiche Linsen', min:30, wer:'Kontaktlinsen-Team', prep:'Bitte bringen Sie Ihre aktuellen Linsen und Ihren Linsenpass mit.'},
   'st-fv-skl':  {name:'Folgeversorgung Sklerallinsen', min:45, wer:'Spezialist/in Sklerallinsen', prep:'Bitte bringen Sie Ihre aktuellen Sklerallinsen und den Behälter mit.'},
-  'st-brille':  {name:'Sehtest und Brillenberatung (Stammkunde)', min:30, wer:'Brillen-Team', prep:'Bringen Sie Ihre aktuelle Brille mit.'},
   'neu-brille': {name:'Brillenberatung mit Sehtest', min:45, wer:'Brillen-Team', prep:'Bringen Sie Ihre aktuelle Brille mit, falls Sie eine haben.'},
   'neu-baby':   {name:'Erstversorgung Baby/Kleinkind', min:90, wer:'Kinder-Kontaktlinsen', prep:'Bitte bringen Sie alle Befunde der Augenklinik oder des Augenarztes mit.'},
   'neu-kl-sport':{name:'Kontaktlinsen-Erstanpassung · für ab und zu', min:45, p40:60, wer:'Kontaktlinsen-Team', prep:LENS},
@@ -53,7 +59,8 @@ const T = {
   'neu-skl':    {name:'Erstanpassung Sklerallinsen', min:90, wer:'Spezialist/in Sklerallinsen', prep:'Bitte bringen Sie Ihre ärztliche Verordnung und vorhandene Befunde mit.'},
   'neu-iris':   {name:'Beratung Irislinse', min:60, wer:'Spezialist/in Kontaktlinseninstitut', prep:'Bitte bringen Sie vorhandene Befunde und, falls möglich, ein Foto Ihres anderen Auges mit.'}
 };
-const REST = {start:3, neu:2, alter:1, wunsch:0, stamm:0, med:0};
+// Fragen, die nach der aktuellen mindestens noch kommen – gleiche Rechnung wie im Vorschlag (kürzester Weg)
+const REST = {start:1, ja:0, nein:0, stamm:0, med:0, alter:1, wunsch:0};
 
 const root = document.getElementById('fa');
 const body = root.querySelector('.ph-body'), prog = root.querySelector('.ph-prog'), backBtn = root.querySelector('.ph-back'), techBtn = root.querySelector('.ph-tech');
@@ -67,14 +74,7 @@ function term(){
   if (S.age === 'ue40' && t.p40) return Object.assign({}, t, {min:t.p40, name:t.name + ' (ab 40)', prep:t.prep + READ, is40:true});
   return t;
 }
-function opts(id, forTree){
-  const list = FLOW[id].opts.slice();
-  if (id === 'wunsch' && !forTree && S.age === 'ue40') {
-    const i = list.findIndex(o => o.key === 'gleit');
-    const g = Object.assign({}, list[i], {tag:'häufig ab 40'}); list.splice(i, 1); list.unshift(g);
-  }
-  return list;
-}
+function opts(id){ return FLOW[id].opts.slice(); }
 function choose(id, key){
   const o = opts(id).find(x => x.key === key);
   hist.push(snap());
@@ -94,7 +94,6 @@ function qHTML(){
   let h = `<h2 class="q">${n.q}</h2>${n.sub ? `<p class="sub">${n.sub}</p>` : '<div style="height:10px"></div>'}`;
   if (list.some(o => o.group)) h += [...new Set(list.map(o => o.group))].map(g => `<p class="lh">${g}</p>` + UI.list(list.filter(o => o.group === g).map(toRow))).join('');
   else h += UI.list(list.map(toRow));
-  if (n.other) h += `<p class="hint">${ic('info', 16)}<span>Etwas anderes? Hier steht später Ihre Telefonnummer.</span></p>`;
   if (S.node === 'start') h += '<div class="push"><p class="fine">Dauert unter einer Minute · keine Anmeldung nötig</p></div>';
   return h;
 }
@@ -139,11 +138,11 @@ function renderTech(){
   techEl.innerHTML = h;
 }
 function tree(id){
-  const n = FLOW[id], on = new Set(S.ans.map(a => a.node + ':' + a.key)), list = opts(id, true);
+  const n = FLOW[id], on = new Set(S.ans.map(a => a.node + ':' + a.key)), list = opts(id);
   const same = list.length > 1 && list.every(o => o.next && o.next === list[0].next);
   const li = o => {
     const isOn = on.has(id + ':' + o.key), cur = isOn && o.end && o.end === S.termin, t = o.end ? T[o.end] : null;
-    const lb = o.group && o.key !== 'brille' ? o.group.split(' ')[0] + ': ' + o.label : (o.short || o.label);
+    const lb = o.group ? o.group + ': ' + o.label : (o.short || o.label);
     return `<li class="${cur ? 'cur' : isOn ? 'on' : ''}"><span class="lb">${lb}</span>${t ? ` <span class="lf">→ ${t.name} · ${t.min}${t.p40 && t.p40 !== t.min ? '/' + t.p40 : ''} Min.</span>` : ''}${o.next && !same ? `<ul>${tree(o.next)}</ul>` : ''}</li>`;
   };
   let h = `<li><span class="ql">${n.tree}</span></li>` + list.map(li).join('');
