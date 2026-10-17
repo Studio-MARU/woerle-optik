@@ -831,24 +831,3 @@ html.revealing .chat-phone{animation:pinFocus 1.5s cubic-bezier(.2,.8,.2,1) both
 .wa-btn,.wa-fab{background:#22b455}
 .wa-btn:hover,.wa-fab:hover{background:#1ea14c}
 .wa-fab{box-shadow:0 1px 2px rgba(16,90,45,.22),0 12px 26px -12px rgba(16,110,55,.5)}
-/* „Betreuung Plus“ als Empfehlung, mit dem Markenauftritt als Teil des Pakets (17.10.2026) */
-.ab-pk{padding-top:14px}
-.ab-opt.rec{border:2px solid #0E5E6F;box-shadow:0 0 0 6px rgba(14,94,111,.12),0 24px 50px -28px rgba(20,50,90,.45)}
-.ab-badge{position:absolute;top:-14px;left:50%;translate:-50% 0;z-index:2;display:inline-flex;align-items:center;gap:6px;padding:5px 12px;border-radius:999px;background:#0E5E6F;color:#fff;font-size:12.5px;font-weight:700;letter-spacing:.01em;white-space:nowrap;box-shadow:0 6px 14px -6px rgba(14,94,111,.6)}
-.ab-brand{display:grid;grid-template-columns:auto minmax(0,1fr);gap:12px;align-items:start;margin-top:16px;padding:14px 16px;border-radius:14px;background:rgba(14,94,111,.07)}
-.ab-brand .ab-out-i{background:#0E5E6F}
-.ab-brand small{font-size:12px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:#4d6a72}
-.ab-brand h5{margin:2px 0 4px;font-size:16px;font-weight:700;letter-spacing:-.01em;line-height:1.3;color:#13202c}
-.ab-brand p{margin:0;font-size:14px;line-height:1.5;color:#2c3c48}
-@media (max-width:620px){.ab-pk{padding-top:0}.ab-pk .ab-opt.rec{margin-top:14px}.ab-brand{padding:12px 14px}}
-.ab-pk{align-items:start}
-/* Angebot sauber formatiert (17.10.2026): alle drei Karten gleich breit untereinander; auf größeren Bildschirmen
-   links Art, Titel und Satz, rechts die Leistungen (mit Trennlinie); bei Plus darunter der Markenauftritt */
-@media (min-width:761px){
-  .ab-pk{grid-template-columns:minmax(0,1fr);gap:26px;padding-top:12px}
-  .ab-offer .ab-opt{grid-template-columns:minmax(0,220px) minmax(0,1fr);grid-template-rows:auto auto 1fr;column-gap:30px;row-gap:4px;align-items:start;padding:28px 30px}
-  .ab-offer .ab-opt > .ab-kind,.ab-offer .ab-opt > h4,.ab-offer .ab-opt > .ab-o1{grid-column:1}
-  .ab-offer .ab-opt > ul{grid-column:2;grid-row:1 / span 3;margin:0;padding:2px 0 0 28px;border-top:0;border-left:1px solid rgba(19,32,44,.1)}
-  .ab-offer .ab-opt > .ab-brand{grid-column:2;grid-row:4;margin:18px 0 0 28px}
-  .ab-offer .ab-opt.rec{padding-top:32px}
-}

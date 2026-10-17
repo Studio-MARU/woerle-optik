@@ -110,7 +110,7 @@ const STEPS = {
   kind: () => two('Ist Ihr Kind schon bei uns in Betreuung?', 'Für Kinder vom Babyalter bis 11 Jahre. Wir nehmen uns viel Zeit.', [['kind-kontrolle', 'Ja, zur Nachkontrolle'], ['kind-erst', 'Nein, es ist der erste Termin']]),
   brille: () => two('Waren Sie schon einmal zum Sehtest bei uns?', 'Damit wir die passende Zeit einplanen.', [['brille-stamm', 'Ja'], ['brille-neu', 'Nein, zum ersten Mal']]),
   termin: () => { const s = svc(); return `<p class="kicker">Kalender von Timify</p><h2 class="q">Wann passt es Ihnen?</h2><p class="sub">${s.name} · ca. ${s.min} Minuten</p>${UI.cal(V, s.min)}
-    <div class="push"><button type="button" class="btn block" data-act="next" ${V.time === null ? 'disabled' : ''}>Weiter</button><p class="fine">Vereinfachte Vorschau. Ab hier zeigt Timify seinen Kalender in Ihren Farben.</p></div>`; },
+    <div class="push"><button type="button" class="btn block" data-act="next" ${V.time === null ? 'disabled' : ''}>Weiter</button><p class="fine">Vereinfachte Vorschau. Ab hier zeigt Timify seinen Kalender in deinen Farben.</p></div>`; },
   daten: () => {
     const d = UI.days()[V.day];
     const vo = V.topic === 'med' ? `<p class="flabel">Haben Sie eine ärztliche Verordnung?</p><div class="chips" role="group" aria-label="Ärztliche Verordnung">${[['ja','Ja'],['nein','Nein'],['unklar','Weiß ich nicht']].map(([k, l]) => `<button type="button" data-vo="${k}" class="${V.vo === k ? 'on' : ''}" aria-pressed="${V.vo === k}">${l}</button>`).join('')}</div>` : '';
@@ -123,7 +123,7 @@ const STEPS = {
   fertig: () => {
     const s = svc(), d = UI.days()[V.day];
     const rows = [['Thema', TOPICS[V.topic].label], ['Terminart', s.name], ['Dauer', 'ca. ' + s.min + ' Minuten'], ['Termin', UI.dLong(d) + ', ' + UI.hhmm(V.time) + ' Uhr'], ['Bitte mitbringen', s.prep]];
-    return `<h2 class="q">So sieht die Bestätigung aus</h2><p class="sub">Timify bestätigt den Termin per E-Mail und erinnert vorher. Tippen Sie auf die Karte, um sie umzudrehen.</p>
+    return `<h2 class="q">So sieht die Bestätigung aus</h2><p class="sub">Timify bestätigt den Termin per E-Mail und erinnert vorher. Tipp auf die Karte, um sie umzudrehen.</p>
       <div class="pass" data-act="flip" role="button" tabindex="0" aria-label="Bestätigung umdrehen"><div class="pass-in">
         <div class="pf front"><div class="pass-h"><span>Bestätigung</span><span>Vorschau</span></div>${rows.map(([k, v]) => `<div class="pass-r"><small>${k}</small><div>${v}</div></div>`).join('')}</div>
         <div class="pf backside"><div class="chk">${ic('check', 30)}</div><b>Termin bestätigt</b><p>${s.name}</p><p>${UI.dLong(d)}, ${UI.hhmm(V.time)} Uhr</p><p>Bestätigung und Erinnerung kommen per E-Mail.</p></div>

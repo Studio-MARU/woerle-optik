@@ -105,7 +105,7 @@ function qHTML(){
 function calHTML(){
   const t = term();
   return `<p class="kicker">Kalender von Timify</p><h2 class="q">Wann passt es Ihnen?</h2><p class="sub">${t.name} · ca. ${t.min} Minuten</p>${UI.cal(S, t.min)}
-    <div class="push"><button type="button" class="btn block" data-act="next" ${S.time === null ? 'disabled' : ''}>Weiter</button><p class="fine">Vereinfachte Vorschau. Ab hier zeigt Timify seinen Kalender in Ihren Farben.</p></div>`;
+    <div class="push"><button type="button" class="btn block" data-act="next" ${S.time === null ? 'disabled' : ''}>Weiter</button><p class="fine">Vereinfachte Vorschau. Ab hier zeigt Timify seinen Kalender in deinen Farben.</p></div>`;
 }
 function formHTML(){
   const d = UI.days()[S.day];
