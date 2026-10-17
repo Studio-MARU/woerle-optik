@@ -673,3 +673,15 @@ html.revealing main,html.revealing .bar{animation:pinFocus 1.5s cubic-bezier(.2,
 .ab-opt ul{margin-top:12px}
 .ab-sh{margin:30px 0 14px;font-size:18px;font-weight:600;letter-spacing:-.01em;text-transform:none;color:#13202c;text-align:center;text-wrap:balance}
 .ab-term{font-size:15px;font-weight:500;color:#13202c}
+/* Feinschliff 17.10.2026 */
+/* Leiste: Navigation genau in der Mitte, Logo links (Handy und Desktop gleich) */
+.bar-in{display:grid;grid-template-columns:minmax(0,1fr) auto minmax(0,1fr);gap:12px}
+.bar-in .brand{justify-self:start;min-width:0}
+.bar .nav{margin-left:0;justify-self:center;overflow:visible}
+@media (max-width:719px){.bar .nav{-webkit-mask:none;mask:none;padding-right:0}.bar .nav a{padding:8px 12px;font-size:14px}}
+/* Terminfinder mittig: Text zentriert darüber, Telefon in der Mitte */
+.slide{grid-template-columns:minmax(0,1fr);justify-items:center;gap:22px;align-items:start}
+.slide-txt{max-width:600px;justify-items:center;text-align:center}
+.slide-txt .ticks{display:flex;flex-wrap:wrap;justify-content:center;gap:6px 18px}
+.slide-ph{width:100%;max-width:440px;justify-self:center}
+@media (max-width:899px){.slide-ph{margin-top:0}}

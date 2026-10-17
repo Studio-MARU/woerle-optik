@@ -137,6 +137,14 @@
     scrollTo({top:offer.getBoundingClientRect().top + scrollY - 96, behavior:reduced() ? 'auto' : 'smooth'});
     state = 2;
   }
+  // Zurück zur Ausgangsansicht (Titel, Text, Button „So geht es weiter“), z. B. über „Über uns“ in der Leiste
+  window.resetOffer = () => {
+    if (state === 0) return;
+    scene.classList.remove('go', 'offer'); offer.hidden = true;
+    btn.querySelector('.ab-cta-t').textContent = 'So geht es weiter';
+    btn.href = '#angebot'; btn.removeAttribute('target'); btn.removeAttribute('rel');
+    state = 0;
+  };
   btn.addEventListener('click', e => {
     if (state === 2) return;
     e.preventDefault(); e.stopPropagation();
@@ -155,5 +163,6 @@ document.addEventListener('click', e => {
   const t = id ? document.getElementById(id) : null;
   if (!t) return;
   e.preventDefault();
+  if (id === 'maru' && a.closest('.nav') && window.resetOffer) window.resetOffer();
   t.scrollIntoView({behavior:matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth', block:'start'});
 });
