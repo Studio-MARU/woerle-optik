@@ -747,3 +747,8 @@ html.revealing .chat-phone{animation:pinFocus 1.5s cubic-bezier(.2,.8,.2,1) both
 }
 @media (prefers-reduced-motion:reduce){.msg,.chat-hint,.msg.typing i{animation:none}.chat.out .chat-phone,html.revealing .chat-phone{animation:none}}
 .chat [hidden]{display:none!important}
+/* Begrüßungs-Chat: Blumenwiese hinter dem Handy (Desktop); am Handy füllt der Chat den Bildschirm */
+@media (min-width:601px){html.chatting .chat{background:url("maru-wiese.webp") center bottom/cover no-repeat,linear-gradient(#9fd0f5,#5aaeed)}.chat-phone{box-shadow:0 40px 90px -30px rgba(16,32,39,.55),0 0 0 1px rgba(255,255,255,.25)}}
+.chat.out{animation:chatFade .52s ease forwards}
+@keyframes chatFade{to{opacity:0}}
+@media (prefers-reduced-motion:reduce){.chat.out{animation:none}}
