@@ -13,7 +13,7 @@
 
 </head>
 <body>
-<script>try { if (sessionStorage.getItem('wo-ok') !== '1') document.documentElement.classList.add('locked'); } catch (e) { document.documentElement.classList.add('locked'); }</script>
+<script>try { const s = sessionStorage, r = document.documentElement; if (s.getItem('wo-ok') !== '1') r.classList.add('locked'); else if (s.getItem('wo-chat') !== '1') r.classList.add('chatting'); } catch (e) { document.documentElement.classList.add('locked'); }</script>
 <svg width="0" height="0" style="position:absolute" aria-hidden="true"><symbol id="maru-logo" viewBox="284 278 1383 1407" fill-rule="evenodd"><path d="M284 892V418A140 140 0 0 1 424 278H853A140 140 0 0 1 993 418V892H860V421A18 18 0 0 0 842 403H721A18 18 0 0 0 703 421V892H571V421A18 18 0 0 0 553 403H432A18 18 0 0 0 414 421V892Z"/><path d="M1093 892V418A140 140 0 0 1 1233 278H1522A140 140 0 0 1 1662 418V892H1529V689H1225V892ZM1243 403H1511A18 18 0 0 1 1529 421V564H1225V421A18 18 0 0 1 1243 403Z"/><path d="M284 1685V1015H768A150 150 0 0 1 918 1165V1330A130 130 0 0 1 788 1460L918 1630V1685H775L597 1460H427V1685ZM427 1150H757A18 18 0 0 1 775 1168V1305A18 18 0 0 1 757 1323H427Z"/><path d="M1055 1015H1197V1534A18 18 0 0 0 1215 1552H1505A18 18 0 0 0 1523 1534V1015H1667V1535A150 150 0 0 1 1517 1685H1205A150 150 0 0 1 1055 1535Z"/></symbol></svg>
 <div class="gate" id="gate" role="dialog" aria-label="Anmeldung">
   <div class="pin-bg" aria-hidden="true"></div>
@@ -32,6 +32,32 @@
   <p class="pin-welcome" id="pinWelcome" aria-hidden="true"></p>
   <i class="pin-flash" aria-hidden="true"></i>
 </div>
+<div class="chat" id="chat" role="dialog" aria-label="Nachricht von Marco und Luis">
+  <div class="chat-phone">
+    <div class="chat-status" aria-hidden="true"><span id="chatClock">9:41</span><i class="chat-island"></i><span class="chat-sig"><i></i><i></i><i></i><i></i><b></b></span></div>
+    <header class="chat-head">
+      <span class="chat-av"><svg class="mlogo" role="img" aria-label="Studio MARU"><use href="#maru-logo"/></svg></span>
+      <b>Marco &amp; Luis</b>
+      <small>Studio MARU</small>
+    </header>
+    <div class="chat-body" id="chatBody" aria-live="polite">
+      <p class="chat-day">Heute <span id="chatTime"></span></p>
+      <div class="msg in" id="chatMsg" hidden>
+        <p><b>Lieber Horsti,</b></p>
+        <p>danke für dein Vertrauen und deine Skizze. Wir haben uns richtig hineingekniet, damit deine Kundinnen und Kunden ihren Termin so einfach wie möglich finden: ohne Fachchinesisch, ohne Umwege, ohne Verwirrung.</p>
+        <p>Hier siehst du deine Idee umgesetzt und unseren Vorschlag dazu. Probier beides in Ruhe aus. Wenn dir etwas einfällt, schreib mir einfach.</p>
+        <p>Herzliche Grüße,<br>Marco &amp; Luis</p>
+      </div>
+      <button type="button" class="msg in file" id="chatFile" hidden aria-label="Terminfinder Wörle.Optik öffnen">
+        <span class="file-ic" aria-hidden="true"><svg viewBox="0 0 40 48"><path d="M6 0h20l14 14v28a6 6 0 0 1-6 6H6a6 6 0 0 1-6-6V6a6 6 0 0 1 6-6Z" fill="#0E5E6F"/><path d="M26 0v8a6 6 0 0 0 6 6h8Z" fill="#8FD6CF"/><use href="#maru-logo" x="10" y="19" width="20" height="20" fill="#fff"/></svg></span>
+        <span class="file-t"><b>Terminfinder Wörle.Optik</b><small>Konzept · 2 Wege zum Termin</small></span>
+      </button>
+      <p class="chat-hint" id="chatHint" hidden>Zum Öffnen tippen</p>
+      <div class="msg in typing" id="chatTyping" hidden aria-label="Schreibt …"><i></i><i></i><i></i></div>
+    </div>
+    <footer class="chat-foot" aria-hidden="true"><span class="chat-plus">+</span><span class="chat-input">Textnachricht</span><span class="chat-send"></span></footer>
+  </div>
+</div>
 <header class="bar">
   <div class="wrap bar-in">
     <a class="brand" href="#top"><svg class="mlogo b-logo" role="img" aria-label="Studio MARU"><use href="#maru-logo"/></svg><span class="for">Konzept für Wörle.Optik</span></a>
@@ -42,17 +68,6 @@
 </header>
 
 <main id="top">
-  <section class="hero">
-    <div class="wrap hello-wrap">
-        <div class="hello">
-          <p class="hello-h">Lieber Horsti,</p>
-          <p>danke für dein Vertrauen und deine Skizze. Wir haben uns richtig hineingekniet, damit deine Kundinnen und Kunden ihren Termin so einfach wie möglich finden: ohne Fachchinesisch, ohne Umwege, ohne Verwirrung.</p>
-          <p>Hier siehst du deine Idee umgesetzt und unseren Vorschlag dazu. Probier beides in Ruhe aus. Wenn dir etwas einfällt, schreib mir einfach.</p>
-          <div class="hello-f"><span>Herzliche Grüße, Marco &amp; Luis</span><a class="wa-btn" href="https://wa.me/436642766355?text=Hallo%20Marco%2C%20ich%20habe%20eine%20Frage%20zum%20Terminfinder%3A%20" target="_blank" rel="noopener"><span data-ic="whatsapp" data-s="18"></span>Fragen per WhatsApp</a></div>
-        </div>
-    </div>
-  </section>
-
   <section class="sec" id="ausprobieren">
     <div class="wrap">
       <div class="sec-head c">

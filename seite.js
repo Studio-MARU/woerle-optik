@@ -94,7 +94,7 @@
     try { sessionStorage.setItem('wo-ok', '1'); } catch (e) {}
     msg.textContent = 'Willkommen, Horsti.';
     document.getElementById('pinWelcome').textContent = 'Willkommen, Horsti.';
-    if (reduced) { root.classList.remove('locked'); gate.remove(); return; }
+    if (reduced) { root.classList.add('chatting'); root.classList.remove('locked'); gate.remove(); if (window.startChat) window.startChat(0); return; }
     gate.classList.add('ok');                     // Punkte leuchten nacheinander auf
     await wait(500);
     gate.classList.add('s1');                     // Ziffernfeld und Gruß treten zurück
@@ -107,7 +107,8 @@
     await wait(1000);
     gate.classList.add('s4');                     // „Willkommen, Horsti.“
     await wait(1100);
-    root.classList.add('revealing'); root.classList.remove('locked'); scrollTo(0, 0);
+    root.classList.add('revealing', 'chatting'); root.classList.remove('locked'); scrollTo(0, 0);
+    if (window.startChat) window.startChat(1400);   // nach der PIN geht es im Chat weiter
     gate.classList.add('open');                   // Kreis öffnet die Seite wie eine Blende
     await wait(1350);
     gate.remove(); root.classList.remove('revealing');
@@ -184,3 +185,41 @@ document.addEventListener('click', e => {
   if (id === 'maru' && a.closest('.nav') && window.resetOffer) window.resetOffer();
   t.scrollIntoView({behavior:matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth', block:'start'});
 });
+
+// Nach der PIN: SMS von Marco & Luis. Erst „schreibt …“, dann die Nachricht, dann die Datei.
+// Ein Tipp auf die Datei öffnet die Seite ab „Zum Ausprobieren“.
+(() => {
+  const chat = document.getElementById('chat'); if (!chat) return;
+  const root = document.documentElement, body = document.getElementById('chatBody');
+  const typing = document.getElementById('chatTyping'), msg = document.getElementById('chatMsg');
+  const file = document.getElementById('chatFile'), hint = document.getElementById('chatHint');
+  const reduced = () => matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const wait = ms => new Promise(r => setTimeout(r, ms));
+  const hhmm = d => d.getHours() + ':' + String(d.getMinutes()).padStart(2, '0');
+  let started = false;
+  function show(el){ el.hidden = false; body.appendChild(el === typing ? typing : el); if (!typing.hidden) body.appendChild(typing); body.scrollTop = body.scrollHeight; }
+  async function type(ms){ show(typing); await wait(ms); typing.hidden = true; }
+  window.startChat = async (delay = 0) => {
+    if (started) return; started = true;
+    const now = new Date();
+    document.getElementById('chatClock').textContent = hhmm(now);
+    document.getElementById('chatTime').textContent = hhmm(now);
+    if (reduced()) return [msg, file, hint].forEach(show);
+    await wait(delay + 500);
+    await type(1900); show(msg);
+    await wait(900);
+    await type(1300); show(file);
+    await wait(700); show(hint);
+  };
+  file.addEventListener('click', async () => {
+    try { sessionStorage.setItem('wo-chat', '1'); } catch (e) {}
+    if (reduced()) { root.classList.remove('chatting'); return scrollTo(0, 0); }
+    chat.classList.add('out');                    // Chat tritt zurück
+    await wait(520);
+    root.classList.add('revealing'); root.classList.remove('chatting'); scrollTo(0, 0);
+    chat.classList.remove('out');
+    await wait(1500);
+    root.classList.remove('revealing');
+  });
+  if (root.classList.contains('chatting')) startChat(0);
+})();

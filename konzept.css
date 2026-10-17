@@ -689,3 +689,61 @@ html.revealing main,html.revealing .bar{animation:pinFocus 1.5s cubic-bezier(.2,
 .ab-scene.back .ab-sub{transition-delay:0s}
 .ab-scene.back .ab-row:last-child{transition-delay:.07s}
 .ab-scene.back .ab-row:first-child{transition-delay:.14s}
+/* SMS-Chat nach der PIN (17.10.2026): Desktop = Handy mittig auf Weiß, Handy = Vollbild */
+.chat{display:none}
+html.chatting .bar,html.chatting main,html.chatting .foot{display:none}
+html.chatting,html.chatting body{overflow:hidden;background:#fff}
+html.chatting .chat{display:grid;place-items:center;position:fixed;inset:0;z-index:90;background:#fff;font-family:-apple-system,BlinkMacSystemFont,"SF Pro Text","Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;color:#111;-webkit-font-smoothing:antialiased}
+.chat-phone{position:relative;display:grid;grid-template-rows:auto auto minmax(0,1fr) auto;width:390px;height:min(844px,calc(100dvh - 64px));border-radius:58px;border:12px solid #121417;background:#fff;overflow:hidden;box-shadow:0 40px 90px -40px rgba(16,32,39,.45),0 0 0 1px rgba(16,32,39,.06)}
+.chat-status{display:flex;align-items:center;justify-content:space-between;height:46px;padding:6px 30px 0 34px;font-size:15px;font-weight:600;letter-spacing:-.01em}
+.chat-island{position:absolute;left:50%;top:10px;width:112px;height:30px;border-radius:20px;background:#121417;transform:translateX(-50%)}
+.chat-sig{display:flex;align-items:flex-end;gap:2px;height:12px}
+.chat-sig i{width:3px;border-radius:1px;background:#111}
+.chat-sig i:nth-child(1){height:4px}.chat-sig i:nth-child(2){height:6px}.chat-sig i:nth-child(3){height:9px}.chat-sig i:nth-child(4){height:12px}
+.chat-sig b{width:24px;height:12px;margin-left:6px;border-radius:3.5px;border:1.5px solid rgba(17,17,17,.45);background:linear-gradient(90deg,#111 70%,transparent 70%) content-box;padding:1.5px}
+.chat-head{display:grid;justify-items:center;gap:2px;padding:6px 16px 10px;border-bottom:1px solid rgba(0,0,0,.08);background:rgba(249,249,249,.94)}
+.chat-av{display:grid;place-items:center;width:52px;height:52px;border-radius:50%;background:#102027;color:#fff;margin-bottom:4px}
+.chat-av .mlogo{width:24px;height:24px;fill:#fff}
+.chat-head b{font-size:13px;font-weight:600}
+.chat-head small{font-size:11px;color:#8a8a8e}
+.chat-body{display:flex;flex-direction:column;align-items:flex-start;gap:6px;padding:14px 14px 18px;overflow-y:auto;scroll-behavior:smooth;overscroll-behavior:contain}
+.chat-day{align-self:center;margin:0 0 8px;font-size:11.5px;color:#8a8a8e}
+.chat-day span{font-weight:600}
+.msg{max-width:80%;padding:9px 13px;border-radius:20px;border-bottom-left-radius:6px;background:#e9e9eb;color:#111;font-size:15.5px;line-height:1.38;text-align:left;transform-origin:0 100%;animation:msgIn .42s cubic-bezier(.2,.9,.25,1.2) both}
+.msg[hidden]{display:none}
+.msg p{margin:0}
+.msg p+p{margin-top:8px}
+.msg.typing{display:flex;gap:5px;align-items:center;padding:13px 15px}
+.msg.typing[hidden]{display:none}
+.msg.typing i{width:8px;height:8px;border-radius:50%;background:#8e8e93;animation:typeDot 1.2s ease-in-out infinite}
+.msg.typing i:nth-child(2){animation-delay:.18s}.msg.typing i:nth-child(3){animation-delay:.36s}
+.msg.file{display:flex;align-items:center;gap:12px;width:min(80%,280px);padding:10px 14px 10px 10px;border:0;font:inherit;cursor:pointer;-webkit-tap-highlight-color:transparent;transition:transform .15s ease,background .15s ease}
+.msg.file:hover{background:#e1e1e4}
+.msg.file:active{transform:scale(.97)}
+.msg.file:focus-visible{outline:3px solid #0E5E6F;outline-offset:3px}
+.file-ic{flex:none;display:grid;width:40px;height:48px}
+.file-ic svg{width:40px;height:48px}
+.file-t{display:grid;gap:2px;min-width:0}
+.file-t b{font-size:15px;font-weight:600;line-height:1.25}
+.file-t small{font-size:12.5px;color:#6b6b70}
+.chat-hint{margin:2px 0 0 6px;font-size:12px;color:#8a8a8e;animation:hintIn .5s ease both,hintPulse 1.8s 1s ease-in-out infinite}
+.chat-hint[hidden]{display:none}
+.chat-foot{display:flex;align-items:center;gap:10px;padding:8px 12px calc(10px + env(safe-area-inset-bottom,0px));border-top:1px solid rgba(0,0,0,.06)}
+.chat-plus{display:grid;place-items:center;width:32px;height:32px;border-radius:50%;background:#e9e9eb;color:#6b6b70;font-size:22px;line-height:1}
+.chat-input{flex:1;height:34px;display:flex;align-items:center;padding:0 14px;border-radius:17px;border:1px solid rgba(0,0,0,.14);color:#a1a1a6;font-size:15px}
+.chat-send{width:28px;height:28px;border-radius:50%;background:#d1d1d6}
+@keyframes msgIn{from{opacity:0;transform:translateY(10px) scale(.6)}}
+@keyframes typeDot{0%,60%,100%{opacity:.35;transform:none}30%{opacity:1;transform:translateY(-3px)}}
+@keyframes hintIn{from{opacity:0}}
+@keyframes hintPulse{50%{opacity:.45}}
+html.revealing .chat-phone{animation:pinFocus 1.5s cubic-bezier(.2,.8,.2,1) both}
+.chat.out .chat-phone{animation:chatOut .52s cubic-bezier(.6,0,.4,1) forwards}
+@keyframes chatOut{to{opacity:0;transform:scale(1.06);filter:blur(10px)}}
+@media (max-width:600px){
+  html.chatting .chat{place-items:stretch}
+  .chat-phone{width:100%;height:100dvh;grid-template-rows:auto minmax(0,1fr) auto;border:0;border-radius:0;box-shadow:none;padding-top:env(safe-area-inset-top,0px)}
+  .chat-status{display:none}
+  .chat-head{padding-top:10px}
+}
+@media (prefers-reduced-motion:reduce){.msg,.chat-hint,.msg.typing i{animation:none}.chat.out .chat-phone,html.revealing .chat-phone{animation:none}}
+.chat [hidden]{display:none!important}
