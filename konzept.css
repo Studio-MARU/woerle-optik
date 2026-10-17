@@ -864,3 +864,17 @@ html.revealing .chat-phone{animation:pinFocus 1.5s cubic-bezier(.2,.8,.2,1) both
 .ab-hero{padding-top:0}
 .ab-scene:not(.offer) .ab-cta{margin-bottom:100px}
 @media (max-width:620px){.ab-scene{padding-top:8px}.ab-hero{padding-top:0}.ab-scene:not(.offer) .ab-cta{margin-bottom:64px}}
+/* Blauer Himmel beginnt schon hinter dem Terminfinder (beide Varianten) und läuft nahtlos in „Über uns“ (17.10.2026) */
+@media (min-width:621px){
+  #ausprobieren{background:linear-gradient(var(--paper) 0,var(--paper) 34%,color-mix(in srgb,var(--paper) 55%,transparent) 56%,transparent 82%),linear-gradient(90deg,#96cdf6,#66b5f1 50%,#4ba6eb)}
+  .ab-scene{background:url("maru-wiese.webp") center bottom/max(100%, 1400px) auto no-repeat,linear-gradient(90deg,#96cdf6,#66b5f1 50%,#4ba6eb)}
+  #ausprobieren::after{background:linear-gradient(90deg,#96cdf6,#66b5f1 50%,#4ba6eb)}
+}
+@media (max-width:620px){
+  #ausprobieren{background:linear-gradient(var(--paper) 0,var(--paper) 30%,color-mix(in srgb,var(--paper) 55%,transparent) 52%,transparent 80%),#5aaeed}
+  .ab-scene{background:linear-gradient(#68b7f1 calc(100% - 520px),rgba(104,183,241,0) calc(100% - 360px)),url("maru-wiese.webp") center bottom/auto 520px no-repeat,linear-gradient(#5aaeed,#68b7f1 calc(100% - 520px))}
+  #ausprobieren::after{background:#5aaeed}
+}
+/* Oben in „Über uns“ den Himmel der Seite weich über den Himmel des Wiesenbildes legen, damit kein Farbsprung entsteht */
+.ab-sky{position:absolute;left:0;right:0;top:0;height:460px;z-index:-1;pointer-events:none;background:linear-gradient(90deg,#96cdf6,#66b5f1 50%,#4ba6eb);-webkit-mask:linear-gradient(#000 30%,transparent);mask:linear-gradient(#000 30%,transparent)}
+@media (max-width:620px){.ab-sky{height:320px;background:#5aaeed}}
