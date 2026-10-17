@@ -653,4 +653,23 @@ html.revealing main,html.revealing .bar{animation:pinFocus 1.5s cubic-bezier(.2,
 .ab-opt .ab-plus ul{margin:8px 0 0;padding:0;border-top:0}
 .ab-opt .ab-plus li{color:#3d4a55}
 .ab-opt .ab-plus li .i{color:#5b6b78}
-
+/* Abo-Angebot: Einrichtung + zwei Betreuungspakete (17.10.2026) */
+.ab-offer{max-width:780px}
+.ab-sh{margin:28px 0 12px;font-size:12.5px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:#24384a}
+.ab-pk{width:100%;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px;align-items:stretch}
+.ab-term{margin:16px 0 0;max-width:560px;font-size:14px;line-height:1.5;color:#24384a;text-align:center;text-wrap:balance}
+.ab-sh,.ab-term{animation:abIn .8s cubic-bezier(.2,.8,.2,1) backwards}
+.ab-sh{animation-delay:.18s}
+.ab-pk .ab-opt{animation-delay:.24s}
+.ab-pk .ab-opt+.ab-opt{animation-delay:.32s}
+.ab-term{animation-delay:.38s}
+.ab-out{animation-delay:.44s}
+.ab-note{animation-delay:.5s}
+@media (max-width:620px){.ab-pk{grid-template-columns:minmax(0,1fr)}}
+@media (prefers-reduced-motion:reduce){.ab-sh,.ab-term{animation:none}}
+/* Ohne Preise (17.10.2026): Art der Leistung über dem Titel, Überleitung als Satz */
+.ab-kind{font-size:12.5px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:#5b6b78}
+.ab-opt h4{margin-bottom:2px}
+.ab-opt ul{margin-top:12px}
+.ab-sh{margin:30px 0 14px;font-size:18px;font-weight:600;letter-spacing:-.01em;text-transform:none;color:#13202c;text-align:center;text-wrap:balance}
+.ab-term{font-size:15px;font-weight:500;color:#13202c}
