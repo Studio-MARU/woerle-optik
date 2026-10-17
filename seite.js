@@ -197,6 +197,10 @@ document.addEventListener('click', e => {
   const wait = ms => new Promise(r => setTimeout(r, ms));
   const hhmm = d => d.getHours() + ':' + String(d.getMinutes()).padStart(2, '0');
   let started = false;
+  // Handy in echter Größe (393 × 852), auf dem Desktop passend zur Fensterhöhe verkleinert
+  const device = chat.querySelector('.chat-device');
+  const fit = () => device.style.setProperty('--fit', innerWidth <= 600 ? 1 : Math.min(1, (innerHeight - 56) / 852, (innerWidth - 48) / 393));
+  fit(); addEventListener('resize', fit);
   function show(el){ el.hidden = false; body.appendChild(el === typing ? typing : el); if (!typing.hidden) body.appendChild(typing); body.scrollTop = body.scrollHeight; }
   async function type(ms){ show(typing); await wait(ms); typing.hidden = true; }
   window.startChat = async (delay = 0) => {

@@ -752,3 +752,16 @@ html.revealing .chat-phone{animation:pinFocus 1.5s cubic-bezier(.2,.8,.2,1) both
 .chat.out{animation:chatFade .52s ease forwards}
 @keyframes chatFade{to{opacity:0}}
 @media (prefers-reduced-motion:reduce){.chat.out{animation:none}}
+/* Handyform natürlicher (17.10.2026): feste Größe 393 × 852 wie ein echtes Handy, per Skript auf die
+   Fensterhöhe skaliert, schmaler Rand mit feiner Metallkante, Seitentasten */
+.chat-device{position:absolute;left:50%;top:50%;translate:-50% -50%;scale:var(--fit,1)}
+.chat-phone{width:393px;height:852px;border:0;border-radius:56px;box-shadow:0 0 0 5px #15181c,0 0 0 6.5px #7b8188,0 50px 100px -30px rgba(16,32,39,.5)}
+.chat-status{height:50px;padding:10px 32px 0 40px}
+.chat-island{width:122px;height:35px;top:11px;border-radius:20px}
+.chat-device::before{content:"";position:absolute;left:-9px;top:172px;width:3px;height:200px;border-radius:2px 0 0 2px;background:linear-gradient(#80868d 0 30px,transparent 30px 64px,#80868d 64px 126px,transparent 126px 138px,#80868d 138px 200px)}
+.chat-device::after{content:"";position:absolute;right:-9px;top:262px;width:3px;height:98px;border-radius:0 2px 2px 0;background:#80868d}
+@media (max-width:600px){
+  .chat-device{position:static;translate:none;scale:none;width:100%;height:100dvh}
+  .chat-device::before,.chat-device::after{display:none}
+  .chat-phone{width:100%;height:100dvh;border-radius:0;box-shadow:none}
+}
