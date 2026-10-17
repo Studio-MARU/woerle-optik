@@ -818,3 +818,12 @@ html.revealing .chat-phone{animation:pinFocus 1.5s cubic-bezier(.2,.8,.2,1) both
 /* Feine Linie an der Kante „Ausprobieren“ → „Über uns“ (Bruchteil-Pixel, Himmel schimmert durch): mit einem Papierstreifen überdecken */
 #ausprobieren{z-index:1}
 #ausprobieren::after{content:"";position:absolute;left:0;right:0;bottom:-3px;height:6px;background:var(--paper);pointer-events:none}
+/* „Über uns“ oben nach Wegfall der Marken-Leiste: mehr Abstand zum Abschnitt davor und zwischen den Elementen,
+   feinere Schatten bei den Wort-Kacheln und beim Button (17.10.2026) */
+.ab-hero{padding-top:120px}
+.ab-h{gap:14px}
+.ab-chip{box-shadow:0 1px 2px rgba(19,32,44,.06),0 10px 24px -14px rgba(19,32,44,.28)}
+.ab-sub{margin:34px 0 34px}
+.ab-cta{box-shadow:0 1px 2px rgba(16,90,45,.22),0 12px 26px -14px rgba(16,110,55,.5)}
+@media (max-width:899px){.ab-hero{padding-top:88px}}
+@media (max-width:620px){.ab-hero{padding-top:64px}.ab-h{gap:8px}.ab-sub{margin:24px 0 28px}}
