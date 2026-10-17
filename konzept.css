@@ -804,3 +804,17 @@ html.revealing .chat-phone{animation:pinFocus 1.5s cubic-bezier(.2,.8,.2,1) both
   .ab-body .ab-steps ol{grid-template-columns:repeat(2,minmax(0,1fr));gap:18px 8px}
   .ab-body .ab-steps li:not(:last-child)::after{display:none}
 }
+/* Weniger Leerraum (17.10.2026; unten im Karussell bleibt Platz für den Schatten des Terminfinders, sonst entsteht eine harte Kante), Kommentar „Leerraum reduzieren“): oben, zwischen Terminfinder und
+   „Über uns“, zwischen „So geht es weiter“ und den Karten sowie unter den Karten */
+#ausprobieren{padding-top:52px;padding-bottom:0}
+.track{padding-block:16px 60px}
+.ab-scene{padding-top:88px}
+.ab-body{margin-top:-250px;padding-bottom:104px}
+@media (max-width:899px){.track{padding-block:12px 48px}.ab-body{margin-top:-150px}}
+@media (max-width:719px){#ausprobieren{padding-top:36px;padding-bottom:0}}
+@media (max-width:620px){.ab-scene{padding-top:64px}.ab-body{margin-top:-120px;padding-bottom:96px}}
+.sec.ab{border-top:0}
+#ausprobieren::before{background:radial-gradient(45% 40% at 0% 30%,var(--glow-a),transparent 70%),radial-gradient(35% 30% at 100% 55%,var(--glow-b),transparent 70%)}
+/* Feine Linie an der Kante „Ausprobieren“ → „Über uns“ (Bruchteil-Pixel, Himmel schimmert durch): mit einem Papierstreifen überdecken */
+#ausprobieren{z-index:1}
+#ausprobieren::after{content:"";position:absolute;left:0;right:0;bottom:-3px;height:6px;background:var(--paper);pointer-events:none}
