@@ -831,3 +831,18 @@ html.revealing .chat-phone{animation:pinFocus 1.5s cubic-bezier(.2,.8,.2,1) both
 .wa-btn,.wa-fab{background:#22b455}
 .wa-btn:hover,.wa-fab:hover{background:#1ea14c}
 .wa-fab{box-shadow:0 1px 2px rgba(16,90,45,.22),0 12px 26px -12px rgba(16,110,55,.5)}
+/* Entschlackt (17.10.2026): weniger Text im Angebot, Markenauftritt hervorgehoben;
+   „So geht es weiter“ steht über „Wir sind …“ (Reihenfolge: Terminfinder → So geht es weiter → wer wir sind) */
+.ab-offer .ab-opt h4{margin-bottom:2px}
+.ab-offer .ab-opt ul{margin-top:12px;padding-top:14px}
+.ab-pk{margin-top:14px}
+.ab-out.hl{margin-top:22px;padding:26px 28px;gap:18px;background:#102027;border:0;box-shadow:0 26px 54px -28px rgba(16,32,39,.7)}
+.ab-out.hl .ab-out-i{width:46px;height:46px;border-radius:14px;background:#8FD6CF;color:#102027}
+.ab-out.hl small{color:#8FD6CF}
+.ab-out.hl h4{margin:4px 0 8px;font-size:22px;color:#fff}
+.ab-out.hl p{color:rgba(255,255,255,.8);font-size:15.5px}
+.ab-note{margin-top:20px;font-size:14px;color:#24384a}
+.ab-scene:not(.offer) .ab-cta{order:-1;margin:0 0 56px}
+.ab-hero{padding-top:72px}
+@media (max-width:899px){.ab-hero{padding-top:60px}}
+@media (max-width:620px){.ab-hero{padding-top:44px}.ab-scene:not(.offer) .ab-cta{margin-bottom:40px}.ab-out.hl{padding:22px 20px;gap:14px}.ab-out.hl h4{font-size:19px}}
