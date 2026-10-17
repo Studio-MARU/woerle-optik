@@ -137,18 +137,36 @@
     scrollTo({top:offer.getBoundingClientRect().top + scrollY - 96, behavior:reduced() ? 'auto' : 'smooth'});
     state = 2;
   }
-  // Zurück zur Ausgangsansicht (Titel, Text, Button „So geht es weiter“), z. B. über „Über uns“ in der Leiste
+  // Zurück zur Ausgangsansicht, z. B. über „Über uns“ in der Leiste: die Animation läuft rückwärts.
+  // Angebot blendet aus, der Button gleitet nach oben, Titel und Text fliegen von der Seite wieder herein.
   window.resetOffer = () => {
-    if (state === 0) return;
-    scene.classList.remove('go', 'offer'); offer.hidden = true;
-    btn.querySelector('.ab-cta-t').textContent = 'So geht es weiter';
-    btn.href = '#angebot'; btn.removeAttribute('target'); btn.removeAttribute('rel');
-    state = 0;
+    if (state !== 2) return;
+    state = 3;
+    function back(){
+      const before = btn.getBoundingClientRect().top;
+      offer.hidden = true; scene.classList.remove('offer');
+      btn.querySelector('.ab-cta-t').textContent = 'So geht es weiter';
+      btn.href = '#angebot'; btn.removeAttribute('target'); btn.removeAttribute('rel');
+      const after = btn.getBoundingClientRect().top;
+      if (reduced()) { scene.classList.remove('go'); state = 0; return; }
+      btn.animate([{transform:`translateY(${before - after}px)`}, {transform:'none'}], {duration:950, easing:'cubic-bezier(.65,0,.25,1)'});
+      // Die Messung oben hat den Zustand „go“ schon berechnet, deshalb laufen die Übergänge jetzt zurück
+      scene.classList.add('back'); scene.classList.remove('go');
+      setTimeout(() => { scene.classList.remove('back'); state = 0; }, 1100);
+    }
+    if (reduced()) return back();
+    const parts = [...offer.children].reverse();
+    const anims = parts.map((el, i) => el.animate([{opacity:1, transform:'none'}, {opacity:0, transform:'translateY(28px)'}], {duration:380, delay:i * 45, easing:'cubic-bezier(.4,0,1,1)', fill:'forwards'}));
+    // Einmal weiter, sobald alles ausgeblendet ist (Zeitgrenze als Rückfall, falls der Tab im Hintergrund ist)
+    let done = false;
+    const next = () => { if (done) return; done = true; back(); anims.forEach(a => a.cancel()); };
+    Promise.all(anims.map(a => a.finished)).then(next, next);
+    setTimeout(next, 900);
   };
   btn.addEventListener('click', e => {
     if (state === 2) return;
     e.preventDefault(); e.stopPropagation();
-    if (state === 1) return;
+    if (state !== 0) return;
     state = 1;
     if (reduced()) return swap();
     scene.classList.add('go');

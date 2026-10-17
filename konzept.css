@@ -685,3 +685,7 @@ html.revealing main,html.revealing .bar{animation:pinFocus 1.5s cubic-bezier(.2,
 .slide-txt .ticks{display:flex;flex-wrap:wrap;justify-content:center;gap:6px 18px}
 .slide-ph{width:100%;max-width:440px;justify-self:center}
 @media (max-width:899px){.slide-ph{margin-top:0}}
+/* Rückweg aus dem Angebot: Text zuerst, dann zweite und erste Zeile (umgekehrte Reihenfolge) */
+.ab-scene.back .ab-sub{transition-delay:0s}
+.ab-scene.back .ab-row:last-child{transition-delay:.07s}
+.ab-scene.back .ab-row:first-child{transition-delay:.14s}
