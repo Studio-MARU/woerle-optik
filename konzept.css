@@ -842,3 +842,13 @@ html.revealing .chat-phone{animation:pinFocus 1.5s cubic-bezier(.2,.8,.2,1) both
 .ab-brand p{margin:0;font-size:14px;line-height:1.5;color:#2c3c48}
 @media (max-width:620px){.ab-pk{padding-top:0}.ab-pk .ab-opt.rec{margin-top:14px}.ab-brand{padding:12px 14px}}
 .ab-pk{align-items:start}
+/* Angebot sauber formatiert (17.10.2026): alle drei Karten gleich breit untereinander; auf größeren Bildschirmen
+   links Art, Titel und Satz, rechts die Leistungen (mit Trennlinie); bei Plus darunter der Markenauftritt */
+@media (min-width:761px){
+  .ab-pk{grid-template-columns:minmax(0,1fr);gap:26px;padding-top:12px}
+  .ab-offer .ab-opt{grid-template-columns:minmax(0,220px) minmax(0,1fr);grid-template-rows:auto auto 1fr;column-gap:30px;row-gap:4px;align-items:start;padding:28px 30px}
+  .ab-offer .ab-opt > .ab-kind,.ab-offer .ab-opt > h4,.ab-offer .ab-opt > .ab-o1{grid-column:1}
+  .ab-offer .ab-opt > ul{grid-column:2;grid-row:1 / span 3;margin:0;padding:2px 0 0 28px;border-top:0;border-left:1px solid rgba(19,32,44,.1)}
+  .ab-offer .ab-opt > .ab-brand{grid-column:2;grid-row:4;margin:18px 0 0 28px}
+  .ab-offer .ab-opt.rec{padding-top:32px}
+}
